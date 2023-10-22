@@ -161,10 +161,10 @@
 
 \author*[1]{\fnm{Yongle} \sur{Zhang}}\email{xxx.com}
 
-\author*[2]{\fnm{Ting Kei} \sur{Pong}}\email{tk.pong@polyu.edu.hk}
+\author[2]{\fnm{Ting Kei} \sur{Pong}}\email{tk.pong@polyu.edu.hk}
 %\equalcont{These authors contributed equally to this work.}
 
-\author[3]{\fnm{Xiqi} \sur{Xu}}\email{xxx.com}
+\author[3]{\fnm{Siqi} \sur{Xu}}\email{xxx.com}
 %\equalcont{These authors contributed equally to this work.}
 
 \affil*[1]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{100190}, \state{State}, \country{Country}}}
@@ -864,13 +864,13 @@ Combining \eqref{eq16} and \eqref{eq22}, for any $k\geq \max\{N_0, N_1\}$, we ha
 \begin{equation}
 \begin{aligned}
 \nonumber
-\left(
+\left[
 \begin{array}{c}
 \frac{1}{\hat{\theta}}\left(-\hat{\theta}L_g(x^{k} - y^{k}) + \nabla P_2(x^{k}) - \nabla P_2(x^{k+1})\right) + L_g(x^{k+1} - y^{k})\\
 -L_g(x^{k+1} - x^{k})\\
 \sum\limits_{i\in I_k(x^{k+1})}\lambda_i^k\nabla^2 g_i(y^{k})(x^{k+1} - y^{k}) - L_g(x^{k+1} - y^{k})
 \end{array}
-\right)
+\right]
 \in \partial H(x^{k+1},x^{k},y^{k}).
 \end{aligned}
 \end{equation}
@@ -1062,7 +1062,7 @@ E_{\hat{\theta}}(x^{k+1},x^k) - \bar{E}_{\hat{\theta}}^* \leq \frac{\zeta}{\vart
 \end{equation}
 Since $\vartheta > \frac{1}{2}$ and $\zeta > 1$, we have that
 \begin{align}\label{upperA}
-\left|\frac{A_k}{\vartheta + \zeta}\right|\leq \left|A_k\right| &\leq \frac{L_g}{2}\left(\frac{1}{\gamma}\d^2(x^k, S) + \|x^k - x^{k-1}\|^2\right) \nonumber\\
+&\left|\frac{A_k}{\vartheta + \zeta}\right|\leq \left|A_k\right|\leq \frac{L_g}{2}\left(\frac{1}{\gamma}\d^2(x^k, S) + \|x^k - x^{k-1}\|^2\right) \nonumber\\
 &\overset{\rm(a)}\leq\frac{L_g c_0}{2\gamma}\left(E_{\hat{\theta}}(x^k, x^{k-1}) - \bar{E}_{\hat{\theta}}^*\right) + \frac{L_g}{2}\|x^k - x^{k-1}\|^2\nonumber\\
 &\overset{\rm(b)}\leq\frac{L_g c_0}{2\gamma}\left(E_{\hat{\theta}}(x^k, x^{k-1}) - \bar{E}_{\hat{\theta}}^*\right) + \frac{1}{(1 - \bar{\beta}^2)}\left(E_{\hat{\theta}}(x^k, x^{k-1}) - E_{\hat{\theta}}(x^{k+1}, x^{k})\right)\nonumber\\
 &\overset{\rm(c)} \leq c_1\left(E_{\hat{\theta}}(x^k, x^{k-1}) - \bar{E}_{\hat{\theta}}^*\right),
@@ -1118,21 +1118,19 @@ Dividing $\mu>0$ on the both sides in the above display, we see that for any $k\
 Rearranging terms in the above inequality, we have that
 \begin{small}
 \begin{equation*}
-E_{\hat{\theta}}(x^{k+1},x^{k}) - \bar{E}_{\hat{\theta}}^* + \frac{M}{\mu(1 - \frac{1}{\mu} - \varrho)}\varrho^{k+1}
-\leq \left(1 - \frac{1}{\mu}\right) \left(E_{\hat{\theta}}(x^k,x^{k-1}) - \bar{E}_{\hat{\theta}}^* + \frac{M}{\mu(1 - \frac{1}{\mu} - \varrho)}\varrho^{k} \right).
+E_{\hat{\theta}}(x^{k+1},x^{k}) - \bar{E}_{\hat{\theta}}^* + \frac{M\varrho^{k+1}}{\mu(1 - \frac{1}{\mu} - \varrho)}
+\leq \left(1 - \frac{1}{\mu}\right) \left(E_{\hat{\theta}}(x^k,x^{k-1}) - \bar{E}_{\hat{\theta}}^* + \frac{M\varrho^{k}}{\mu(1 - \frac{1}{\mu} - \varrho)} \right).
 \end{equation*}
 \end{small}
 
 Inductively, since $1 - \frac{1}{\mu} > \varrho>0$, we see that for any $k\geq k_4$,
-
-
 \begin{align}\label{inductE}
-E_{\hat{\theta}}(x^{k+1},x^{k}) - \bar{E}_{\hat{\theta}}^* \leq
-&~ E_{\hat{\theta}}(x^{k+1},x^{k}) - \bar{E}_{\hat{\theta}}^* + \frac{M}{\mu(1 - \frac{1}{\mu} - \varrho)}\varrho^{k+1} \nonumber\\
-& \leq \left(1 - \frac{1}{\mu}\right)^{k-k_4+1} \left(E_{\hat{\theta}}(x^{k_4},x^{k_4-1}) - \bar{E}_{\hat{\theta}}^* + \frac{M}{\mu(1 - \frac{1}{\mu} - \varrho)}\varrho^{k_4} \right) \nonumber\\
-& \overset{\rm(a)} = c_2 \left(1 - \frac{1}{\mu}\right)^{k + 1},
+&E_{\hat{\theta}}(x^{k+1},x^{k}) - \bar{E}_{\hat{\theta}}^* 
+ \leq
+ E_{\hat{\theta}}(x^{k+1},x^{k}) - \bar{E}_{\hat{\theta}}^* + \frac{M\varrho^{k+1}}{\mu(1 - \frac{1}{\mu} - \varrho)} \nonumber\\
+& \leq \left(\!1 - \frac{1}{\mu}\!\right)^{k-k_4+1} \!\!\!\ \left(E_{\hat{\theta}}(x^{k_4},x^{k_4-1}) \!-\! \bar{E}_{\hat{\theta}}^* \!+\! \frac{M\varrho^{k_4}}{\mu(1 - \frac{1}{\mu} - \varrho)} \right) \overset{\rm(a)} = c_2 \left(\!1 - \frac{1}{\mu}\!\right)^{k + 1},
 \end{align}
-where (a) follows from $c_2 := \left(1 - \frac{1}{\mu}\right)^{-k_4}\left(E_{\hat{\theta}}(x^{k_4},x^{k_4-1}) - \bar{E}_{\hat{\theta}}^* + \frac{M}{\mu(1 - \frac{1}{\mu} - \varrho)}\varrho^{k_4} \right)> 0$.
+where (a) holds with $c_2 := \left(1 - \frac{1}{\mu}\right)^{-k_4}\left(E_{\hat{\theta}}(x^{k_4},x^{k_4-1}) - \bar{E}_{\hat{\theta}}^* + \frac{M}{\mu(1 - \frac{1}{\mu} - \varrho)}\varrho^{k_4} \right)> 0$.
 
 Finally, combining \eqref{upperK} and \eqref{inductE}, we obtain that for any $k\geq k_4$,
 \begin{align*}
@@ -1143,8 +1141,8 @@ where (a) holds because of \eqref{upperK}, (b) follows from $E_{\hat{\theta}}(x^
 
 Furthermore, for any $k\geq k_4$,
 \begin{align*}
-\sum\limits_{j = k}^{\infty}\|x^{j+1} - x^j\|\leq &\sum\limits_{j = k}^{\infty} \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\left(\sqrt{1 - \frac{1}{\mu}}\right)^{j+1}\\
-&\leq \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\cdot\frac{1}{1 - \sqrt{1 - \frac{1}{\mu}}}\left(\sqrt{(1 - \frac{1}{\mu})}\right)^{k+1},
+\sum\limits_{j = k}^{\infty}\|x^{j+1} - x^j\|&\leq \sum\limits_{j = k}^{\infty} \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\left(\sqrt{1 - \frac{1}{\mu}}\right)^{j+1}\\
+&\leq \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\cdot\frac{1}{1 - \sqrt{1 - \frac{1}{\mu}}}\left(\sqrt{1 - \frac{1}{\mu}}\right)^{k+1},
 \end{align*}
 which implies that $\{x^k\}$ is a Cauchy sequence. Combining this with Theorem~\ref{subconver}(ii), by Assumption~\ref{B1} and Assumption~\ref{B2}, we see that $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}. This completes the proof.
 \end{proof}
@@ -1490,50 +1488,9 @@ From Table~\ref{table2}, one can see that ESQM$_{{\rm e}}$ is the fastest in ter
 
 
 
+\bmhead{Acknowledgments}
+The second author is supported in part by the Hong Kong Research Grants Council PolyU153001/22p.
 
-
-%ESQM$_{\text{e}}$: For this algorithm, we choose the extrapolation parameters $\{\beta_k\}$ as in (\ref{beta}), and perform both the fixed restart and the adaptive restart strategies as described in Section \ref{sec3}.
-
-%\subsection{ Group LASSO with Cauchy noise. }
-%In this subsection, we focus on the following problem:
-%\begin{equation}
-%\begin{aligned}\label{nu2}
-%\min\limits_{x\in\R^n}\quad & \sum\limits_{J\in\mathcal{J}}\|x_J\| - \mu\|x\| \\
-%{\rm s.t.}\quad & \|Ax - b\|_{LL_2,\gamma}\leq \overline{\sigma},\\
-%          \quad & \max\limits_{J\in \mathcal{J}}\|x_J\| \leq M.
-%\end{aligned}
-%\end{equation}
-%where $\mu\in(0,1), A\in \mathbb{R}^{p\times n}$ has full row rank, $b\in\R^p$, $\sigma \in (0, \|b\|_{LL_2,\gamma})$, $\mathcal{J}$ is a partition of $\{1,2,\dots,, n\}$, $x_J\in\R^{|J|}$ is the subvector of $x$ indexed by $J\in\mathcal{J}$.
-%
-%From Table~\ref{table4}, one can see that the recovery errors of FPA$_{\rm retract}$ and ESQM$_{\rm ls}$ in \cite{zhang21}, with ESQM$_{\rm e}$ are comparable, and we let $\mu = 0.95, \gamma = 0.2$, choose the $d=0.02$, the performance of ESQM$_{\rm e}$ is usually faster.
-%\begin{table}[h]
-%\caption{Computational results for problem \eqref{nu2}}\label{table4}
-%\begin{center}
-%{\footnotesize
-%\begin{tabular}{|c|c|c|c|c|c|c|}\hline
-%\phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ } & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }\\\cline{1-7}
-%\multirow{7}*{CPU time} & \multirow{1}*{QR}
-%&   0.59 &   4.59 &  13.76 &  35.63 &  60.46\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{Slater}
-%&   0.01 &   0.02 &   0.05 &   0.09 &   0.14\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{SPGL1}
-%&   1.00 &   7.98 &  24.75 &  13.28 & 194.40\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-%&   2.13 &  11.79 &  25.09 &  56.80 & 119.71\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-%&   2.30 &  13.09 &  28.73 &  49.94 &  76.11\\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e},\ \delta = 0.02}$}
-%&   1.07 &   5.33 &  12.14 &  19.20 &  32.97\\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{FPA$_{\rm retract}$}
-%&    318 &    414 &    414 &    569 &    744\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-%&    448 &    607 &    624 &    636 &    618\\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e},\ \delta = 0.02}$}
-%&    159 &    172 &    182 &    168 &    183\\\cline{1-7} \multirow{5}*{RecErr} & \multirow{1}*{SPGL1}
-%&  1.186 &  1.739 &  2.098 &  1.014 &  2.580\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-%&  0.154 &  0.168 &  0.169 &  0.171 &  0.172\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-%&  0.154 &  0.168 &  0.169 &  0.171 &  0.172\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-%&  0.154 &  0.168 &  0.169 &  0.171 &  0.172\\\cline{1-7} \multirow{5}*{Residual} & \multirow{1}*{SPGL1}
-%& -2.81e-01 & -3.88e-01 & -4.84e-01 & -3.69e-01 & -4.35e-01\\\cline{2-7} \multirow{1}*{} & \multirow{1}*{FPA$_{\rm retract}$}
-%& -1.35e-11 & -1.50e-11 & -1.27e-11 & -1.63e-11 & -1.16e-11\\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-%& 3.11e-10 & 2.33e-10 & 2.04e-10 & 2.15e-10 & 2.63e-10\\\cline{2-2} \multirow{1}*{}      & \multirow{1}*{ESQM$_{{\rm ls},\ \delta = 0.02}$}
-%& 8.27e-14 & 5.52e-14 & 2.30e-14 & 4.66e-14 & 4.12e-14\\\cline{1-7}
-%\end{tabular}
-%}
-%\end{center}
-%\end{table}
 
 
 
