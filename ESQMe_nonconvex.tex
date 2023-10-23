@@ -50,7 +50,7 @@
 \usepackage{xcolor}%
 \usepackage{textcomp}%
 \usepackage{manyfoot}%
-%\usepackage{refcheck}%
+\usepackage{refcheck}%
 \usepackage{algorithm,algorithmic}%
 
 \usepackage{latexsym,enumerate,verbatim,amsfonts,microtype}
@@ -78,7 +78,7 @@
 \def\cF{{\mathcal{F}}}
 \def\cD{{\mathcal{D}}}
 \def\cL{{\mathcal{L}}}
-\def\R{{\rm I\!R}}
+\def\R{{\mathbb{R}}}
 \def\tr{{\rm tr}}
 \def\argmin{\mathop{\rm arg\,min}}
 \def\Argmin{\mathop{\rm Arg\,min}}
@@ -86,7 +86,7 @@
 \def\Diag{{\rm Diag}}
 \def\tx{{\widetilde x}}
 \def\hx{{\widehat x}}
-\def\conv{{\rm conv}}
+\def\conv{{\rm conv}\,}
 
 \def\prox{{\rm Prox}}
 \def\xfeas{x^\odot}
@@ -145,7 +145,7 @@
 
 \begin{document}
 
-\title[ESQM]{The extended sequential quadratic method with extrapolation}
+\title[ESQM]{An extended sequential quadratic method with extrapolation}
 
 %%=============================================================%%
 %% Prefix	-> \pfx{Dr}
@@ -201,20 +201,21 @@ where $P_1:\mathbb{R}^n \to \R$ and $P_2:\mathbb{R}^n\to \R$ are finite-valued c
 
 \section{Notation and preliminaries}\label{sec2}
 
-In this paper, we use $\mathbb{R}$ to denote the set of real numbers, use $\mathbb{R}_+$ to denote the set of nonnegative real numbers and use $\mathbb{Z}$ to denote the set of integer numbers. We also use $\mathbb{R}^n$ to denote the Euclidean space of dimension $n$, and use $\mathbb{R}_+^n$ to denote the nonnegative orthant Euclidean space of dimension $n$. For a vector $x\in \mathbb{R}^n$, $\|x\|$ stands for the Euclidean norm of $x$. For two vectors $x$ and $y\in \mathbb{R}^n$, $\langle x,y \rangle$ stands for the inner product of $x$ and $y$.
+In this paper, we let $\mathbb{R}$, $\mathbb{R}_+$ and $\mathbb{Z}$ denote the sets of real numbers, nonnegative real numbers and integers respectively. We also let $\mathbb{R}^n$ and $\mathbb{R}_+^n$ denote the $n$-dimensional Euclidean space and its nonnegative orthant. For an $x\in \mathbb{R}^n$, we let $\|x\|$ denote its Euclidean norm; moreover, for $x$ and $y\in \mathbb{R}^n$, we let $\langle x,y \rangle$ denote their inner product.
 
-For extended-real-valued function $f:\mathbb{R}^n \to (-\infty,+\infty]$, we say $f$ is a proper function if $\dom f := \{ x: f(x)<\infty \}\neq \emptyset$. The proper function $f$ is considered to be closed if it is lower semicontinuous. We use $x^k\overset{f}{\to} x$ to stand for $x^k\to x$ and $f(x^k)\to f(x)$. For a proper closed function $f$, the regular subdifferential of $f$ at $w\in \dom f$ is given by
+For an extended-real-valued function $f:\mathbb{R}^n \to (-\infty,+\infty]$, we say that $f$ is proper if $\dom f := \{ x: f(x)<\infty \}\neq \emptyset$. A proper function $f$ is said to be closed if it is lower semicontinuous. We use $x^k\overset{f}{\to} x$ to denote $x^k\to x$ and $f(x^k)\to f(x)$. For a proper closed function $f$, the regular subdifferential of $f$ at $w\in \dom f$ is given by
 $$
 \widehat{\partial} f(w):= \left\{ \xi\in\mathbb{R}^n :\liminf_{v\to w,v\neq w} \frac{f(v) - f(w) - \langle \xi, v - w \rangle }{\| v - w\|}\geq 0 \right\}.
 $$
 The (limiting) subdifferential of $f$ at $w\in \dom f$ is given by
 \begin{equation*}
-\partial f(w):= \left\{ \xi\in\mathbb{R}^n:\exists w^{k}\overset{f}{\to} w, \xi^{k}\to\xi \text{ with } \xi^{k} \in \widehat{\partial} f(w^{k}) \text{ for each } k\right\}.
+\partial f(w):= \left\{ \xi\in\mathbb{R}^n:\exists w^{k}\overset{f}{\to} w, \xi^{k}\to\xi \text{ with } \xi^{k} \in \widehat{\partial} f(w^{k}) \text{ for each } k\right\},
 \end{equation*}
-In general, if $ x\notin \dom f$, then $\partial f(x)=\widehat{\partial}f(x) = \emptyset,$ and $\dom \partial f := \{x:\partial f(x)\neq \emptyset\}$. The above subdifferential of $f$ is consistent with the classical subdifferential of $f$ when $f$ is a convex function; see, for example, \cite[proposition 8.12]{rock97a} and \cite[proposition 8.8]{rock97a}. If $f$ is a convex function, then the subdifferential of $f$ at $w\in \dom f$ is given by
+and we set $\partial f(x)=\widehat{\partial}f(x) = \emptyset$ when $ x\notin \dom f$ by convention. We also define $\dom \partial f := \{x:\partial f(x)\neq \emptyset\}$. The above subdifferential of $f$ is consistent with the classical subdifferential of $f$ when $f$ is in addition convex; indeed, in this case, we have
 $$
-\partial f(w)=\left\{ \xi\in\mathbb{R}^n:\langle \xi, v - w \rangle\leq f(v) - f(w) ~~ \forall v\in \mathbb{R}^n \right\}.
+\partial f(w)=\left\{ \xi\in\mathbb{R}^n:\langle \xi, v - w \rangle\leq f(v) - f(w) ~~ \forall v\in \mathbb{R}^n \right\};
 $$
+see, for example, \cite[proposition 8.12]{rock97a} and \cite[proposition 8.8]{rock97a}.
 For a nonempty closed set $C\subseteq \mathbb{R}^n$, the indicator function $\delta_C$ is defined by
 \begin{equation*}
 \delta_C(x) = \left\{
@@ -224,29 +225,15 @@ For a nonempty closed set $C\subseteq \mathbb{R}^n$, the indicator function $\de
  \end{array}
  \right.
 \end{equation*}
-The normal cone of $C$ at $x\in C$ is defined by $$ \mathcal{N}_C(x) :=\partial \delta_C(x)=\{\xi \in \mathbb{R}^n:\langle \xi, y - x \rangle \leq 0 ~~\forall y\in C\}.$$
-The distance from a point $x$ to $C$ is denoted by $\d(x, C)$. The convex hull of $C$ is denoted by $\conv ~C$.
+The normal cone of $C$ at $x\in C$ is defined by 
+$$ \mathcal{N}_C(x) :=\partial \delta_C(x)=\{\xi \in \mathbb{R}^n:\langle \xi, y - x \rangle \leq 0 ~~\forall y\in C\}.$$
+Finally, the distance from a point $x$ to $C$ is denoted by $\d(x, C)$, and the convex hull of $C$ is denoted by $\conv C$.
 
-We next recall a constraint qualification for \eqref{eq1} (which first appeared in \cite{Ausleder13}), and the first-order optimality conditions for \eqref{eq1}.
-%
-%\begin{definition}[{{\bf MFCQ}}]\label{MFCQ}
-% Mangassarian-Fromovitz constraint qualification holds at $x\in C\cap \mathscr{F}$ if the following statement holds:
-%\[
-%\left. \begin{gathered}
-%-\sum_{i=1}^{m}\lambda_i\nabla g_i(x)\in \mathcal{N}_C(x)
-%\\	\lambda_i g_i(x)=0, ~ i=1,\dots,m
-%\\	\lambda_i \geq 0, ~ i=1,\dots,m
-%\end{gathered} \right\}
-%\implies \lambda_i=0, ~ i=1,\dots,m. 	\]
-%\end{definition}
-%Note that if $g_i$ in \eqref{eq1} is a convex function and the Slater condition holds, i.e., $\{x \in C: g_i(x) < 0, ~ i = 1, \ldots, m\} \neq \emptyset $, then the MFCQ holds at any point in $G$.
-
+We next recall some important definitions that will be used in the sequel. We start by recalling the following constraint qualification for \eqref{eq1} (which first appeared in \cite{Ausleder13}), and the (associated) first-order optimality conditions for \eqref{eq1}.
 \begin{definition}[{{\bf RCQ}}]\label{RCQ}
 We say that the Robinson constraint qualification holds at $x\in\R^n$ for \eqref{eq1} if the following statement holds:
-$$ RCQ(x):~\exists y\in C, \text{ such that } g_i(x) + \langle\nabla g_i(x), y-x\rangle < 0~~ \forall i = 1,2,\cdots m.$$
+$$ RCQ(x):~\exists y\in C \text{ such that } g_i(x) + \langle\nabla g_i(x), y-x\rangle < 0~~ \forall i = 1,2,\cdots m.$$
 \end{definition}
-
-%Note that if $RCQ(x)$ holds at $x\in C\cap \mathscr{F}$, then MFCQ holds at $x\in C\cap \mathscr{F}$.
 
 \begin{definition}[{{\bf Critical point}}]\label{Stationary}
 For \eqref{eq1}, we say that $x$ is a critical point of \eqref{eq1} if $x\in C$ and there exists $\lambda=(\lambda_1, \lambda_2, \dots, \lambda_m)\in \mathbb{R}_+^m$ such that $(x, \lambda)$ satisfies the following conditions:
@@ -257,73 +244,66 @@ For \eqref{eq1}, we say that $x$ is a critical point of \eqref{eq1} if $x\in C$ 
 \end{enumerate}	
 \end{definition}
 
-If RCQ holds at every point in $\mathcal{G}$, by using similar arguments as in \cite[Section 2]{yu21}, one can show that any local minimizer of \eqref{eq1} is a critical point of \eqref{eq1}.
+One can show using similar arguments as in \cite[Section 2]{yu21} that if the RCQ holds at every point in $\mathcal{G}$, then any local minimizer of \eqref{eq1} is a critical point of \eqref{eq1}.
 
-Next, we recall the notation of Kurdyka-{\L}ojasiewicz (KL) property and Kurdyka-{\L}ojasiewicz (KL) exponent. The KL property plays an important role in the convergence rate analysis of first order methods; see, for example, \cite{bolte14,attouch13,beck09,bolte07,attouch10}.
+Next, we recall the definitions of Kurdyka-{\L}ojasiewicz (KL) property and Kurdyka-{\L}ojasiewicz (KL) exponent. The KL property plays an important role in the convergence rate analysis of first order methods; see, for example, \cite{bolte14,attouch13,beck09,bolte07,attouch10}.
 \begin{definition}[{{\bf Kurdyka-{\L}ojasiewicz (KL) property and exponent}}]\label{KLd}
-A proper closed function $f$ is said to satisfy the KL property at $\bar{x}\in \text{dom} \, \partial f$ if there exist $r\in (0,\infty]$, a neighborhood $U$ of $\bar{x}$, and a continuous concave function $\phi:[0,r)\to \mathbb{R}_+$, $\phi(0)=0$ such that:
+A proper closed function $f$ is said to satisfy the KL property at $\bar{x}\in \dom\partial f$ if there exist $r\in (0,\infty]$, a neighborhood $U$ of $\bar{x}$, and a continuous concave function $\phi:[0,r)\to \mathbb{R}_+$ satisfying $\phi(0)=0$ such that:
 \begin{enumerate}[{\rm (i)}]
     \item $\phi$ is continuously differentiable on $(0,r)$ with $\phi'>0$;
-    \item For all $x\in U$, $f(\bar{x})< f(x) < f(\bar{x}) + r$, it holds that
+    \item for all $x\in U$, $f(\bar{x})< f(x) < f(\bar{x}) + r$, it holds that
         \begin{align}\label{eq21}
         \phi'(f(x) - f(\bar{x}))\d(0,\partial f(x))\geq 1.
         \end{align}
 \end{enumerate}
 If $f$ satisfies the KL property at $\bar{x}\in \dom\partial f$, and $\phi$ in \eqref{eq21} can be chosen as $\phi(\varsigma)= \rho \varsigma^{1-\alpha}$ for some $\rho>0$ and $\alpha\in[0,1)$, then we say that $f$ satisfies the KL property with exponent $\alpha$ at $\bar{x}$.
 
-A proper closed function $f$ satisfies KL property at every point in dom\,$\partial f$ is called KL function. Moreover, a proper closed function $f$ satisfies KL property with exponent $\alpha\in[0,1)$ at every point in dom\,$\partial f$ is called KL function with exponent $\alpha$.
+A proper closed function $f$ satisfying the KL property at every point in $\dom\partial f$ is called a KL function. Moreover, a proper closed function $f$ satisfying the KL property with exponent $\alpha\in[0,1)$ at every point in $\dom\partial f$ is called a KL function with exponent $\alpha$.
 \end{definition}
 
-Based on the above definition, we next recall the following Lemma, which was established in \cite[Lemma~3.10]{yu21}.
-%\begin{lemma}[{{\bf Uniformized KL property}}]\label{uKL}
-%Suppose that $f$ is a proper closed function and $\mathcal{V}$ is a compact set. If $f$ is continuous at $\mathcal{V}$ and satisfies the KL property at every point in $\mathcal{V}$, then there exists $\epsilon>0, \eta>0, \phi\in \varTheta_\eta$ such that
-%$$\phi'(f(x)-f(\bar{x}))\text{dist}(0,\partial f(x))\geq 1,$$
-%holds for all $\bar{x}\in \mathcal{V}$, and any $x$ satisfies dist$(x, \mathcal{V})<\epsilon$ and $f(\bar{x})<f(x)<f(\bar{x})+\eta$.
-%\end{lemma}
-
+Finally, before ending this section, we recall two technical lemmas. The first lemma concerns the uniformized KL property and was established in \cite[Lemma~3.10]{yu21}. The second lemma is a special case of Robinson \cite{Rob75} concerning error bounds for convex functions, which will be used in Section~\ref{sec5} for studying the KL property of a penalty function associated with \eqref{eq1}.
 \begin{lemma}\label{KLinequ}
-Let $f:\R^n\rightarrow (-\infty,+\infty]$ be a level-bounded proper closed convex function with $\Lambda:= \Argmin f\not=\emptyset$. Let $\underline{f}:=\inf f$. Suppose that $f$ satisfies the KL property at each point in $\Lambda$ with exponent $\alpha\in[0,1)$. Then there exist $\epsilon >0$, $r_0>0$, and $c_0>0$ such that
+Let $f:\R^n\rightarrow (-\infty,+\infty]$ be a level-bounded proper closed convex function with $\Lambda:= \Argmin f\not=\emptyset$. Let $\underline{f}:=\inf f$. Suppose that $f$ satisfies the KL property at each point in $\Lambda$ with exponent $\alpha\in[0,1)$. Then there exist $\epsilon >0$, $r_0>0$ and $c_0>0$ such that
 \[
 \d(x, \Lambda)\leq c_0(f(x) - \underline{f})^{1-\alpha}
 \]
 for any $x\in\dom \partial f$ satisfying $\d(x, \Lambda)\leq \epsilon$ and $\underline{f}\leq f(x) \leq \underline{f} + r_0$.
 \end{lemma}
 
-The following lemma is a special case of Robinson \cite{Rob75} concerning error bounds for convex functions.
-
 \begin{lemma}\label{RobEB}
-Let $g:\R^n\to \R^m$ be a convex function. Let $\Omega := \{x\in \mathbb{X}:\; 0 \in g(x) + \R^m_+\}$ and suppose there exist $x^s\in \Omega$ and $\delta_0 > 0$ such that $B(0,\delta_0)\subseteq g(x^s) + \R^m_+$.
+Let $g:\R^n\to \R^m$ with each component function $g_i$ being convex. Let $\Omega := \{x\in \R^n:\; 0 \in g(x) + \R^m_+\}$ and suppose there exist $x^s\in \Omega$ and $\delta_0 > 0$ such that $B(0,\delta_0)\subseteq g(x^s) + \R^m_+$.
 Then
 \[
-\d(x,\Omega)\leq \frac{\|x - x^s\|}{\delta_0}\d(0, g(x) + \R^m_+)~~  \forall x\in \mathbb{X}.
+\d(x,\Omega)\leq \frac{\|x - x^s\|}{\delta_0}\d(0, g(x) + \R^m_+)~~~~~  \forall x\in \mathbb{X}.
 \]
 \end{lemma}
 
-\section{Algorithm and convergence analysis}\label{sec3}
+\section{Algorithmic framework}\label{sec3}
 
-From \cite{wen17}, for each $i$, we see that $g_i$ (whose gradient is Lipschitz continuous) can be written as $g_i = g_i^1 - g_i^2$, where $g_i^1$ and $g_i^2$ are two convex functions with Lipschitz continuous gradients. We first present a remark concerning the Lipschitz continuity moduli of $\nabla g_i^1$ and $\nabla g_i^2$.
+In this section, we present our algorithm for solving \eqref{eq1}. To describe our algorithm, following the discussion in \cite[Section~3]{wen17}, for each $i$, notice that we can rewrite $g_i$ (whose gradient is Lipschitz continuous) as $g_i = g_i^1 - g_i^2$, where $g_i^1$ and $g_i^2$ are two convex functions with Lipschitz continuous gradients. The next remark concerns the Lipschitz continuity moduli of $\nabla g_i^1$ and $\nabla g_i^2$.
 
 \begin{remark}\label{Remarkg}
-We denote a Lipschitz continuity modulus of $\nabla g_i^1$ by $L_{g_i} > 0$ and a Lipschitz continuity modulus of $\nabla g_i^2$ by $\ell_{g_i} > 0$, by taking a larger $L_{g_i}$ if necessary, we may assume without loss of generality that $L_{g_i} \geq \ell_{g_i}$. Then one can show that $\nabla g_i$ is Lipschitz continuous with a modulus $L_{g_i}$. We let $L_g := \max\{L_{g_i}: i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}: i=1,\dots,m\}$ for brevity.
+Here and throughout, we denote a Lipschitz continuity modulus of $\nabla g_i^1$ by $L_{g_i} > 0$ and a Lipschitz continuity modulus of $\nabla g_i^2$ by $\ell_{g_i} > 0$. In addition, by taking a larger $L_{g_i}$ if necessary, we will assume without loss of generality that $L_{g_i} \geq \ell_{g_i}$. Then one can show that $\nabla g_i$ is Lipschitz continuous with a modulus $L_{g_i}$. We also let $L_g := \max\{L_{g_i}: i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}: i=1,\dots,m\}$ for brevity.
 \end{remark}
 
-The extended sequential quadratic method with extrapolation (ESQM$_{\text{e}}$) we study in this paper is presented in Algorithm \ref{alg:Framwork} below. Here and throughout, for notational simplicity, for each $u$, $w\in \R^n$, we define
+The algorithm we study in this paper is presented as Algorithm \ref{alg:Framwork} below; here and throughout, for notational simplicity, for each $u$, $w\in \R^n$, we define
 \begin{equation}\label{ling}
 \ling{0}{u}{v}\equiv 0 \ \ {\rm and}\ \ \ling{i}{u}{w} := g_i(w) + \langle\nabla g_i(w), u - w\rangle \ \ \ \forall i = 1,\ldots,m.
 \end{equation}
+We identify our algorithm as an extended sequential quadratic method with extrapolation (ESQM$_{\text{e}}$), where ``extrapolation" refers to the step \eqref{defyk}. This is because when $\beta_k \equiv 0$, our algorithm reduces to an instance of the ESQM proposed in \cite{Ausleder13}, whose convergence was established for solving \eqref{eq1} when the $P$ in \eqref{eq1} is in addition smooth with Lipschitz gradient.\footnote{More precisely, when the $P$ in \eqref{eq1} is smooth with Lipschitz gradient (say, with Lipschitz constant $L_P$) and $\beta_k \equiv 0$, our algorithm applied to \eqref{eq1} with $P_1(x) := \frac{L_P}2\|x\|^2$ and $P_2(x) := \frac{L_P}2\|x\|^2 - P(x)$ becomes an instance of the ESQM in \cite{Ausleder13}.}
 \begin{algorithm}
-\caption{ESQM$_{\text{e}}$ for solving problem \eqref{eq1}}\label{alg:Framwork}
+\caption{ESQM$_{\text{e}}$ for solving \eqref{eq1}}\label{alg:Framwork}
 \begin{algorithmic}
 \STATE
 \begin{description}
-  \item[\bf Step 0.] Choose $x^{-1}=x^0\in C, \{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}~\right]$, $\theta_0>0$, $d>0$, where $L_g = \max\{L_{g_i}, ~ i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}, ~ i=1,\dots,m\}$.
+  \item[\bf Step 0.] Choose $x^{-1}=x^0\in C$, $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}~\right]$, $\theta_0>0$, $d>0$, where $L_g = \max\{L_{g_i}, ~ i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}, ~ i=1,\dots,m\}$.
   \item[\bf Step 1.] Set
     \begin{equation}\label{defyk}
       y^k = x^k + \beta_k(x^k - x^{k-1}).
     \end{equation}
   \item[\bf Step 2.] Take any $\xi^k\in \partial P_2(x^{k})$ and compute
     \begin{align}\label{eq2}
-    (x^{k+1},s^{k+1})=\Argmin\limits_{(x,s)\in \mathbb{R}^{n+1}}\quad &P_1(x) - \langle \xi^k, x \rangle
+    (x^{k+1},s^{k+1})=\argmin\limits_{(x,s)\in \mathbb{R}^{n+1}}\quad &P_1(x) - \langle \xi^k, x \rangle
 	+ \theta_k s + \frac{\theta_k L_g}{2}\| x - y^k \|^2   \notag
 	\\ \text{s.t.} \quad &\ling{i}{x}{y^k} \leq s ~~\forall i=1,\dots,m,
 	\\& (x,s)\in C\times \mathbb{R_+},  \notag
@@ -334,14 +314,14 @@ where ${\rm lin}_{g_i}$ is defined in \eqref{ling}.
 \end{algorithmic}
 \end{algorithm}
 
-We next present some useful facts concerning the subproblem \eqref{eq2}.
+The convergence properties of our algorithm will be studied in Section~\ref{sec4}, and we end this section by presenting some useful facts concerning the subproblem \eqref{eq2}.
 
 \begin{lemma}\label{subproremarks}
 Suppose that $x^{k-1}, x^k\in C$ are generated at the beginning of the $k$-th iteration of Algorithm \ref{alg:Framwork} for some $k\geq 0$. Then the following statements hold:
 \begin{enumerate}[{\rm (i)}]
     \item $s^{k+1} = \max_{i = 1,\cdots,m}[\ling{i}{x^{k+1}}{y^k}]_+$.
     \item Problem \eqref{eq2} has a unique solution.
-    \item Let $g_0:\equiv 0$. Then, for each $k\geq 0$, $x^{k+1}$ is a component of the minimizer of \eqref{eq2} if and only if there exist $\lambda_i^k \geq 0$ for all $i\in I_k(x^{k+1})$ such that $\sum_{i\in I_k(x^{k+1})}\lambda_i^k = 1$ and
+    \item Let $g_0\equiv 0$. Then $x^{k+1}$ is a component of the minimizer of \eqref{eq2} if and only if there exist $\lambda_i^k \geq 0$ for all $i\in I_k(x^{k+1})$ such that $\sum_{i\in I_k(x^{k+1})}\lambda_i^k = 1$ and
         \begin{equation}\label{KKT2}
         0\in \partial P_1(x^{k+1}) - \xi^k + \theta_k\sum_{i\in I_k(x^{k+1})} \lambda_i^k\nabla g_i(y^k) + \theta_kL_g(x^{k+1} - y^k) + \mathcal{N}_C(x^{k+1}),
         \end{equation}
@@ -353,57 +333,58 @@ Suppose that $x^{k-1}, x^k\in C$ are generated at the beginning of the $k$-th it
 \end{lemma}
 
 \begin{proof}
-It is not hard to show that (i) and (ii) hold. We omit the proof for brevity.
+The proofs of (i) and (ii) are standard and we omit the proofs for brevity.
 
-Now, we prove (iii). Combined $g_0:\equiv 0$ with (i), we have that $x^{k+1}$ in \eqref{eq2} satisfies
+We now prove (iii). Combining $g_0\equiv 0$ with (i), we see that the $x^{k+1}$ in \eqref{eq2} satisfies
 \begin{equation}\label{subproblem2}
-x^{k+1} = \Argmin\limits_{x\in C}~ P_1(x) - \langle \xi^k, x \rangle + \theta_k \max_{i = 0, 1,\cdots,m}\{\ling{i}{x}{y^k}\} + \frac{\theta_k L_g}{2}\| x - y^k \|^2.
+x^{k+1} = \argmin\limits_{x\in C}~ P_1(x) - \langle \xi^k, x \rangle + \theta_k \max_{i = 0, 1,\cdots,m}\{\ling{i}{x}{y^k}\} + \frac{\theta_k L_g}{2}\| x - y^k \|^2.
 \end{equation}
 Then, from \cite[Theorem 23.8]{Ro70}, we have that $x^{k+1}$ is a minimizer of the convex problem \eqref{subproblem2} if and only if
 \begin{align*}
 0&\!\in\! \partial P_1(x^{k+1}) \!-\! \xi^k \!+\! \theta_k\partial\!\left(\max_{i = 0, 1,\cdots,m}\{\ling{i}{\cdot}{y^k}\}\right)\!(x^{k+1}) \!+\! \theta_kL_g(x^{k+1} - y^k) \!+\! \mathcal{N}_C(x^{k+1})\\
 & \!\!\overset{\rm(a)}=\! \partial P_1(x^{k+1}) - \xi^k + \theta_k\conv\{\nabla g_i(y^k): i\in I_k(x^{k+1})\} + \theta_kL_g(x^{k+1} - y^k) + \mathcal{N}_C(x^{k+1}),
 \end{align*}
-where $I_k(\cdot)$ defined in \eqref{defiIk}, and (a) follows from \cite[Exercise~8.31]{rock97a}.
-
-That is, for each $k\geq 0$, there exist $\lambda_i^k \geq 0$ for all $i\in I_k(x^{k+1})$ such that $\sum_{i\in I_k(x^{k+1})}\lambda_i^k = 1$ and
-\begin{equation*}
-0\in \partial P_1(x^{k+1}) - \xi^k + \theta_k\sum_{i\in I_k(x^{k+1})} \lambda_i^k\nabla g_i(y^k) + \theta_kL_g(x^{k+1} - y^k) + \mathcal{N}_C(x^{k+1}).
-\end{equation*}
-This completes the proof.
+where (a) follows from \cite[Exercise~8.31]{rock97a} with $I_k(\cdot)$ defined in \eqref{defiIk}.
+%
+%That is, for each $k\geq 0$, there exist $\lambda_i^k \geq 0$ for all $i\in I_k(x^{k+1})$ such that $\sum_{i\in I_k(x^{k+1})}\lambda_i^k = 1$ and
+%\begin{equation*}
+%0\in \partial P_1(x^{k+1}) - \xi^k + \theta_k\sum_{i\in I_k(x^{k+1})} \lambda_i^k\nabla g_i(y^k) + \theta_kL_g(x^{k+1} - y^k) + \mathcal{N}_C(x^{k+1}).
+%\end{equation*}
+%This completes the proof.
 \end{proof}
 
 
-\section{Convergence properties}
-\subsection{Convergence analysis for ESQM$_{\rm e}$ in Algorithm~\ref{alg:Framwork}}
+\section{Convergence properties}\label{sec4}
 
+\subsection{Convergence analysis for ESQM$_{\rm e}$}
+We first show that the successive changes of the $\{x^k\}$ generated by ESQM$_{\rm e}$ vanish under suitable assumptions on $\beta_k$.
 \begin{theorem}\label{suffdec}
 Consider \eqref{eq1}. Let $\{(x^k,y^k,s^k,\theta_k)\}$ be the sequence generated by Algorithm \ref{alg:Framwork}. Then the following statements hold:
 \begin{enumerate}[{\rm (i)}]
     \item The sequence $\{x^k\}$ belongs to $C$ and is bounded.
-    \item Let $\bar{m} = \inf\{P(x):x\in C\}$. Then for any $k\geq 0$,
+    \item Let $\bar{m} = \inf\{P(x):x\in C\}$. Then for any $k\geq 1$,
         $$
         Q(x^{k+1},x^{k},y^{k},\theta_{k+1}) \leq Q(x^k,x^{k-1},y^{k-1},\theta_k) - \left(1 - \frac{L_g + \ell_g}{L_g}\beta_k^2\right)\frac{L_g}{2}\| x^{k} - x^{k-1}\|^2,
         $$
-    where 
+    where
     \[
     Q(x,y,z,\theta)\!:=\!\frac{1}{\theta}\!\left(\!P(x) \!-\! \bar{m} \!+\! \theta\!\!\max_{i = 1,\cdots,m}\left[\ling{i}{x}{z}\right]_+\!+\! \frac{\theta L_g}{2}\| x \!-\! y \|^2 \!+\! \frac{\theta L_g}{2}\| x \!-\! z \|^2 \!\right)\!.
     \]
-    \item $\sum_{k = 1}^{\infty} \frac{L_g - (L_g + \ell_g)\beta_k^2}{2} \| x^k - x^{k-1}\|^2 < \infty$. Moreover, if $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, then $\lim_{k \rightarrow\infty}\|x^k - x^{k-1}\| = 0$ and  $\lim_{k \rightarrow\infty}\|x^k - y^k\| = 0$.
+    \item It holds that $\sum_{k = 1}^{\infty} \frac{L_g - (L_g + \ell_g)\beta_k^2}{2} \| x^k - x^{k-1}\|^2 < \infty$. Moreover, if $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, then $\lim_{k \rightarrow\infty}\|x^k - x^{k-1}\| = 0$ and  $\lim_{k \rightarrow\infty}\|x^k - y^k\| = 0$.
 \end{enumerate}
 \end{theorem}
 
 \begin{proof}
-(i): Since $\{x^k\}\subseteq C$ according to \eqref{eq2} and $C$ is a nonempty compact convex set, $\{x^k\}$ is bounded.
+(i): Note that $\{x^k\}\subseteq C$ according to \eqref{eq2}. Since $C$ is compact, $\{x^k\}$ is bounded.
 
-(ii): Using the definition of $(x^{k+1},s^{k+1})$ in \eqref{eq2} and the strong convexity of the objective in the minimization problem \eqref{eq2}, and noting that $(x^k,\max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^k}\right]_+)$ is feasible for \eqref{eq2}, we have that
+(ii): Note that the objective in the subproblem \eqref{eq2} is strongly convex. Using this, and noting the definition of $(x^{k+1},s^{k+1})$ in \eqref{eq2} as a minimizer and the fact that $(x^k,\max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^k}\right]_+)$ is feasible for \eqref{eq2}, we have for any $k\ge 0$ that
 \begin{equation}
 \begin{split}\label{eq6}
 & P_1(x^{k+1}) \!-\! \langle \xi^k,x^{k+1}-x^k\rangle + \theta_k s^{k+1} + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k  \|^2 \\
 &\leq P_1(x^{k}) \!+\! \theta_k \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^k}\right]_+ \!+\! \frac{\theta_k L_g}{2}\| x^{k}-y^k \|^2 \!-\! \frac{\theta_k L_g}{2}\| x^{k+1}-x^k \|^2.
 \end{split}
 \end{equation}
-Meanwhile, from Remark~\ref{Remarkg} and the definition of ${\rm lin}_{g_i}$ in \eqref{ling}, we see that
+Meanwhile, from Remark~\ref{Remarkg} and the definition of ${\rm lin}_{g_i}$ in \eqref{ling}, we see that whenever $k \ge 1$,
 \begin{align}\label{gnonconvex}
 &\!\! \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^k}\right]_+ \notag\\
 &\!\!= \max_{i = 1,\cdots,m}\left[g^1_i(y^k) + \langle\nabla g^1_i(y^k), x^k - y^k \rangle - g^2_i(y^k) - \langle\nabla g^2_i(y^k), x^k - y^k \rangle\right]_+ \notag\\
@@ -411,9 +392,8 @@ Meanwhile, from Remark~\ref{Remarkg} and the definition of ${\rm lin}_{g_i}$ in 
 &\!\! \overset{\rm(b)}{\leq} \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^{k-1}}+ \frac{L_{g_i}}{2}\|x^k - y^{k-1}\|^2 + \frac{\ell_{g_i}}{2}\|x^k - y^{k}\|^2\right]_+ \notag\\
 &\!\!\overset{\rm(c)}{\leq} \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^{k-1}}\right]_+ + \frac{L_g}{2}\|x^k - y^{k-1}\|^2 + \frac{\ell_{g}}{2}\|x^k - y^{k}\|^2, \notag
 \end{align}
-where (a) holds because of the convexity of $\nabla g^1_i$ and the Lipschitz continuity of $\nabla g^2_i$, (b) follows from the Lipschitz continuity of $\nabla g_i$, and (c) holds because $L_g=\max\{L_{g_i}:\;i=1,\dots,m\}$ and $\ell_g=\max\{\ell_{g_i}:\;i=1,\dots,m\}$.
-
-Then, we obtain that
+where (a) holds because of the convexity of $g^1_i$ and the Lipschitz continuity of $\nabla g^2_i$, (b) follows from the Lipschitz continuity of $\nabla g_i$, and (c) holds because $L_g=\max\{L_{g_i}:\;i=1,\dots,m\}$ and $\ell_g=\max\{\ell_{g_i}:\;i=1,\dots,m\}$.
+Then, we obtain that when $k \ge 1$,
 \begin{align*}
 &P(x^{k+1}) = P_1(x^{k+1}) - P_2(x^{k+1})\overset{\rm(a)}{\leq} P_1(x^{k+1}) - \langle\xi^k, x^{k+1} - x^k\rangle - P_2(x^{k})\\
 & = P_1(x^{k+1}) - \langle \xi^k, x^{k+1} - x^k\rangle + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k \|^2 - \frac{\theta_k L_g}{2}\| x^{k+1} - y^k\|^2 - P_2(x^{k})\\
@@ -425,7 +405,7 @@ Then, we obtain that
 \end{align*}
 where (a) holds because $P_2$ is convex and $\xi^k\in \partial P_2(x^k)$, (b) holds thanks to \eqref{eq6}, and (c) holds because of \eqref{gnonconvex}.
 
-Rearranging terms in the above display and noting that $y^k - x^k = \beta_k(x^k - x^{k - 1})$ (thanks to the definition of $y^k$ in \eqref{defyk}), we have that
+Rearranging terms in the above display and noting that $y^k - x^k = \beta_k(x^k - x^{k - 1})$ for $k \ge 0$ (thanks to the definition of $y^k$ in \eqref{defyk}), we have that for $k\ge 1$,
 \begin{align}\label{eq8}
 &P(x^{k+1}) + \theta_k s^{k+1} + \frac{\theta_k L_g}{2}\| x^{k+1} - x^k\|^2 + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k\|^2 \notag\\
 &\leq P(x^{k}) + \theta_k\max_{i = 1,\cdots,m}\left[\ling{i}{x^{k}}{y^{k-1}}\right]_+ + \frac{\theta_k L_g}{2}\| x^k - y^{k-1}\|^2 \\
@@ -434,7 +414,7 @@ Rearranging terms in the above display and noting that $y^k - x^k = \beta_k(x^k 
 &~~~~~~ + \frac{\theta_k L_g}{2}\| x^k - y^{k-1}\|^2 - \left(1 - \frac{L_g + \ell_g}{L_g}\beta_k^2\right)\frac{\theta_k L_g}{2}\| x^{k} - x^{k-1}\|^2. \notag
 \end{align}
 
-Since $P$ is continuous and $C$ is a compact set, it implies that $\bar{m} = \inf\{P(x):x\in C\} > -\infty$. Then we see from the definition of $Q$ and the observation $s^{k+1} = \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^{k}}\right]_+$ (thanks to Lemma~\ref{subproremarks}(i)) that
+Since $P$ is continuous and $C$ is a compact set, we see that $\bar{m} = \inf\{P(x):x\in C\} > -\infty$. Then we can deduce from the definition of $Q$ and the observation $s^{k+1} = \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^{k}}\right]_+$ (thanks to Lemma~\ref{subproremarks}(i)) that whenever $k\ge 1$,
 \begin{align}\label{eq81}
 &Q(x^{k+1},x^{k},y^{k},\theta_{k+1}) \notag\\
 &= \frac{P(x^{k+1}) - \bar{m}}{\theta_{k+1}} + s^{k+1} + \frac{L_g}{2}\| x^{k+1} - x^{k} \|^2 + \frac{L_g}{2}\| x^{k+1} - y^{k} \|^2 \notag\\
@@ -445,9 +425,9 @@ Since $P$ is continuous and $C$ is a compact set, it implies that $\bar{m} = \in
 &~~~~ + \frac{L_g}{2}\| x^{k} - x^{k-1}\|^2 + \frac{L_g}{2}\|x^k - y^{k-1}\|^2- \left(1 - \frac{L_g + \ell_g}{L_g}\beta_k^2\right)\frac{L_g}{2}\| x^{k} - x^{k-1}\|^2 \notag\\
 & = Q(x^k,x^{k-1},y^{k-1},\theta_k) - \left(1 - \frac{L_g + \ell_g}{L_g}\beta_k^2\right)\frac{L_g}{2}\| x^{k} - x^{k-1}\|^2,
 \end{align}
-where (a) holds because the definition of $\bar{m}$ and the fact that $\{\theta_k^{-1}\}$ is nonincreasing, which implies that $\theta_{k+1}^{-1}\leq \theta_k^{-1}$; (b) follows from \eqref{eq8} and the fact that $\frac{1}{\theta_k} > 0$, and (c) holds because $x^{k}\in C$.
+where (a) holds because the definition of $\bar{m}$ and the fact that $\{\theta_k^{-1}\}$ is nonincreasing, (b) follows from \eqref{eq8} and the fact that $\frac{1}{\theta_k} > 0$, and (c) holds because $x^{k}\in C$.
 
-(iii): Observe that, for any $k\geq 1$,
+(iii): Observe that, for any $k\geq 0$,
 \begin{equation*}
 \begin{split}
 &Q(x^{k+1},x^{k},y^k,\theta_{k+1})  \\
@@ -459,148 +439,157 @@ Combining the above display with \eqref{eq81}, we have
 &\sum_{k=1}^{\infty}\left(1 - \frac{L_g + \ell_g}{L_g}\beta_k^2\right)\frac{L_g}{2}\| x^{k} - x^{k-1} \|^2 \\
 &\leq Q(x^1,x^{0},y^{0},\theta_1) - \liminf_{k\to \infty} Q(x^{k+1},x^{k},y^k,\theta_{k+1})\leq Q(x^1,x^{0},y^{0},\theta_1) <\infty .
 \end{align*}
-Moreover, if $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, then we deduce from the above display that
+Finally, if $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, then we deduce from the above display that
 $$\lim_{k\to \infty}\| x^k - x^{k-1}\|=0.$$
 Combining this with the definition of $y^k$ in \eqref{defyk}, we can obtain further that
 $
 \lim_{k\to \infty}\| y^k - x^k\| = \lim_{k\to \infty}\beta_k\| x^k - x^{k-1}\| =0$.
 \end{proof}
 
-Next, we need to make use of the following assumption, which was first introduced in \cite[Assumption~A1]{Ausleder13}.
+Next, we recall the following assumption concerning the RCQ in Definition~\ref{RCQ}. This assumption was first introduced in \cite[Assumption~A1]{Ausleder13} for studying ESQM.
 
 \begin{assumption}\label{A1}
-$RCQ(x)$ holds at every point $x\in C\cap \mathcal{F}$, and for every $x\in C\setminus \mathcal{F}$, there cannot exist $u_i$, $i\in I(x)$, such that
+For \eqref{eq1}, the $RCQ(x)$ holds at every point $x\in C\cap \mathcal{F}$, and for every $x\in C\setminus \mathcal{F}$, there cannot exist $u_i$, $i\in I(x)$, such that
 \begin{equation}\label{A11}
 u_i\geq 0 ~~ \forall i\in I(x), ~~ \sum_{i\in I(x)}u_i=1, ~~ \left\langle\sum_{i\in I(x)}u_i\nabla g_i(x), z - x\right\rangle\geq0 ~~\forall z\in C.
 \end{equation}
 where $I(x) := \Big\{ s\in\{1, 2, \dots, m\}: g_s(x) = \max_{i = 1, 2, \dots, m} \{ g_i(x), 0\} \Big\}$.\footnote{Note that, from the definition of $I_k(\cdot)$ in \eqref{defiIk}, one can see that the difference between $I_k(\cdot)$ and $I(\cdot)$ is that $I_k(\cdot)\subseteq\{0, 1,\cdots,m\}$, while $I(\cdot)\subseteq\{1,\cdots,m\}$.}
 \end{assumption}
 \begin{remark}\label{remarkRCQ}
-From the definition of $RCQ(x)$, we have that if Assumption~\ref{A1} holds, then for any $x\in C$, there cannot exist $u_i$, $i\in I(x)$, such that \eqref{A11} holds. Moreover, if $RCQ(x)$ holds at every point $x\in C$, then Assumption~\ref{A1} holds.
+\begin{enumerate}[{\rm (i)}]
+  \item From the definition of $RCQ(x)$, we have that if Assumption~\ref{A1} holds, then for any $x\in C$, there cannot exist $u_i$, $i\in I(x)$, such that \eqref{A11} holds.
+  \item One can show that if the $RCQ(x)$ holds at every $x\in C$, then Assumption~\ref{A1} holds.
+\end{enumerate}
 \end{remark}
+\todo[inline]{Add some comments / concrete discussions concerning this assumption?}
 
-Using this Assumption and Theorem~\ref{suffdec}, we will prove in the next theorem that the sequence $\{\theta_k\}$ in Algorithm~\ref{alg:Framwork} is bounded.
+Using Assumption~\ref{A1} and Theorem~\ref{suffdec}, we will prove in the next theorem that the sequence $\{\theta_k\}$ in Algorithm~\ref{alg:Framwork} is bounded.
 
 \begin{theorem}\label{alpha}
-Consider \eqref{eq1} and suppose that Assumption \ref{A1} holds and $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$. Let $\{(x^k,y^k,\theta_k)\}$ be the sequence generated by Algorithm \ref{alg:Framwork}, $A := \{k\in \mathbb{N}:\theta_{k+1}>\theta_k\}$, and let $|A|$ denote the number of elements in A. Then $|A|$ is finite, i.e., there exists $N_0\in \mathbb{N}$, such that $\theta_k \equiv \theta_{N_0}$, whenever $k\geq N_0$. Moreover, $s^{k+1} = 0$ whenever $k\geq N_0$.
+Consider \eqref{eq1}. Suppose that Assumption~\ref{A1} holds and $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$. Let $\{(x^k,y^k,\theta_k)\}$ be the sequence generated by Algorithm~\ref{alg:Framwork}, $A := \{k\in \mathbb{N}:\theta_{k+1}>\theta_k\}$, and let $|A|$ denote the number of elements in A. Then $|A|$ is finite, i.e., there exists $N_0\in \mathbb{N}$, such that $\theta_k \equiv \theta_{N_0}$, whenever $k\geq N_0$. Moreover, $s^{k+1} = 0$ whenever $k\geq N_0$.
 \end{theorem}
 
 \begin{proof}
-By the definition of A, $|A|$ is either finite or infinite. If $\Upsilon(\text{A}) = \infty$, by the definition of $\theta_k$ in Step~3, we have that $\lim_{k\to \infty}\theta_k = \infty$ and $\lim_{k\to \infty}\theta_k^{-1}=0$.
+%By the definition of $A$, $|A|$ is either finite or infinite. 
+Suppose to the contrary that $|A| = \infty$. Then by the definition of $\theta_k$ in Step~3 of Algorithm~\ref{alg:Framwork}, we have $\lim_{k\to \infty}\theta_k = \infty$ and $\lim_{k\to \infty}\theta_k^{-1}=0$.
 	
 We first claim that for each $i$, there exists $n_i\in \mathbb{Z}$ such that, for all $k\geq n_i$,
-\begin{equation}
+\begin{equation*}
  g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.
-\end{equation}
-If not, then there exists $i_0\in\{1,\dots, m\}$, and subsequences $\{x^{k_j}\}$ and $\{y^{k_j}\}$, such that
-\begin{equation}\label{ifnot}
+\end{equation*}
+If not, then there exists $i_0\in\{1,\dots, m\}$, and (infinite) subsequences $\{x^{k_j}\}$ and $\{y^{k_j}\}$, such that
+\begin{equation*}
  g_{i_0}(y^{k_j}) + \langle \nabla g_{i_0}(y^{k_j}),x^{{k_j}+1} - y^{k_j} \rangle > 0.
-\end{equation}
-Then, by the definition of $I_k(\cdot)$ in \eqref{defiIk} and \eqref{ifnot}, we have that for all $i\in I_{k_j}(x^{k_j+1})$,
+\end{equation*}
+Using this and the definition of $I_k(\cdot)$ in \eqref{defiIk}, we have that for all $i\in I_{k_j}(x^{k_j+1})$,
 \begin{equation*}
  g_{i}(y^{k_j}) + \langle \nabla g_{i}(y^{k_j}),x^{{k_j}+1} - y^{k_j} \rangle > 0.
 \end{equation*}
-
-In view of the infiniteness of $\{(x^{k_j+1}, y^{k_j})\}$ and the finiteness of $\left\{I_{k_j}(x^{k_j+1})\right\}$ (since $I_{k_j}(x^{k_j+1})\subseteq \{0, 1, \dots, m\}$ for all $j$), passing to a further subsequence if necessary, there exists a nonempty subset $I_0\subseteq \{0, 1,\dots,m\}$ with $0\notin I_0$ such that
-$I_0 \equiv I_{k_j}(x^{k_j+1})$ for all $j$. That is, for all $i\in I_0$,
+In particular, $0 \notin  I_{k_j}(x^{k_j+1})$ (recall that $g_0 \equiv 0$). Now, in view of the finiteness of $\left\{I_{k_j}(x^{k_j+1})\right\}$ (since $I_{k_j}(x^{k_j+1})\subseteq \{1, \dots, m\}$ for all $j$), by passing to a further subsequence if necessary, we deduce that there exists a nonempty subset $I_0\subseteq \{1,\dots,m\}$ such that
+$I_{k_j}(x^{k_j+1})\equiv I_0$ for all $j$. That is, for all $i\in I_0$,
 \begin{equation}\label{eq10}
 \ling{i}{x^{k_j+1}}{y^{k_j}} = \max_{s = 0, 1, \dots, m} \left\{ \ling{s}{x^{k_j+1}}{y^{k_j}}\right\} > 0~~ \forall j.
 \end{equation}
-
-From Lemma~\ref{subproremarks}(iii), we have that for each $k_j$, there exist $\lambda_i^{k_j} \geq 0$ for each $i\in I_{k_j}(x^{k_j + 1}) (\equiv I_0)$, such that $\sum_{i\in I_0}\lambda_i^{k_j} = 1$ and
+In addition, from Lemma~\ref{subproremarks}(iii), we have that for each $k_j$, there exist $\lambda_i^{k_j} \geq 0$ for each $i\in I_{k_j}(x^{k_j + 1}) \equiv I_0$, such that $\sum_{i\in I_0}\lambda_i^{k_j} = 1$ and
 \begin{align}\label{eq11}
 0\in \theta_{k_j}^{-1}(\partial P_1(x^{k_j+1}) - \xi^{k_j}) + L_g(x^{k_j+1} - y^{k_j}) \!+\! \sum_{i\in I_0} \lambda_i^{k_j} \nabla g_i(y^{k_j}) \!+\! \mathcal{N}_C(x^{k_j+1}).
 \end{align}
-
-Since the sequences $\{x^k\}$ and $\{\lambda_i^{k_j}: i \in I_0\}$ are bounded, by passing to a further subsequence if necessary, we assume $\{x^{k_j}\}$ is a convergent subsequence such that $\lim_{j \to \infty} x^{k_j} = x^{*}$ and $\lim_{j \to \infty}\lambda_i^{k_j}= \bar{\lambda}_i$, for all $i\in I_0$. Then $x^*\in C$, $\bar{\lambda}_i \ge 0$ (for each $i\in I_0$), $\sum_{i\in I_0} \bar{\lambda}_i = 1$ and $I_0 \subseteq \left\{i \in\{0,1,\cdots,m\}: g_i(x^*) = \max_{i=0,1,\cdots,m} g_i(x^*)\right\}$ (thanks to $I_0 = I_{k_j}(x^{k_j+1})$ for all $k_j$). Since $0\notin I_0$, we see that
-$$I_0 \subseteq I(x^*) :=\left\{i \in\{1,2,\cdots,m\}: g_i(x^*) = \max_{i=1,\cdots,m} \{g_i(x^*), 0\}\right\}.$$
-
-Passing to the limit in \eqref{eq11}, and noting that $\lim_{j \to \infty} \theta_{k_j}^{-1} = 0$, $\lim_{j \to \infty}\| x^{k_j+1} - y^{k_j} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)), $\{\partial P_1(x^{k_j+1})\}$ and $\{\xi^{k_j}\}$ are uniformly bounded (thanks to $P_1$, $P_2$ are convex, $C$ is bounded and \cite[Theorem~2.6]{Tu98}), we have that
+Now, since the sequences $\{x^k\}$ and $\{\lambda_i^{k_j}: i \in I_0\}$ are bounded, by passing to a further subsequence if necessary, we assume that $\lim_{j \to \infty} x^{k_j} = x^{*}$ for some $x^*$ and that for each $i\in I_0$, $\lim_{j \to \infty}\lambda_i^{k_j}= \bar{\lambda}_i$ for some $\bar \lambda_i$. Then $x^*\in C$, $\bar{\lambda}_i \ge 0$ (for each $i\in I_0$), $\sum_{i\in I_0} \bar{\lambda}_i = 1$ and $I_0 \subseteq \left\{i \in\{0,1,\cdots,m\}: g_i(x^*) = \max_{i=0,1,\cdots,m} g_i(x^*)\right\}$ (thanks to \eqref{eq10}, \eqref{ling} and Theorem~\ref{suffdec}(iii)). Since $0\notin I_0$, we see that
+\[
+I_0 \subseteq I(x^*) :=\left\{i \in\{1,2,\cdots,m\}: g_i(x^*) = \max_{i=1,\cdots,m} \{g_i(x^*), 0\}\right\}.
+\]
+Passing to the limit in \eqref{eq11}, and noting that $\lim_{j \to \infty} \theta_{k_j}^{-1} = 0$, $\lim_{j \to \infty}\| x^{k_j+1} - y^{k_j} \|=\lim_{j \to \infty}\| x^{k_j+1} - x^{k_j} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)) and the fact that $\{\partial P_1(x^{k_j+1})\}$ and $\{\xi^{k_j}\}$ are uniformly bounded (thanks to the real-valuedness and convexity of $P_1$, $P_2$, the compactness of $C$ and \cite[Theorem~24.7]{Ro70}), we have that
 $$0\in \sum_{i\in I_0}\bar{\lambda}_i \nabla g_i(x^*) + \mathcal{N}_C(x^*),$$
 which implies that
-\begin{align}\label{eq12}
-\left\langle \sum_{i\in I_0}\bar{\lambda}_i \nabla g_i(x^*), x-x^* \right\rangle \geq 0 ~~ \forall x\in C.
-\end{align}
-Since $I_0\subseteq I(x^*)$, this contradicts Assumption~\ref{A1}.
+\begin{align*}
+\left\langle \sum_{i\in I_0}\bar{\lambda}_i \nabla g_i(x^*), x-x^* \right\rangle \geq 0 ~~~~ \forall x\in C.
+\end{align*}
+Since $I_0\subseteq I(x^*)$, this contradicts Assumption~\ref{A1} (see also Remark~\ref{remarkRCQ}(i)).
 
-Therefore, if $|A| = \infty$, then for each $i$, there exists $n_i\in \mathbb{Z}$, such that for any $k\geq n_i$,
-$$g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.$$
-Letting $N_0 =  \max_{i = 1, \dots, m} n_i$. Then for all $i\in\{1, 2, \dots, m\}$ and for any $k\ge N_0$, we have
-$$g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.$$
-From the definition of $\theta_k$ in Step 3 of Algorithm \ref{alg:Framwork}, we have $\theta_k\equiv \theta_{N_0}$ for all $k\geq N_0$, which contradicts $\theta_k\rightarrow\infty$. Thus, we have $|A|\not= \infty$.
+Therefore, if $|A| = \infty$, then it must hold that for each $i$, there exists $n_i\in \mathbb{Z}$, such that for any $k\geq n_i$,
+\[
+g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.
+\]
+Let $N_0 =  \max_{i = 1, \dots, m} n_i$. Then for all $i\in\{1, 2, \dots, m\}$ and for any $k\ge N_0$, we have
+\[
+g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.
+\]
+In view of this and the definition of $\theta_k$ in Step 3 of Algorithm \ref{alg:Framwork}, we must have $\theta_k\equiv \theta_{N_0}$ for all $k\geq N_0$, which contradicts $\theta_k\rightarrow\infty$. Thus, it must hold that $|A|\not= \infty$.
 
-Since $|A|$ is finite, there exists $N_0\in \mathbb{Z}$, such that $\theta_k\equiv\theta_{N_0}$ whenever $k\geq N_0$. From Step 3 of Algorithm \ref{alg:Framwork}, we known that for each $i$, $ g_i(y^k) + \langle \nabla g_i(y^k), x^{k+1} - y^k \rangle\leq 0$, for all $k\geq N_0$. Then by the definition of $s^{k+1}$, we see that $s^{k+1}=0$, for any $k\geq N_0$. This completes the proof.
+Since $|A|$ is finite, there exists $N_0\in \mathbb{Z}$, such that $\theta_k\equiv\theta_{N_0}$ whenever $k\geq N_0$. From Step 3 of Algorithm \ref{alg:Framwork}, we known that for each $i$, $ g_i(y^k) + \langle \nabla g_i(y^k), x^{k+1} - y^k \rangle\leq 0$, for all $k\geq N_0$. Then Lemma~\ref{subproremarks}(i) asserts that $s^{k+1}=0$ for any $k\geq N_0$. 
 \end{proof}
 
-Finally, we prove that any cluster point of sequence $\{x^k\}$ is a critical point of problem \eqref{eq1}.
-
+We are now ready to prove that any cluster point of sequence $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} is a critical point of \eqref{eq1}.
 \begin{theorem}\label{subconver}
-Consider \eqref{eq1} and suppose that Assumption \ref{A1} holds and $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$. Let $\{(x^k,y^k,\theta_k)\}$ be the sequence generated by Algorithm \ref{alg:Framwork}. Then the following statements hold:
-\begin{enumerate}[{\rm (i)}]
-    \item For any accumulation point $\bar{x}$ of $\{x^k\}$, there exists $\bar{\lambda}_i\geq 0$ for each $i\in \tilde{I}(\bar{x})$ such that $\sum_{i\in \tilde{I}(\bar{x})} \bar{\lambda}_i = 1$ and
-        \begin{equation}\label{critical3333}
-        0\in \partial P_1(\bar{x}) - \bar{\xi} + \theta_{N_0}\sum_{i\in \tilde{I}(\bar{x})} \bar{\lambda}_i\nabla g_i(\bar{x}) + \mathcal{N}_C(\bar{x}),
-        \end{equation}
-        where $\tilde{I}(\bar{x}):=\left\{s \in\{0,1,\cdots,m\}: g_s(\bar{x}) = \max_{i=0,1,\cdots,m} \{g_i(\cdot)\}\right\}$.\footnote{Notice that $\tilde{I}(\cdot)\subseteq\{0,1,2,\cdots,m\}$ and $I(\cdot)\subseteq\{1,2,\cdots,m\}$}
-    \item Any accumulation point of sequence $\{x^k\}$ is a critical point of \eqref{eq1}
-\end{enumerate}
+Consider \eqref{eq1} and suppose that Assumption \ref{A1} holds and $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$. Let $\{(x^k,y^k,\theta_k)\}$ be the sequence generated by Algorithm \ref{alg:Framwork}. Then any accumulation point of sequence $\{x^k\}$ is a critical point of \eqref{eq1}.
+%the following statements hold:
+%\begin{enumerate}[{\rm (i)}]
+%    \item For any accumulation point $\bar{x}$ of $\{x^k\}$, there exists $\bar{\lambda}_i\geq 0$ for each $i\in \tilde{I}(\bar{x})$ such that $\sum_{i\in \tilde{I}(\bar{x})} \bar{\lambda}_i = 1$ and
+%        \begin{equation}\label{critical3333}
+%        0\in \partial P_1(\bar{x}) - \bar{\xi} + \theta_{N_0}\sum_{i\in \tilde{I}(\bar{x})} \bar{\lambda}_i\nabla g_i(\bar{x}) + \mathcal{N}_C(\bar{x}),
+%        \end{equation}
+%        where $\tilde{I}(\bar{x}):=\left\{s \in\{0,1,\cdots,m\}: g_s(\bar{x}) = \max_{i=0,1,\cdots,m} \{g_i(\cdot)\}\right\}$.
+%    \item Any
+%\end{enumerate}
 \end{theorem}
 \begin{proof}
-(i): Suppose $\bar{x}$ is an accumulation point of $\{x^k\}$ with $\lim_{j\to \infty} x^{k_j} = \bar{x}$ for some convergence subsequence $\{x^{k_j}\}$. Since $\{\lambda^k\}$ is bounded thanks to Lemma~\ref{subproremarks}(iii) and $\{\xi^k\}$ is bounded thanks to $P_2$ is convex and \cite[Theorem~2.6]{Tu98}, passing to a further subsequence if necessary, we may assume without loss of generality that $\lim_{j\to \infty} \lambda^{k_j} = \bar{\lambda}\geq 0$ and $\lim_{j\to \infty} \xi^{k_j} = \bar{\xi}$.
-
-Moreover, by the infiniteness of $\{(x^{k_j+1}, y^{k_j})\}$ and the finiteness of $\{I_{k_j}(x^{k_j+1})\}$ (since $I_{k_j}(x^{k_j+1})\subseteq \{0, 1, 2, \dots, m\}$ for all $j$), passing to a further subsequence if necessary, there exists a nonempty subset $I_0\subseteq \{0, 1,\dots,m\}$ such that
-$I_0 \equiv I_{k_j}(x^{k_j+1})$ for all $k_j$ and $I_0\subseteq \tilde{I}(\bar{x}):=\{s = 0,1,\cdots,m: g_s(\bar{x}) = \max_{i=0,1,\cdots,m} \{g_i(\bar{x})\}\}$.
-
-By subproblem \eqref{eq2},  we obtain that for each $k_j$,
-\[
-g_i(y^{k_j}) + \langle\nabla g_i(y^{k_j}), x^{{k_j}+1} - y^{k_j} \rangle \leq s^{{k_j}+1} ~~ \forall i =1,\dots,m,
-\]
-and by Lemma~\ref{subproremarks}(iii), there exist $\lambda_i^{k_j}\geq 0$ for each $i\in I_0$ such that $\sum_{i\in I_0} \lambda_i^{k_j} = 1$ and
-\[
-0\in \partial P_1(x^{k_j+1}) - \xi^{k_j} + \theta_{k_j}L_g(x^{{k_j}+1} - y^{k_j}) + \theta_{k_j} \sum_{i\in I_0} \lambda_i^{k_j}\nabla g_i(y^{k_j}) + \mathcal{N}_C(x^{{k_j}+1}).
-\]
-Passing to the limit in the above inequalities, note that $\lim_{j\to \infty} \| x^{k_j} - x^{k_j-1} \|=0$, $\lim_{m\to \infty} \| x^{k_j+1} - y^{k_j} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)), $s^{k_j+1} = 0$ and $\theta_{k_j} \equiv \theta_{N_0}$, for any $k_j\geq N_0$ (thanks to Theorem~\ref{alpha}), we see that
-\begin{equation}\label{critical1}
-g_i(\bar{x})\le 0 ~~ \forall i=1,\dots,m,
+Suppose that $\bar{x}$ is an accumulation point of $\{x^k\}$ with $\lim_{j\to \infty} x^{k_j} = \bar{x}$ for some convergence subsequence $\{x^{k_j}\}$. In view of the finiteness of $\{I_{k_j}(x^{k_j+1})\}$ (since $I_{k_j}(x^{k_j+1})\subseteq \{0, 1, 2, \dots, m\}$ for all $j$), by passing to a further subsequence if necessary, we see that there exists a nonempty subset $I_0\subseteq \{0, 1,\dots,m\}$ such that\footnote{Notice that $\tilde{I}(\cdot)\subseteq\{0,1,2,\cdots,m\}$ and $I(\cdot)\subseteq\{1,2,\cdots,m\}$}
+\begin{equation}\label{I0}
+I_{k_j}(x^{k_j+1})\equiv I_0\subseteq \tilde{I}(\bar{x}):=\{s = 0,1,\cdots,m: g_s(\bar{x}) = \max_{i=0,1,\cdots,m} \{g_i(\bar{x})\}\}.
 \end{equation}
-and by the closedness of $\partial P_1$, $\partial P_2$ and $\mathcal{N}_C$ (thanks to $P_1,P_2:\R^n\to\R$ are convex and \cite[Theorem~24.7]{Ro70}), there exist $\bar{\lambda}_i\geq 0$ for all $i\in I_0$ such that $\sum_{i\in I_0} \bar{\lambda}_i = 1$ and
+Let $\{\xi^k\}$ be generated in Algorithm~\ref{alg:Framwork} and $\{\lambda^k_i\}$ with $i\in I_k(x^{k+1})$ be as in Lemma~\ref{subproremarks}(iii). Then $\{\lambda^{k_j}_i\}$ for each $i \in I_{k_j}(x^{k_j+1})\equiv I_0$ is bounded as sequences of nonnegative numbers at most $1$, and $\{\xi^k\}$ is bounded thanks to the real-valuedness and convexity of $P_2$ and \cite[Theorem~24.7]{Ro70}. Passing to a further subsequence if necessary, we assume without loss of generality that $\lim_{j\to \infty} \lambda_i^{k_j} = \bar{\lambda}_i\geq 0$ for each $i\in I_0$ and $\lim_{j\to \infty} \xi^{k_j} = \bar{\xi}$; moreover, the property of $\{\lambda^{k_j}_i\}$ with $i\in I_{k_j}(x^{k_j+1})\equiv I_0$ guaranteed by Lemma~\ref{subproremarks}(iii) asserts that for all $j$, it holds that $\sum_{i\in I_0}\lambda^{k_j}_i = 1$ and
+\begin{equation}\label{inclusion}
+0\in \partial P_1(x^{k_j+1}) - \xi^{k_j} + \theta_{k_j}L_g(x^{{k_j}+1} - y^{k_j}) + \theta_{k_j} \sum_{i\in I_0} \lambda_i^{k_j}\nabla g_i(y^{k_j}) + \mathcal{N}_C(x^{{k_j}+1}).
+\end{equation}
+In addition, in view of the subproblem \eqref{eq2}, we obtain that for each $j$,
+\begin{equation}\label{giineq}
+g_i(y^{k_j}) + \langle\nabla g_i(y^{k_j}), x^{{k_j}+1} - y^{k_j} \rangle \leq s^{{k_j}+1} ~~~~ \forall i =1,\dots,m.
+\end{equation}
+
+Now, note that $\lim_{j\to \infty} \| x^{k_j} - x^{k_j-1} \|=\lim_{m\to \infty} \| x^{k_j+1} - y^{k_j} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)), $s^{k_j+1} = 0$ and $\theta_{k_j} \equiv \theta_{N_0}$, for any $k_j\geq N_0$ (thanks to Theorem~\ref{alpha}). Passing to the limit in \eqref{giineq} and \eqref{inclusion}, we see that
+\begin{equation}\label{critical1}
+g_i(\bar{x})\le 0 ~~ \forall i=1,\dots,m, 
+\end{equation}
+and
 \begin{equation}\label{critical3}
 0\in \partial P_1(\bar{x}) - \bar{\xi} + \theta_{N_0}\sum_{i\in I_0} \bar{\lambda}_i\nabla g_i(\bar{x}) + \mathcal{N}_C(\bar{x}).
 \end{equation}
-For all $i\in \tilde{I}(\bar{x})\setminus I_0$, let $\bar{\lambda}_i = 0$, we see that (i) holds.
+where we also invoked the closedness of $\partial P_1$, $\partial P_2$ and $\mathcal{N}_C$ to deduce \eqref{critical3}.
 
-(ii): Letting $\hat{\lambda}_i = \theta_{N_0}\bar{\lambda}_i\geq 0$, for all $i\in I_0\cap\{1,2,\cdots,m\}$, and $\hat{\lambda}_i = 0$, for all $i\in \{1,2,\cdots,m\}\setminus I_0$. Then by \eqref{critical1} and $I_0\subseteq \tilde{I}(\bar{x})$, we have that
+Let $\hat{\lambda}_i := \theta_{N_0}\bar{\lambda}_i\geq 0$, for all $i\in I_0\cap\{1,2,\cdots,m\}$, and $\hat{\lambda}_i = 0$, for all $i\in \{1,2,\cdots,m\}\setminus I_0$. Then by \eqref{critical1} and $I_0\subseteq \tilde{I}(\bar{x})$ (see \eqref{I0}), we have that
 \begin{equation}\label{critical2}
 \hat{\lambda}_i g_i(\bar{x}) = 0 ~~ \forall i=1,\dots,m.
 \end{equation}
 Indeed, for each $i\in I_0$, we have that $g_i(\bar{x}) = 0$, and for each $i\notin I_0$, we have that $\hat{\lambda}_i = 0$.
 
-Notice that $\nabla g_0 (\bar{x}) = 0$ (thanks to $g_0 \equiv 0$), by the definition of $\hat{\lambda}_i$ and \eqref{critical3}, we have that
+Notice that $\nabla g_0 (\bar{x}) = 0$ (thanks to $g_0 \equiv 0$), using the definition of $\hat{\lambda}_i$ and \eqref{critical3}, we have
 \begin{equation}\label{critical33}
 \begin{aligned}
 0&\in \partial P_1(\bar{x}) - \bar{\xi} + \sum_{i=1}^m \hat{\lambda}_i\nabla g_i(\bar{x}) + \mathcal{N}_C(\bar{x})\\
 &\subseteq\partial P_1(\bar{x}) - \partial P_2(\bar{x}) + \sum_{i=1}^m \hat{\lambda}_i\nabla g_i(\bar{x}) + \mathcal{N}_C(\bar{x}).
 \end{aligned}
 \end{equation}
-Combining \eqref{critical1}, \eqref{critical2} and \eqref{critical33}, we see that $\bar{x}$ is a critical point of \eqref{eq1}. This completes the proof.
+Combining \eqref{critical1}, \eqref{critical2} and \eqref{critical33}, we conclude that $\bar{x}$ is a critical point of \eqref{eq1}. 
+%This completes the proof.
 \end{proof}
 
 
 %\subsection{Global convergence}
 
-We next consider the global convergence property of the sequence $\{x^k\}$ generated by Algorithm \ref{alg:Framwork}. For convenience, we let
+We next derive the global convergence property of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork}. We will need to make use of the following function,
 \begin{equation}\label{defH}
 H(x,y,z) := \frac{P(x) - \bar{m}}{\hat{\theta}} + \delta_{C}(x) + \max_i[\ling{i}{x}{z}]_+ + \frac{L_g}{2}\| x-y \|^2 + \frac{L_g}{2}\| x - z \|^2,
 \end{equation}
-where $\hat{\theta}:= \theta_{N_0}$, which was defined in Theorem \ref{alpha} and $\bar{m}$ is defined in Theorem \ref{suffdec}(ii).
+where $\bar{m}$ is defined in Theorem~\ref{suffdec}(ii), and $\hat{\theta}:= \theta_{N_0}$ with $N_0$ defined in Theorem~\ref{alpha}.
 
 \begin{remark}\label{rebarh}
-In fact, from the definition of $Q$ in Theorem \ref{suffdec}~{\rm (ii)}, we see that $H(x,y,z) = Q(x,y,z,\theta_{N_0})$. According to Theorem \ref{alpha}, there exists $N_0\in \mathbb{R}$ such that $\theta_k \equiv \theta_{N_0}$ and $s^{k+1} = 0$ for all $k\geq N_0$. Thus, we have $H(x^{k+1},x^{k},y^k) = Q(x^{k+1},x^{k},y^k,\hat{\theta})$ for all $k\geq N_0$. Then one can see that the sequence $\{H(x^{k+1},x^{k},y^k)\}$ is nonincreasing thanks to Theorem \ref{suffdec}~{\rm (ii)}. Moreover, for all $k\geq N_0$,
-$$
-H(x^{k+1},x^{k},y^{k}) \leq H(x^{k},x^{k-1},y^{k-1}) - \frac{L - (L + \ell)\bar{\beta}^2}{2}\| x^{k} - x^{k-1}\|^2,
-$$
+In fact, from the definition of $Q$ in Theorem~\ref{suffdec}{\rm (ii)}, we see that $H(x,y,z) = Q(x,y,z,\theta_{N_0}) + \delta_C(x)$. Now, according to Theorem~\ref{alpha}, there exists an integer $N_0$ such that $\theta_k \equiv \theta_{N_0}$ and $s^{k+1} = 0$ for all $k\geq N_0$. Thus, we have $H(x^{k+1},x^{k},y^k) = Q(x^{k+1},x^{k},y^k,\hat{\theta})$ for all $k\geq N_0$. Then one can see that the sequence $\{H(x^{k+1},x^{k},y^k)\}$ is nonincreasing thanks to Theorem~\ref{suffdec}{\rm (ii)}, and it holds that
+\[
+H(x^{k+1},x^{k},y^{k}) \leq H(x^{k},x^{k-1},y^{k-1}) - \frac{L - (L + \ell)\bar{\beta}^2}{2}\| x^{k} - x^{k-1}\|^2\ \ \ \ \forall k\ge N_0,
+\]
 where $\bar{\beta}: = \sup_k\beta_k$.
 \end{remark}
+\todo[inline]{Edits end here as of Oct 23, 2023.}
 
 \begin{lemma}\label{lemma1}
 Consider \eqref{eq1} and suppose that Assumption~\ref{A1} holds, and $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$. Let $\{(x^k,y^k)\}$ be the sequence generated by Algorithm \ref{alg:Framwork}, and $\Omega$ be the set of accumulation points of $\{(x^{k+1},x^{k},y^{k})\}$. Then $\Omega$ is a nonempty compact set, $\omega := \lim_{k\to \infty} H(x^{k+1},x^{k}, y^{k})$ exists, and $H \equiv \omega$ on $\Omega$.
@@ -634,7 +623,7 @@ Each $g_i$ in \eqref{eq1} is twice continuously differentiable. The function $P_
 \end{assumption}
 
 Now, we present the following property of $\partial H$.
-
+\todo[inline]{Change the lemma to give bounds on the distance}
 \begin{lemma}\label{th2.1}
 Consider \eqref{eq1} and suppose that Assumptions~\ref{A1} and \ref{A2} hold, and $\bar{\beta}: = \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$. Let $\{(x^k,y^k)\}$ be a sequence generated by Algorithm \ref{alg:Framwork}. Then, we have that
 \[
@@ -647,9 +636,8 @@ Consider \eqref{eq1} and suppose that Assumptions~\ref{A1} and \ref{A2} hold, an
 \end{lemma}
 \begin{proof}
 Let $\varLambda$ be the set of accumulation points of $\{x^k\}$. By the boundedness of $\{x^k\}$ (see Theorem~\ref{suffdec}(i)), we have that $\varLambda$ is nonempty and compact, and $\varLambda\subseteq\mathcal{X}$ (see Theorem~\ref{subconver}(ii)). Then, we have $\lim_{k\to \infty}\text{dist}(x^k,\varLambda)=0$. Thus, for any $\gamma>0$, there exists $N_1>0$, such that dist$(x^k,\varLambda)<\gamma$ and $x^k\in U_0$ (where $U_0$ was defined as in Assumption \ref{A2}) for all $k\geq N_1$.
-%Since $\varLambda$ is a nonempty compact set, by shrinking $\gamma$ if necessary, we denote the bounded set $U := \{x\in U_0:\text{dist}(x,\varLambda)<\gamma\}$. WLOG, we assume that $\nabla P_2$ is globally Lipschitz continuous on $U$.
 
-Now, considering the subdifferential of $H$ at the point $(x^{k+1},x^{k},y^{k})$, for any $k\geq \max\{N_0,N_1\}$, where $N_0$ was defined in Theorem \ref{alpha}. Since $P_2$ is continuously differentiable on $U_0$ and $x^k\in U_0$ for any $k\geq \max\{N_0,N_1\}$, we obtain from \cite[Theorem~8.6]{rock97a} that
+Next, let $N_0$ be defined as in Theorem \ref{alpha}. Since $P_2$ is continuously differentiable on $U_0$ and $x^k\in U_0$ for any $k\geq \max\{N_0,N_1\}$, we obtain from \cite[Theorem~8.6]{rock97a} that
 \begin{align}\label{eq16}
 &\!\!\!\!\!\!\!\!\!\!~~~\partial H(x^{k+1},x^{k},y^{k})\supseteq \widehat{\partial} H(x^{k+1},x^{k},y^{k})\notag \\
 &\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(a)}\supseteq\!\!\!
@@ -663,7 +651,7 @@ Now, considering the subdifferential of $H$ at the point $(x^{k+1},x^{k},y^{k})$
 &\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(b)}{\supseteq}\!\!\!
 \left[\!
 \begin{array}{c}
-\!\frac{1}{\hat{\theta}}\partial P(x^{k+1}) \!+ \!\!\!\!\sum\limits_{i\in I_k(x^{k+1})}\!\!\! \lambda_i^k \nabla g_i(y^k) \!+\! \mathcal{N}_C(x^{k+1}) \!+\! L_g(x^{k+1} \!-\! x^k) \!+\! L_g(x^{k+1} \!-\! y^k)    \\ 
+\!\frac{1}{\hat{\theta}}\partial P(x^{k+1}) \!+ \!\!\!\!\sum\limits_{i\in I_k(x^{k+1})}\!\!\! \lambda_i^k \nabla g_i(y^k) \!+\! \mathcal{N}_C(x^{k+1}) \!+\! L_g(x^{k+1} \!-\! x^k) \!+\! L_g(x^{k+1} \!-\! y^k)    \\
  - L_g(x^{k+1} - x^{k}) \\ [5 pt]
 \sum_{i\in I_k(x^{k+1})} \lambda_i^k\nabla^2 g_i(y^{k})(x^{k+1} - y^{k}) - L_g(x^{k+1}-y^{k})
 \end{array}\!\!
@@ -671,7 +659,7 @@ Now, considering the subdifferential of $H$ at the point $(x^{k+1},x^{k},y^{k})$
 \end{align}
 where
 \[
-\Xi_k := \frac{1}{\hat{\theta}}\partial P(x^{k+1}) + \conv_{i\in I_k(x^{k+1})}\{\nabla g_i(y^k)\} + \mathcal{N}_C(x^{k+1}) + L_g(x^{k+1} - x^k) + L_g(x^{k+1} - y^k),
+\Xi_k \!:=\! \frac{1}{\hat{\theta}}\partial P(x^{k+1}) + \conv_{i\in I_k(x^{k+1})}\{\nabla g_i(y^k)\} + \mathcal{N}_C(x^{k+1}) + L_g(x^{k+1} - x^k) + L_g(x^{k+1} - y^k),
 \]
 and (a) holds because of the subdifferential calculus rules in \cite[Proposition~10.5, Corollary~10.9, Exercise~8.31]{rock97a} and the regularity of the closed convex convex set $C$ and the convex function $P_1$ (thanks to \cite[Corollary~10.9, Proposition~8.12, Exercise~8.8]{rock97a}), and (b) holds as $\sum_{i\in I_k(x^{k+1})} \lambda_i^k = 1$, where $I_k(x^{k+1})$ and $\lambda_i^k$ were defined as in Lemma~\ref{subproremarks}(iii).
 %$(c)$ holds for any $\lambda^k \in \widehat{\mathcal{N}}_{-\mathbb{R}_+^m}(\bar{g}(x^{k+1}, y^k)) = \mathcal{N}_{-\mathbb{R}_+^m}(\bar{g}(x^{k+1}, y^k))$ thanks to \cite[Theorem 6.14]{rock97a}.
@@ -866,7 +854,7 @@ Then, we have that for any $k\geq k_4:= \max\{k_3, N_0\}$,
 &\overset{\rm(b)}\leq \frac{L_g}{2\gamma}\d^2(x^k, S) + \frac{L_g}{2(1 - \gamma)}\|x^k - y^k\|^2 - \frac{L_g}{2\gamma}\d^2(x^{k+1}, S)  \nonumber\\
 &~~~~+ \frac{L_g}{2}(\frac{1}{\gamma} - 1)\d^2(x^{k+1}, S) + \frac{L_g}{2}\|x^{k+1} - x^k\|^2 \\
 &\overset{\rm(c)}\leq \left(\frac{L_g}{2\gamma}\d^2(x^k, S) - \frac{L_g}{2}\|x^k - x^{k-1}\|^2\right) - \left(\frac{L_g}{2\gamma}\d^2(x^{k+1}, S) - \frac{L_g}{2}\|x^{k+1} - x^k\|^2\right) \nonumber\\
-&~~~~+ \frac{L_g\bar{\beta}^2}{2(1 - \gamma)}\|x^k - x^{k-1}\|^2 + \frac{L_g}{2}\|x^k - x^{k-1}\|^2 + \frac{L_g}{2}(\frac{1}{\gamma} - 1)c_0(E_{\hat{\theta}}(x^{k+1}, x^{k}) - \bar{E}_{\hat{\theta}}^*), 
+&~~~~+ \frac{L_g\bar{\beta}^2}{2(1 - \gamma)}\|x^k - x^{k-1}\|^2 + \frac{L_g}{2}\|x^k - x^{k-1}\|^2 + \frac{L_g}{2}(\frac{1}{\gamma} - 1)c_0(E_{\hat{\theta}}(x^{k+1}, x^{k}) - \bar{E}_{\hat{\theta}}^*),
 \end{align*}
 where (a) follows from $E_{\hat{\theta}}(x^{k+1},x^k) = F_{\hat{\theta}}(x^{k+1}) + \frac{L_g}{2}\|x^{k+1} - x^k\|$ and $\bar{E}_{\hat{\theta}}^* = \bar{F}_{\hat{\theta}}^*$, (b) holds because of \eqref{upperF} and $\bar{F}_{\hat{\theta}}^* = F_{\hat{\theta}}(\bar{x}^k)$ (thanks to $\bar{x}^k\in S$), and (c) follows from \eqref{Eerro}, $y^k = x^k + \beta_k(x^k - x^{k-1})$ and $\bar{\beta} = \max\beta_k$.
 
@@ -917,9 +905,8 @@ E_{\hat{\theta}}(x^{k+1},x^k) - \bar{E}_{\hat{\theta}}^* + \frac{1}{\vartheta + 
 \end{equation*}
 which means, there exists $M>0$ such that, for any $k\geq k_4$,
 \begin{align}\label{inequ}
-0\leq& E_{\hat{\theta}}(x^k,x^{k-1}) - \bar{E}_{\hat{\theta}}^*\leq M\varrho^{k} - \frac{1}{\vartheta + \zeta}A_{k} \notag\\
-&\overset{\rm(a)}= M\varrho^{k} - \frac{L_g}{2(\vartheta + \zeta)}\left(\frac{1}{\gamma}\d^2(x^k, S) - \|x^k - x^{k-1}\|^2\right)\notag\\
-&\leq M\varrho^{k} + \frac{L_g}{2(\vartheta + \zeta)} \|x^k - x^{k-1}\|^2\notag\\
+0&\leq E_{\hat{\theta}}(x^k,x^{k-1}) - \bar{E}_{\hat{\theta}}^*\leq M\varrho^{k} - \frac{1}{\vartheta + \zeta}A_{k} \notag\\
+&\overset{\rm(a)}= M\varrho^{k} \!-\! \frac{L_g}{2(\vartheta + \zeta)}\left(\!\frac{1}{\gamma}\d^2(x^k, S) - \|x^k - x^{k-1}\|^2\!\right)\!\leq\! M\varrho^{k} \!+\! \frac{L_g}{2(\vartheta + \zeta)} \|x^k - x^{k-1}\|^2\notag\\
 &\overset{\rm(b)}\leq M\varrho^{k} + \frac{1}{(\vartheta + \zeta)(1 - \bar{\beta}^2)}\left(E_{\hat{\theta}}(x^k,x^{k-1}) - E_{\hat{\theta}}(x^{k+1},x^{k})\right),
 \end{align}
 where (a) follows from the definition of $A_k$, and (b) holds because of \eqref{upperK}.
@@ -972,10 +959,10 @@ Furthermore, for any $k\geq k_4$,
 \sum_{j = k}^{\infty}\|x^{j+1} - x^j\|&\leq \sum_{j = k}^{\infty} \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\left(\sqrt{1 - \frac{1}{\mu}}\right)^{j+1}\\
 &\leq \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\cdot\frac{1}{1 - \sqrt{1 - \frac{1}{\mu}}}\left(\sqrt{1 - \frac{1}{\mu}}\right)^{k+1},
 \end{align*}
-which implies that $\{x^k\}$ is a Cauchy sequence. Combining this with Theorem~\ref{subconver}(ii), by Assumption~\ref{B1} and Assumption~\ref{B2}, we see that $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}. This completes the proof.
+which implies that $\{x^k\}$ is a Cauchy sequence. Combining this with Theorem~\ref{subconver}(ii), by Assumption~\ref{B1} and Assumption~\ref{B2}, we see that $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}. %This completes the proof.
 \end{proof}
 
-\section{KL exponent for a concrete model}
+\section{KL exponent for a concrete model}\label{sec5}
 
 In this section, we examine the KL exponent for some structured convex optimization model that arises from applications. Specifically, we consider the following constrained optimization problem:
 \begin{equation}\label{KLproblem}
@@ -986,7 +973,7 @@ where $C$ is a nonempty compact convex set, $P_1:\R^n\rightarrow\R$ is convex, t
 We first present the definition of the exact penalty parameter of \eqref{KLproblem}.
 
 \begin{definition}[{{\bf Exact penalty parameter}}]\label{Exact}
-Let $S_{\eta}:= \Argmin_{x\in C}\{P_1(x) + \eta\max_{i = 1,\cdots,m}[g_i(x)]_+\}$ and $S:= \Argmin_{x\in C\cap\mathcal{F}}\{P_1(x)\} = \Argmin F$. If there exists $\bar{\eta} > 0$ such that for any $\eta \geq \bar{\eta}$, $S_{\eta} = S$, then $\bar{\eta}$ is called the exact penalty parameter of \eqref{KLproblem}.
+Let $S_{\eta}:= \Argmin_{x\in C}\{P_1(x) + \eta\max_{i = 1,\cdots,m}[g_i(x)]_+\}$ and $S:= \Argmin_{x\in C\cap\mathcal{F}}\{P_1(x)\} = \Argmin F$. If there exists $\bar{\eta} > 0$ such that for all $\eta \geq \bar{\eta}$, $S_{\eta} = S$, then $\bar{\eta}$ is called the exact penalty parameter of \eqref{KLproblem}.
 \end{definition}
 
 Now, we show that if $F$ is KL function with exponent $\alpha$, then
@@ -1250,7 +1237,7 @@ If Assumption~\ref{A1} holds, one can apply Theorem~\ref{subconver}(ii) with $L_
 
 We compare SCP$_{\rm ls}$ in \cite{yu21}, ESQM(taking $\beta_k \equiv 0$ in Algorithm~\ref{alg:Framwork})with ESQM$_e$ in Algorithm~\ref{alg:Framwork}. We use the same parameter settings for SCP$_{\rm ls}$ in \cite{yu21}, and the initial point of SCP$_{\rm ls}$ is chosen as $x^0 = A^\dagger b$. In ESQM and ESQM$_e$, we take $L_g = \frac{2\|A\|}{\gamma^2}$, $\ell_g = \frac{\|A\|}{4\gamma^2}$, $d = \frac{\gamma^2}{20}$, $\theta_0 = 0.05$, the initial point are chosen as $x^0 = 0$. We terminate all algorithms when $\|x^{k+1} - x^k\|< 10^{-8}\max\{1, \|x^{k+1}\|\}$.
 
-We use FISTA (which reset parameters with fixed and adaptive restart) to generate the sequence $\{\beta_k\}$. In more detail, setting the initial values $\vartheta_{-1}=\vartheta_{0}=1$, for $k\geq 0$, defining that
+We use FISTA (which reset parameters with fixed and adaptive restart) to generate the sequence $\{\beta_k\}$. In more detail, set the initial values $\vartheta_{-1}=\vartheta_{0}=1$, define for $k \ge 0$,
 \begin{align}\label{beta}
 \beta_k = \frac{\vartheta_{k-1}-1}{\vartheta_{k}},
 \end{align}
@@ -1325,25 +1312,25 @@ The second author is supported in part by the Hong Kong Research Grants Council 
 
 \begin{thebibliography}{99}
 \bibitem{attouch10}
-H. Attouch, J. Bolte, and P. Redont.
+H. Attouch, J. Bolte, P. Redont and A. Soubeyran.
 \newblock Proximal alternating minimization and projection methods for nonconvex problems: An approach based on the Kurdyka-{\L}ojasiewicz inequality.
 \newblock {\em Mathematics of Operations Research} 35, 438--457, 2010.
 
 
 \bibitem{attouch13}
-H. Attouch, J. Bolte, and B. F. Svaiter.
+H. Attouch, J. Bolte and B. F. Svaiter.
 \newblock Convergence of descent methods for semi-algebraic and tame problems: proximal algorithms, forward--backward splitting, and regularized Gauss--Seidel methods.
 \newblock {\em Mathematical Programming} 137, 91--129, 2013.
 
 \bibitem{Ausleder13}
 A. Auslender.
-\newblock An Extended Sequential Quadratically Constrained Quadratic Programming Algorithm for Nonlinear, Semidefinite, and Second-Order Cone Programming.
+\newblock An extended sequential quadratically constrained quadratic programming algorithm for nonlinear, semidefinite, and second-order cone programming.
 \newblock{\em Journal of Optimization Theory and Applications} 156, 183--212, 2013.
 
 
 \bibitem{Bauschke96}
-H. H. Bauschke, and J. M. Borwein.
-\newblock On Projection Algorithms for Solving Convex Feasibility Problems.
+H. H. Bauschke and J. M. Borwein.
+\newblock On projection algorithms for solving convex feasibility problems.
 \newblock {\em SIAM Review} 38(3), 367--426, 1996.
 
 
@@ -1386,7 +1373,7 @@ J. D. W. Hosmer, S. Lemeshow and R. X. Sturdivant.
 \newblock John Wiley Sons, 3rd edition, 2013.
 
 \bibitem{li18}
-G. Y. Li and T. K. Pong.
+G. Li and T. K. Pong.
 \newblock Calculus of the exponent of Kurdyka--{\L}ojasiewicz inequality and its applications to linear convergence of first-order methods.
 \newblock {\em Foundations of Computational Mathematics} 18, 1199--1232, 2018.
 
@@ -1431,23 +1418,23 @@ H. Tuy.
 \newblock Springer, 1998.
 
 \bibitem{wen17}
-B. Wen, X. J. Chen, and T. K. Pong.
+B. Wen, X. Chen and T. K. Pong.
 \newblock Linear convergence of proximal gradient algorithm with extrapolation for a class of nonconvex nonsmooth minimization problems.
 \newblock {\em SIAM Journal on Optimization} 27, 124¨C145, 2017.
 
 \bibitem{wen18}
-B. Wen, X. J. Chen, and T. K. Pong.
+B. Wen, X. Chen, and T. K. Pong.
 \newblock A proximal difference-of-convex algorithm with extrapolation.
 \newblock {\em Computational Optimization and Applications} 69, 297--324, 2018.
 
 
 \bibitem{yu21}
-P. R. Yu, T. K. Pong and Z. S. Lu.
+P. Yu, T. K. Pong and Z. Lu.
 \newblock Convergence rate analysis of a sequential convex programming method with line search for a class of constrained difference-of-convex optimization problems.
 \newblock {\em SIAM Journal on Optimization} 31, 2024--2054, 2021.
 
 \bibitem{zhang23}
-Y. L. Zhang, G.Y. Li, T. K. Pong and S. Q. Xu.
+Y. Zhang, G. Li, T. K. Pong and S. Xu.
 \newblock Retraction-based first-order feasible methods for difference-of-convex programs with smooth inequality and simple geometric constraints.
 \newblock {\em Advances in Computational Mathematics} 49, Article number: 8, 2023.
 
