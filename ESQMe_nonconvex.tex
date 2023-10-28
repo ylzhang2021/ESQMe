@@ -290,7 +290,7 @@ Here and throughout, we denote a Lipschitz continuity modulus of $\nabla g_i^1$ 
 
 The algorithm we study in this paper is presented as Algorithm \ref{alg:Framwork} below; here and throughout, for notational simplicity, for each $u$, $w\in \R^n$, we define
 \begin{equation}\label{ling}
-\ling{0}{u}{v}\equiv 0 \ \ {\rm and}\ \ \ling{i}{u}{w} := g_i(w) + \langle\nabla g_i(w), u - w\rangle \ \ \ \forall i = 1,\ldots,m.
+\ling{0}{u}{w}\equiv 0 \ \ {\rm and}\ \ \ling{i}{u}{w} := g_i(w) + \langle\nabla g_i(w), u - w\rangle \ \ \ \forall i = 1,\ldots,m.
 \end{equation}
 We identify our algorithm as an extended sequential quadratic method with extrapolation (ESQM$_{\text{e}}$), where ``extrapolation" refers to the step \eqref{defyk}. This is because when $\beta_k \equiv 0$, our algorithm reduces to an instance of the ESQM proposed in \cite{Ausleder13}, whose convergence was established for solving \eqref{eq1} when the $P$ in \eqref{eq1} is in addition smooth with Lipschitz gradient.\footnote{More precisely, when the $P$ in \eqref{eq1} is smooth with Lipschitz gradient (say, with Lipschitz constant $L_P$) and $\beta_k \equiv 0$, our algorithm applied to \eqref{eq1} with $P_1(x) := \frac{L_P}2\|x\|^2$ and $P_2(x) := \frac{L_P}2\|x\|^2 - P(x)$ becomes an instance of the ESQM in \cite{Ausleder13}.} Notice that the subproblem in \eqref{eq2} has a unique solution as an optimization problem with a strongly convex objective and a nonempty feasible set. While it requires an iterative solver in general, we refer the readers to \cite[Appendix~A]{zhang23} for an efficient routine for solving \eqref{eq2} when $m = 1$.
 \begin{algorithm}
@@ -821,7 +821,7 @@ Now we are ready to prove the three items one by one.
 &\overset{\rm(c)}{\leq} \frac{P_1(x^{k+1}) - \hat{m}}{\theta_k} + \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^k} \right]_+ + \frac{L_{g}}{2}\| x^{k+1} - y^k \|^2\\
 &\overset{\rm(d)}{\leq}\frac{P_1(x^{k}) - \hat{m}}{\theta_k} + \max_{i = 1,\cdots,m}\left[\ling{i}{x^k}{y^k}\right]_+ + \frac{L_{g}}{2}\| x^{k} - y^k \|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2\\
 &\overset{\rm(e)}{\leq}\frac{P_1(x^{k}) - \hat{m}}{\theta_k} +  \max_{i = 1,\cdots,m}\left[g_i(x^k)\right]_+ + \frac{L_{g}}{2}\| x^{k} - y^k \|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2\\
-&= \frac{1}{\theta_k}\left(P_1(x^{k}) - \hat{m} + \theta_k\max_{i = 1,\cdots,m}\left[g_i(x^k)\right]_+\right) + \frac{\beta_k^2 L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2\\
+&= \frac{1}{\theta_k}\!\left(\!P_1(x^{k}) - \hat{m} + \theta_k\max_{i = 1,\cdots,m}\left[g_i(x^k)\right]_+\!\right)\! +\! \frac{\beta_k^2 L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2\\
 &= E(x^{k},x^{k-1},\theta_k) - \frac{(1 - \beta_k^2)L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2,
 \end{align*}
 where (a) holds thanks to $\theta_k \leq\theta_{k+1}$ and $\hat{m} = \min\{P_1(x): x\in C\}$, (b) holds because of the Lipschitz continuity of $\nabla g_i$, (c) follows from $L_g := \max\{L_{g_i}:\; i=1,\dots,m\}$, (d) holds thanks to \eqref{stongconve} with $x=x^k$ (as $x^k\in C$), (e) follows from the convexity of $g_i$, and the last equality follows from the definition of $E(x^{k},x^{k-1},\theta_{k})$. The desired inequality now follows immediately from the above display and the definition of $E(x^{k+1},x^{k},\theta_{k+1})$.
@@ -1392,7 +1392,7 @@ X. Chen, Z. Lu and T. K. Pong.
 
 \bibitem{DonoghueCandes15}
 B. O'Donoghue and E. J. Cand\`{e}s.
-\newblock Adaptive restart for accelerated gradient schemes. 
+\newblock Adaptive restart for accelerated gradient schemes.
 \newblock {\em Foundations of Computational Mathematics} 15, 715--732, 2015.
 
 \bibitem{HoLS13}
