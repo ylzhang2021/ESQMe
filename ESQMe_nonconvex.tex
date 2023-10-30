@@ -265,7 +265,7 @@ If $f$ satisfies the KL property at $\bar{x}\in \dom\partial f$, and the $\phi$ 
 A proper closed function $f$ satisfying the KL property at every point in $\dom\partial f$ is called a KL function. A proper closed function $f$ satisfying the KL property with exponent $\alpha\in[0,1)$ at every point in $\dom\partial f$ is called a KL function with exponent $\alpha$.
 \end{definition}
 
-Many functions are known to satisfy the KL property. For instance, proper closed semi-algebraic functions satisfy the KL property with some exponent $\alpha$; see \cite{bolte07}. The KL property plays an important role in the global convergence analysis of first order methods and the exponent is important in establishing convergence rates; see, for example, \cite{bolte14,attouch13,beck09,bolte07,attouch10,li18}.
+Many functions are known to satisfy the KL property. For instance, proper closed semi-algebraic functions satisfy the KL property with some exponent $\alpha$; see \cite{bolte07_2}. The KL property plays an important role in the global convergence analysis of first order methods and the exponent is important in establishing convergence rates; see, for example, \cite{bolte14,attouch13,beck09,bolte07,attouch10,li18}.
 
 Finally, before ending this section, we recall two technical lemmas. The first lemma concerns the uniformized KL property (see \cite[Section~3.5]{bolte14}) and was established in \cite[Lemma~3.10]{yu21}. The second lemma is a special case of Robinson \cite{Rob75} concerning error bounds for convex functions, which will be used in Section~\ref{sec5} for studying the KL property of a penalty function associated with \eqref{eq1}.
 \begin{lemma}\label{KLinequ}
@@ -1093,7 +1093,7 @@ Suppose that in \eqref{eq1}, $P_1 = \|\cdot\|_1$, $C$ is a polyhedron, $m = 1$, 
    \item (Basis pursuit denoising \cite{Ca18}) $q_1(z) = \frac{1}{2}\|z - b\|^2 - \sigma$.
    \item (Logistic loss \cite{HoLS13}) $q_1(z) = \sum_{i=1}^{s_1}\log(1 + \exp(b_iz_i)) - \sigma$ for some $b\in \{-1,1\}^{s_1}$.
  \end{enumerate}
- Let $\bar{\eta}$ be the exact penalty parameter of \eqref{KLproblem}. We deduce from \cite[Corollary~5.1]{li18}, \cite[Corollary~5.1]{zhang23} and Theorem~\ref{FetaKL} that, for any $\eta>\bar{\eta}$, the KL exponent of the corresponding $\hat F_{\eta}$ is $\frac{1}{2}$.
+ Let $\bar{\eta}$ be the exact penalty parameter of \eqref{KLproblem}. We deduce from \cite[Corollary~5.1]{li18}, \cite[Corollary~5.1]{zhang23} and Theorem~\ref{FetaKL} that, for any $\eta>\bar{\eta}$, the KL exponent of the corresponding $\hat F_{\eta}$ in \eqref{Feta} (and hence the $F_\eta$ in \eqref{definfalpha}) is $\frac{1}{2}$.
 \end{example}
 
 
@@ -1110,7 +1110,7 @@ In this section, we perform numerical experiments to illustrate the performance 
 \end{equation}
 where $\mu\in[0, 1]$, $A\in\R^{q\times n}$ has full row rank, $b\in \R^q$, $h: \R^q\rightarrow\R_+$ is an analytic function whose gradient is Lipschitz continuous with modulus $L_{h}$ and satisfies $h(0) = 0$, and $\sigma\in (0, h(-b))$.
 
-Although the feasible region of \eqref{CompSen} is unbounded and Algorithm~\ref{alg:Framwork} cannot be directly applied to solving \eqref{CompSen}, one can argue as in the discussion following \cite[(6.2)]{zhang23} that \eqref{CompSen} is equivalent to the following model:
+Although the feasible region of \eqref{CompSen} is unbounded and Algorithm~\ref{alg:Framwork} cannot be directly applied to solving \eqref{CompSen}, one can argue as in the discussion following \cite[Eq.~(6.2)]{zhang23} that \eqref{CompSen} is equivalent to the following model:
 \begin{equation}\label{CompSen1}
 \begin{aligned}
 \min_{x\in\R^n}\quad &\|x\|_1 - \mu\|x\| \\
@@ -1118,7 +1118,7 @@ Although the feasible region of \eqref{CompSen} is unbounded and Algorithm~\ref{
            \quad & \|x\|_{\infty} \leq M,
 \end{aligned}
 \end{equation}
-where $M: = (1 - \mu)^{-1}\Big(\|A^\dagger b\|_1 - \mu\|A^\dagger b\|\Big)$. Notice that the equivalent problem \eqref{CompSen1} is a special case of \eqref{eq1} with $P_1(x): = \|x\|_1$, $P_2(x) := \mu\|x\|$, $g(x) := h(Ax - b)$ and $C: = \{x: \|x\|_{\infty}\leq M\}$. Since $A$ has full row rank and $h(0) = 0< \sigma$, we see that $A^\dagger b \in C\cap \{x: g(x) < 0 \}\not=\emptyset$.
+where $M: = (1 - \mu)^{-1}\Big(\|A^\dagger b\|_1 - \mu\|A^\dagger b\|\Big)$. Notice that the equivalent problem \eqref{CompSen1} is a special case of \eqref{eq1} with $P_1(x) = \|x\|_1$, $P_2(x) = \mu\|x\|$, $m = 1$, $g_1(x) = h(Ax - b)$ and $C = \{x: \|x\|_{\infty}\leq M\}$. Since $A$ has full row rank and $h(0) = 0< \sigma$, we see that $A^\dagger b \in C\cap \{x: g_1(x) < 0 \}\not=\emptyset$.
 
 Next, we will focus on \eqref{CompSen1} and consider two specific choices of $h$.
 
@@ -1132,11 +1132,11 @@ In this subsection, we take $h(\cdot) = \frac{1}{2}\|\cdot\|^2$, then \eqref{Com
 \end{aligned}
 \end{equation}
 %where $M: = (1 - \mu)^{-1}\Big(\|A^{\dag}b\|_1 - \mu\|A^{\dag}b\|\Big)$.
-Notice that $h$ is convex, the Slater condition holds for the feasible region of \eqref{CompSen1-1}, and the origin is not feasible as $\sigma\in(0, \frac{1}{2}\|b\|^2)$. Then Assumptions~\ref{A1} and \ref{A2} hold. One can then apply Theorem~\ref{th2.2} with $\ell_g = 0$ to deduce the convergence of the (whole) sequence $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_k\beta_k < 1$ for solving \eqref{CompSen1-1}.\footnote{Though we are not considering $\mu = 0$ in our experiments below, we also point out that when $\mu = 0$ in \eqref{CompSen1-1}, thanks to $\sigma\in(0, \frac{1}{2}\|b\|^2)$ and the assumption that $A$ has full row rank, we can deduce from Example~\ref{RemarkKL} that $x\rightarrow \|x\|_1 + \delta_C(x) + \eta\max_{i = 1,\cdots,m} [g_i(x)]_+$ is a KL function with exponent $\frac{1}{2}$ whenever $\eta$ exceeds some exact penalty parameter. Therefore, according to Remark~\ref{rem52}, for the sequence $\{(x^k,\theta_k)\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_k\beta_k < 1$, if $\hat\theta$ exceeds some exact penalty parameter, then $\{x^k\}$ converges locally linearly thanks to Theorem~\ref{Edecres}(iii).}
+Notice that $h$ is convex, the Slater condition holds for the feasible region of \eqref{CompSen1-1}, and the origin is not feasible as $\sigma\in(0, \frac{1}{2}\|b\|^2)$. Then Assumptions~\ref{A1} and \ref{A2} hold. Since the $H$ corresponding to \eqref{CompSen1-1} is clearly a semi-algebraic and hence KL function, one can then apply Theorem~\ref{th2.2} with $\ell_g = 0$ to deduce the convergence of the (whole) sequence $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_k\beta_k < 1$ for solving \eqref{CompSen1-1}.\footnote{Though we are not considering $\mu = 0$ in our experiments below, we also point out that when $\mu = 0$ in \eqref{CompSen1-1}, thanks to $\sigma\in(0, \frac{1}{2}\|b\|^2)$ and the fact that $A^\dagger b \in C\cap \{x: g_1(x) < 0 \}$, we can deduce from Example~\ref{RemarkKL} that $x\rightarrow \|x\|_1 + \delta_C(x) + \eta\max_{i = 1,\cdots,m} [g_i(x)]_+$ is a KL function with exponent $\frac{1}{2}$ whenever $\eta$ exceeds some exact penalty parameter. Therefore, according to Remark~\ref{rem52}, for the sequence $\{(x^k,\theta_k)\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_k\beta_k < 1$, if $\hat\theta$ exceeds some exact penalty parameter, then $\{x^k\}$ converges locally linearly thanks to Theorem~\ref{Edecres}(iii).}
 
 We compare SCP$_{\rm ls}$ in \cite{yu21}, ESQM (i.e., setting $\beta_k \equiv 0$ in Algorithm~\ref{alg:Framwork}) and ESQM$_e$ (i.e., Algorithm~\ref{alg:Framwork}). We use the same parameter settings for SCP$_{\rm ls}$ in \cite{yu21}, and the initial point of SCP$_{\rm ls}$ is chosen as $x^0 = A^\dagger b$. In ESQM and ESQM$_e$, we take $L_g = \|A\|^2$, $\ell_g = 0$, $d = 1$ and $\theta_0 = 1$, and the initial points are chosen as $x^0 = 0$. We terminate all algorithms when $\|x^{k+1} - x^k\|< 10^{-8}\max\{1, \|x^{k+1}\|\}$. The subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
 
-We use the same strategy of choosing $\beta_k$ as in the FISTA with fixed and adaptive restart described in \cite{DonoghueCandes15} for setting $\{\beta_k\}$. In more detail, we set the initial values $\vartheta_{-1}=\vartheta_{0}=1$ and define, for $k\geq 0$, that
+We use the same strategy of choosing $\beta_k$ as in the FISTA with fixed and adaptive restart described in \cite{DonoghueCandes15}. In more detail, we set the initial values $\vartheta_{-1}=\vartheta_{0}=1$ and define, for $k\geq 0$,
 \begin{align}\label{beta}
 \beta_k = \frac{\vartheta_{k-1}-1}{\vartheta_{k}} \ \ {\rm with}\ \ \vartheta_{k+1}=\frac{1+\sqrt{1+4\vartheta_{k}^2}}{2},
 \end{align}
@@ -1144,7 +1144,7 @@ and we reset $\vartheta_{k-1}=\vartheta_{k}=1$ every $K = 200$ iterations or whe
 
 We perform tests on random instances of \eqref{CompSen1-1}. Specifically, we generate an $A\in\R^{q\times n}$ with independent and identically distributed (i.i.d.) standard Gaussian entries, and then normalize this matrix so that each column of it has unit norm. Then we choose a subset $T$ of size $k$ uniformly at random from $\{1, 2, \cdots, n\}$ and a $k$-sparse vector $x_{\rm orig}$ having i.i.d. standard Gaussian entries on $T$ is generated. We let $b = Ax_{\rm orig} + 0.01\cdot\hat{n}$ with $\hat{n}$ being a random vector having i.i.d. standard Gaussian entries, and $\sigma = 0.5\sigma_1^2$ with $\sigma_1 = 1.1\cdot\|0.01\cdot\hat{n}\|$.
 
-In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(p,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random data as described above. We present the computational results in Table~\ref{table1}, averaged over the $20$ random instances. Here, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$),  the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$),\footnote{Note that $A^\dagger b$ is only used by SCP$_{\rm ls}$.} the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\| - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
+In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(p,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. We present the computational results in Table~\ref{table1}, averaged over the $20$ random instances. Here, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$),  the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$),\footnote{Note that $A^\dagger b$ is only used by SCP$_{\rm ls}$, and $\|A\|$ is only used by ESQM and ESQM$_e$.} the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\| - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
 
 
 \begin{table}[h]
@@ -1181,7 +1181,7 @@ From Table~\ref{table1}, one can see that ESQM$_{{\rm e}}$ is the fastest, and t
 
 \subsection{When $h$ is the Lorentzian norm}
 
-In this subsection, we consider $h$ is the Lorentzian norm \cite{CarrBarAys10}, which is defined as follows for any given $\gamma>0$:
+In this subsection, we consider $h$ being the Lorentzian norm \cite{CarrBarAys10}, which is defined as follows for any given $\gamma>0$:
 \[
 \|y\|_{L L_2, \gamma}:=\sum_{i=1}^q \log\left(1 + \frac{y_i^2}{\gamma^2}\right).
 \]
@@ -1195,15 +1195,15 @@ Then, problem~\eqref{CompSen1} becomes the following problem:
 \end{equation}
 We first argue that Assumption~\ref{A1} holds for \eqref{CompSen1-2} under our assumptions on $A$ and $\sigma$ in \eqref{CompSen1}. To this end, let $\hat h(y) := \|y\|_{L L_2, \gamma} - \sigma$ for notational simplicity. Then \eqref{CompSen1-2} is an instance of \eqref{eq1} with $g_1(x) = \hat h(Ax - b) - \sigma$ and $C := \{x:\; \|x\|_\infty \le M\}$. Now, recall that $A^\dagger b\in C$ by construction. Moreover, observe that for any $x\in C$, we have
 \begin{align}\label{RCQexpression}
-&\langle \nabla g_1(x), A^\dagger b - x\rangle = \langle A^T\nabla h(Ax-b), A^\dagger b - x\rangle =  \langle \nabla h(Ax-b), b - Ax\rangle\notag\\
+&\langle \nabla g_1(x), A^\dagger b - x\rangle = \langle A^T\nabla \hat h(Ax-b), A^\dagger b - x\rangle =  \langle \nabla \hat h(Ax-b), b - Ax\rangle\notag\\
 & = 2\sum_{i=1}^q\frac{a_i^Tx - b_i}{\gamma^2 + (a_i^Tx - b_i)^2}\cdot (b_i - a_i^Tx)
 = -2\sum_{i=1}^q\frac{(a_i^Tx - b_i)^2}{\gamma^2 + (a_i^Tx - b_i)^2},
 \end{align}
-where $a_i^T$ is the $i$-th row of $A$. Now, suppose that $I(x)$ is nonempty, i.e., $I(x) = \{1\}$. If there exists $u_1$ such that \eqref{A11} holds, then we see from \eqref{RCQexpression} that $a_i^Tx = b_i$ for all $i$. But then $g_1(x) = \hat h(0) - \sigma = -\sigma < 0$, contradicting to the assumption that $I(x) = \{1\}$. This together with Remark~\ref{remarkRCQ}(i) shows that Assumption~\ref{A1} holds.
+where $a_i^T$ is the $i$-th row of $A$. Now, suppose that $I(x)$ (defined in Assumption~\ref{A1}) is nonempty, i.e., $I(x) = \{1\}$. If there exists $u_1$ such that \eqref{A11} holds, then we see from \eqref{RCQexpression} that $a_i^Tx = b_i$ for all $i$. But then $g_1(x) = \hat h(0) - \sigma = -\sigma < 0$, contradicting to the assumption that $I(x) = \{1\}$. This together with Remark~\ref{remarkRCQ}(i) shows that Assumption~\ref{A1} holds.
 
 Next, observe that the $\hat h$ has Lipschitz continuous gradient with modulus $\frac{2}{\gamma^2}$. The following proposition shows that $\hat h$ can be represented as the difference of two convex functions $\hat h_1$ and $\hat h_2$ with Lipschitz continuous gradients, and the Lipschitz continuity modulus of $\nabla \hat h_1$ is $\frac{2}{\gamma^2}$ while that of $\nabla \hat h_2$ is $\frac{1}{4\gamma^2}$.
 \begin{proposition}
-Let $\hat h(y): = \|y\|_{L L_2, \gamma} - \sigma$. Then there exist two convex functions $\hat h_1$ and $\hat h_2$ with Lipschitz continuous gradients, such that, $\hat h(y) = \hat h_1(y) - \hat h_2(y)$ and the Lipschitz continuity modulus of $\nabla \hat h_1$ is $\frac{2}{\gamma^2}$ while that of $\nabla \hat h_2$ is $\frac{1}{4\gamma^2}$.
+Let $\hat h(y): = \|y\|_{L L_2, \gamma} - \sigma$. Then there exist two convex functions $\hat h_1$ and $\hat h_2$ with Lipschitz continuous gradients such that $\hat h(y) = \hat h_1(y) - \hat h_2(y)$ and the Lipschitz continuity modulus of $\nabla \hat h_1$ is $\frac{2}{\gamma^2}$ while that of $\nabla \hat h_2$ is $\frac{1}{4\gamma^2}$.
 \end{proposition}
 
 \begin{proof}
@@ -1217,24 +1217,25 @@ r_1(t) =\int_0^t (t-s)\left[\frac{2(1 - s^2)}{(1+s^2)^2}\right]_+ds{\text{~ and 
 \]
 Then we have
 \[
-r_1''(t) = \left[\frac{2(1 - t^2)}{(1 + t^2)^2}\right]_+ {\text{~ and  ~}}  r_2''(t) = \left[\frac{2(1 - t^2)}{(1 + t^2)^2}\right]_-.
+r_1''(t) = \left[\frac{2(1 - t^2)}{(1 + t^2)^2}\right]_+ {\text{~ and  ~}}  r_2''(t) = \left[\frac{2(1 - t^2)}{(1 + t^2)^2}\right]_-,
 \]
+and a direct computation shows that $\sup_t |r''(t)| = \frac{2}{\gamma^2}$ and $\sup_{t}|r_2''(t)| = \frac{1}{4\gamma^2}$.
 Taking
 \[
 \hat h_1(y) = \sum_{i = 1}^m r_1(y_i) - \sigma, \text{~  and  ~} \hat h_2(y) = \sum_{i = 1}^m r_2(y_i),
 \]
 one can see that $\hat h_1$ and $\hat h_2$ are two convex functions with Lipschitz continuous gradients, and $\hat h(y) = \hat h_1(y) - \hat h_2(y)$. Furthermore, the continuity modulus of Lipschitz continuous gradients of $\hat h_1$ and $\hat h_2$ are $\sup_t |r''(t)| = \frac{2}{\gamma^2}$ and $\sup_{t}|r_2''(t)| = \frac{1}{4\gamma^2}$, respectively.
 \end{proof}
-In view of the above discussions, one can apply Theorem~\ref{th2.2} with $L_g = \frac{2\|A\|^2}{\gamma^2}$ and $\ell_g = \frac{\|A\|^2}{4\gamma^2}$ to deducing the convergence of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_{k}\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}} = \sqrt{\frac89}$ for solving \eqref{CompSen1-2}.
+In view of the above discussions, and the observation that the $H$ corresponding to \eqref{CompSen1-1} is a subanalytic function that is continuous on its closed domain (and hence a KL function in view of \cite[Theorem~3.1]{bolte07}), one can apply Theorem~\ref{th2.2} with $L_g = \frac{2\|A\|^2}{\gamma^2}$ and $\ell_g = \frac{\|A\|^2}{4\gamma^2}$ to deducing the convergence of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_{k}\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}} = \sqrt{\frac89}$ for solving \eqref{CompSen1-2}.
 
-As in the previous subsection, we compare SCP$_{\rm ls}$ in \cite{yu21}, ESQM (i.e., setting $\beta_k \equiv 0$ in Algorithm~\ref{alg:Framwork}) and ESQM$_e$ (i.e., Algorithm~\ref{alg:Framwork}). We use the same parameter settings for SCP$_{\rm ls}$ in \cite{yu21}, and the initial point of SCP$_{\rm ls}$ is chosen as $x^0 = A^\dagger b$. In ESQM and ESQM$_e$, we take $L_g = \frac{2\|A\|}{\gamma^2}$, $\ell_g = \frac{\|A\|}{4\gamma^2}$, $d = \frac{\gamma^2}{20}$ and $\theta_0 = 0.05$, and the initial point are chosen as $x^0 = 0$. We terminate all algorithms when $\|x^{k+1} - x^k\|< 10^{-8}\max\{1, \|x^{k+1}\|\}$. Furthermore, the subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
+As in the previous subsection, we compare SCP$_{\rm ls}$ in \cite{yu21}, ESQM (i.e., setting $\beta_k \equiv 0$ in Algorithm~\ref{alg:Framwork}) and ESQM$_e$ (i.e., Algorithm~\ref{alg:Framwork}). We use the same parameter settings for SCP$_{\rm ls}$ in \cite{yu21}, and the initial point of SCP$_{\rm ls}$ is chosen as $x^0 = A^\dagger b$. In ESQM and ESQM$_e$, we take $L_g = \frac{2\|A\|}{\gamma^2}$, $\ell_g = \frac{\|A\|}{4\gamma^2}$, $d = \frac{\gamma^2}{20}$ and $\theta_0 = 0.05$, and the initial points are chosen as $x^0 = 0$. We terminate all algorithms when $\|x^{k+1} - x^k\|< 10^{-8}\max\{1, \|x^{k+1}\|\}$. Furthermore, the subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
 
-We also choose $\{\beta_k\}$ as described in \eqref{beta} but we set the fixed restart frequency $K = 49$. This parameter will ensure that $\{\beta_k\}$ satisfies $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}\right)$ and $ \sup_{k}\beta_k<\sqrt{\frac{L_g}{L_g + \ell_g}}$.
+We also choose $\{\beta_k\}$ as described in \eqref{beta} but we set the fixed restart frequency as $K = 49$. This parameter will ensure that $\{\beta_k\}$ satisfies $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}\right)$ and $ \sup_{k}\beta_k<\sqrt{\frac{L_g}{L_g + \ell_g}}$.
 
-We perform tests on random instances of \eqref{CompSen1-1}. As in the previous section, we generate an $A\in\R^{q\times n}$ with i.i.d. standard Gaussian entries, and then normalize this matrix so that each column of $A$ has unit norm. hen we choose a subset $T$ of size $k$ uniformly at random from $\{1, 2, \cdots, n\}$ and a $k$-sparse vector $x_{\rm orig}$ having i.i.d. standard Gaussian entries on $T$ is generated. We let $b = Ax_{\rm orig} + 0.01\cdot\bar{n}$ with $\bar{n}_i\sim{\rm Cauchy}(0, 1)$, specifically, we generate $\bar{n}_i$ as $\tan(\pi(\tilde{n}_i - \frac{1}{2}))$ with $\tilde{n}$ being a random vector with i.i.d. entries uniformly chosen in $[0, 1]$. We then set $\sigma = 1.1\cdot\|0.01\cdot\tilde{n}\|_{L L_2, \gamma}$ with $\gamma = 0.05$.
+We perform tests on random instances of \eqref{CompSen1-1}. As in the previous section, we generate an $A\in\R^{q\times n}$ with i.i.d. standard Gaussian entries, and then normalize its columns. We then choose a subset $T$ of size $k$ uniformly at random from $\{1, 2, \cdots, n\}$ and generate a $k$-sparse vector $x_{\rm orig}$ with i.i.d. standard Gaussian entries on $T$. We let $b = Ax_{\rm orig} + 0.01\cdot\bar{n}$ with $\bar{n}_i\sim{\rm Cauchy}(0, 1)$, specifically, we generate $\bar{n}_i$ as $\tan(\pi(\tilde{n}_i - \frac{1}{2}))$ with $\tilde{n}$ being a random vector with i.i.d. entries uniformly chosen in $[0, 1]$. We then set $\sigma = 1.1\cdot\|0.01\cdot\tilde{n}\|_{L L_2, \gamma}$ with $\gamma = 0.05$.
 
 
-In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(p,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random data as described above. The computational results averaged over the $20$ random instances are presented in Table~\ref{table2}. Specifically, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$), the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$), the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\|_{LL_2,\gamma} - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
+In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(p,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. The computational results averaged over the $20$ random instances are presented in Table~\ref{table2}. As before, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$), the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$), the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\|_{LL_2,\gamma} - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
 
 
 \begin{table}[h]
@@ -1344,6 +1345,11 @@ A. Beck and M. Teboulle.
 J. Bolte, A. Daniilidis and A. Lewis.
 \newblock The {\L}ojasiewicz inequality for nonsmooth subanalytic functions with applications to subgradient dynamical systems.
 \newblock {\em SIAM Journal on Optimization} 17, 1205--1223, 2007.
+
+\bibitem{bolte07_2}
+J. Bolte, A. Daniilidis, A. Lewis and M. Shiota.
+\newblock Clark subgradients of stratifiable functions.
+\newblock {\em SIAM Journal on Optimization} 18, 556--572, 2007.
 
 
 \bibitem{bolte16}
