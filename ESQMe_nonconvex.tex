@@ -732,14 +732,14 @@ Suppose that in \eqref{eq1}, $P_2 = 0$ and $g_1,\ldots, g_m$ are convex.
 The Slater condition holds for $\mathcal{G}$ in \eqref{eq1}, i.e., there exists $\hat{x}\in C$ with $g_i(\hat{x})<0$ for $i=1,\dots,m$.
 \end{assumption}
 \begin{remark}\label{rem43}
-If each $g_i$ is convex and Assumption~\ref{B2} holds, then $RCQ(x)$ holds at every point $x\in C$, which implies that Assumption~\ref{A1} holds thanks to Remark~\ref{remarkRCQ}.
+If each $g_i$ is convex and Assumption~\ref{B2} holds, then $RCQ(x)$ holds at every point $x\in C$, which implies that Assumption~\ref{A1} holds thanks to Remark~\ref{remarkRCQ}(ii).
 \end{remark}
 
-Now, we present the convergence properties of Algorithm \ref{alg:Framwork} under the Assumptions~\ref{B1} and \ref{B2}. Unlike our convergence rate result in Theorem~\ref{th2.2} which was based on the KL property of the function $H$ in \eqref{defH}, our analysis in this section is based on the KL property of the following function:
+Now, we present the convergence properties of Algorithm \ref{alg:Framwork} under Assumptions~\ref{B1} and \ref{B2}. Unlike our convergence rate result in Theorem~\ref{th2.2} which was based on the KL property of the function $H$ in \eqref{defH}, our analysis in this section is based on the KL property of the following function:
 \begin{equation}\label{definfalpha}
 F_{\eta}(x) := \frac{1}{\eta}(P_1(x) - \hat m) + \delta_C(x) + \max_{i = 1,\cdots,m}\left[g_i(x)\right]_+,
 \end{equation}
-where $\eta > 0$ and $\hat{m} = \min\{P_1(x): x\in C\}$. Compared with $H$, the explicit KL exponent is more readily obtainable, as we will discuss in Section~\ref{sec5}. On the other hand, we will impose an additional assumption concerning the set of minimizers of $F_{\hat\theta}$, where $\hat\theta$ is defined in \eqref{defH}. The next lemma recalls a well-known fact and serves to motivate such an assumption.
+where $\eta > 0$ and $\hat{m} = \inf\{P_1(x): x\in C\}$. Compared with $H$, the explicit KL exponent of $F_{\eta}$ is more readily obtainable, as we will discuss in Section~\ref{sec5}. Our $F_{\eta}$-based analysis, however, will require an additional assumption concerning the set of minimizers of $F_{\hat\theta}$, where $\hat\theta$ is defined in \eqref{defH}. The next lemma recalls a well-known fact and serves to motivate such an assumption.
 \begin{lemma}\label{lem43}
   Consider \eqref{eq1}. Suppose that Assumption~\ref{B1} holds and let $F_\eta$ be defined in \eqref{definfalpha}. If
   $\bar\eta > 0$ is such that $\Argmin F_{\bar\eta}\cap \Argmin_{x\in\cal G}P_1(x)\neq \emptyset$, then $\Argmin F_{\eta} = \Argmin_{x\in {\cal G}}P_1(x)$ whenever $\eta > \bar\eta$.
@@ -750,27 +750,27 @@ where $\eta > 0$ and $\hat{m} = \min\{P_1(x): x\in C\}$. Compared with $H$, the 
 \end{lemma}
 \begin{proof}
 Fix any $\eta > \bar\eta$ and let $\hat x \in \Argmin F_{\bar\eta}\cap \Argmin_{x\in\cal G}P_1(x)$.
-We first argue that $\Argmin_{x\in\cal G}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$. Indeed, if $\tilde x\in \Argmin_{x\in {\cal G}}P_1(x)$, then $\tilde x \in {\cal G}\subseteq \mathscr{F}$ and hence $\max_{i=1,\ldots,m}[g_i(\tilde x)] = 0$. Moreover, it holds that
+We first argue that $\Argmin_{x\in\cal G}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$. Indeed, if $\tilde x\in \Argmin_{x\in {\cal G}}P_1(x)$, then $\tilde x \in {\cal G}\subseteq \mathscr{F}$ and hence $\max_{i=1,\ldots,m}[g_i(\tilde x)]_+ = 0$. Moreover, it holds that
 \begin{align*}
-\eta F_{\eta}(\tilde x) = P_1(\tilde x)\overset{\rm (a)}= P_1(\hat x) = \bar\eta F_{\bar\eta}(\hat x)\overset{\rm (b)}\le \bar\eta F_{\bar\eta}(x)\overset{\rm (c)}\le \eta F_{\eta}(x)
+\eta F_{\eta}(\tilde x) = P_1(\tilde x)- \hat m\overset{\rm (a)}= P_1(\hat x)- \hat m = \bar\eta F_{\bar\eta}(\hat x)\overset{\rm (b)}\le \bar\eta F_{\bar\eta}(x)\overset{\rm (c)}\le \eta F_{\eta}(x)
 \end{align*}
 for any $x\in C$, where (a) holds because both $\hat x$ and $\tilde x$ minimizes $P_1$ over ${\cal G}$, (b) holds because $\hat x$ also minimizes $\bar\eta F_{\bar\eta}$, and (c) holds because $\eta> \hat\eta$. As for the converse inclusion, let $\tilde x \in \Argmin F_{\eta}\cap \mathscr{F}$. Then for any $x\in {\cal G} = C\cap \mathscr{F}$, we have
 \[
-P_1(\tilde x) = {\eta} F_{{\eta}}(\tilde x)\le {\eta} F_{{\eta}}(x) = P_1(x),
+P_1(\tilde x)- \hat m = {\eta} F_{{\eta}}(\tilde x)\le {\eta} F_{{\eta}}(x) = P_1(x)- \hat m,
 \]
-where the equalities hold because $x\in \mathscr{F}$, which implies $\max_{i=1,\ldots,m}[g_i(x)]_+=0$. The above arguments establish $\Argmin_{x\in\cal G}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$.
+where the equalities hold because $u\in \mathscr{F}$ implies $\max_{i=1,\ldots,m}[g_i(u)]_+=0$. The above arguments establish $\Argmin_{x\in\cal G}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$.
 
 To complete the proof, it now suffices to show that $\Argmin F_{\eta}\subseteq \mathscr{F}$. To this end, let $\tilde x \in \Argmin F_{\eta}$. Then we have
 \begin{align*}
-&P_1(\tilde x) + \eta \max_{i=1,\ldots,m}[g_i(\tilde x)]_+=\eta F_{\eta}(\tilde x) \le \eta F_{\eta}(\hat x) = P_1(\hat x) + \eta \max_{i=1,\ldots,m}[g_i(\hat x)]_+ \\
-&\overset{\rm (a)}= P_1(\hat x) + \bar\eta \max_{i=1,\ldots,m}[g_i(\hat x)]_+
-= \bar\eta F_{\bar\eta}(\hat x) \overset{\rm (b)}\le \bar\eta F_{\bar\eta}(\tilde x) = P_1(\tilde x) + \bar\eta\max_{i=1,\ldots,m}[g_i(\tilde x)]_+,
+&P_1(\tilde x)- \hat m + \eta \max_{i=1,\ldots,m}[g_i(\tilde x)]_+=\eta F_{\eta}(\tilde x) \le \eta F_{\eta}(\hat x) = P_1(\hat x)- \hat m + \eta \max_{i=1,\ldots,m}[g_i(\hat x)]_+ \\
+&\!\!\overset{\rm (a)}= P_1(\hat x)- \hat m + \bar\eta\! \max_{i=1,\ldots,m}[g_i(\hat x)]_+
+\!=\! \bar\eta F_{\bar\eta}(\hat x) \overset{\rm (b)}\le \bar\eta F_{\bar\eta}(\tilde x) = P_1(\tilde x)- \hat m + \bar\eta\!\max_{i=1,\ldots,m}[g_i(\tilde x)]_+,
 \end{align*}
-where (a) holds because $\hat x\in {\cal G}$ and (b) holds because $\hat x$ also minimizes $\bar\eta F_{\bar\eta}$. Rearranging the above inequality, we obtain $(\eta-\bar\eta)\max_{i=1,\ldots,m}[g_i(\tilde x)]_+ = 0$, which means $\tilde x\in \mathscr{F}$.
+where (a) holds because $\hat x\in {\cal G}$ and (b) holds because $\hat x$ also minimizes $\bar\eta F_{\bar\eta}$. Rearranging terms in the above inequality, we obtain $(\eta-\bar\eta)\max_{i=1,\ldots,m}[g_i(\tilde x)]_+ = 0$, which means $\tilde x\in \mathscr{F}$.
 \end{proof}
 
 \begin{theorem}[Convergence rate of Algorithm \ref{alg:Framwork} in convex setting]\label{Edecres}
-Consider \eqref{eq1}. Suppose that Assumptions~\ref{B1} and \ref{B2} hold, and $\bar{\beta}: = \sup_k\beta_k < 1$. Let $\{(x^k,\theta_k)\}$ be generated by Algorithm \ref{alg:Framwork}. Then the following statements hold:
+Consider \eqref{eq1}. Suppose that Assumptions~\ref{B1} and \ref{B2} hold, and $\bar{\beta}: = \sup_k\beta_k < 1$. Let $\{(x^k,\theta_k)\}$ be generated by Algorithm \ref{alg:Framwork}. Then the following statements hold.
 \begin{enumerate}[{\rm (i)}]
     \item For any $k\ge 1$,
           \[
@@ -782,18 +782,18 @@ Consider \eqref{eq1}. Suppose that Assumptions~\ref{B1} and \ref{B2} hold, and $
     \begin{equation}\label{assumptionunhappy}
     \Argmin F_{\hat\theta} = \Argmin_{x\in {\cal G}}P_1(x),
     \end{equation}
-     then $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}, and there exist $c_0 > 0$, $s\in (0,1)$ and a positive integer $k_0$ such that
+     then $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}, and there exist $c_0 > 0$, $s\in (0,1)$ and $k_0\in \mathbb{N}$ such that
         \[
         \|x^k - x^*\|\leq c_0 s^k ~~\forall k > k_0.
         \]
 \end{enumerate}
 \end{theorem}
 \begin{remark}[Comments on \eqref{assumptionunhappy}]
-Consider \eqref{eq1}. Suppose that Assumptions~\ref{B1} and \ref{B2} hold, and $\bar{\beta}: = \sup_k\beta_k < 1$. Let $\{\theta_k\}$ be generated by Algorithm \ref{alg:Framwork}. Using Theorem~\ref{subconver} (see also Remark~\ref{rem43}) and the formula for the subdifferential of $\max_{i=1,\ldots,m}[g_i(\cdot)]_+$, we deduce from the definition of $F_{\hat\theta}$ in \eqref{definfalpha} that
+Consider \eqref{eq1}. Suppose that Assumptions~\ref{B1} and \ref{B2} hold, and $\bar{\beta}: = \sup_k\beta_k < 1$. Let $\{(x^k,\theta_k)\}$ be generated by Algorithm \ref{alg:Framwork}. Using Theorem~\ref{subconver} (see also Remark~\ref{rem43}) and the formula for the subdifferential of $\max_{i=1,\ldots,m}[g_i(\cdot)]_+$, we deduce from the definition of $F_{\hat\theta}$ in \eqref{definfalpha} that
 \begin{equation}\label{conditionunhappy}
 \emptyset\neq \Lambda\subseteq \Argmin F_{\hat\theta} \cap \Argmin_{x\in\cal G}P_1(x).
 \end{equation}
-where ${\cal G}$ is the feasible set of \eqref{eq1}. Consequently, Lemma~\ref{lem43} implies that $\Argmin F_{\eta} = \Argmin_{x\in {\cal G}}P_1(x)$ whenever $\eta > \hat\theta$. In this regard, the assumption \eqref{assumptionunhappy} can be seen as a slightly stronger requirement where we require the equality of the two sets to hold when $\eta = \hat\theta$ as well. See Remark~\ref{rem52} below for further comments on \eqref{assumptionunhappy} based on the notion of exact penalty parameters in Definition~\ref{Exact}.
+where ${\cal G}$ is the feasible set of \eqref{eq1} and $\Lambda$ is the set of accumulation points of $\{x^k\}$. Consequently, Lemma~\ref{lem43} implies that $\Argmin F_{\eta} = \Argmin_{x\in {\cal G}}P_1(x)$ whenever $\eta > \hat\theta$. In this regard, the assumption \eqref{assumptionunhappy} can be seen as a slightly stronger requirement where we require the equality of the two sets to hold when $\eta = \hat\theta$ as well. See Remark~\ref{rem52} below for further comments on \eqref{assumptionunhappy} based on the notion of exact penalty parameters in Definition~\ref{Exact}.
 \end{remark}
 %
 %\begin{proof}
@@ -802,8 +802,8 @@ where ${\cal G}$ is the feasible set of \eqref{eq1}. Consequently, Lemma~\ref{le
 Recall that $s^{k+1} = \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^k}\right]_+$ (thanks to Lemma~\ref{subproremarks}(i)). Using the definition of $(x^{k+1},s^{k+1})$ in \eqref{eq2} as a minimizer, the feasibility of $(x,\max_{i = 1,\cdots,m}\left[\ling{i}{x}{y^k}\right]_+)$ for \eqref{eq2} when $x\in C$ and the strong convexity of the objective in \eqref{eq2}, we obtain that for any $x\in C$,
 \begin{align}\label{stongconve}
 &P_1(x^{k+1}) + \theta_k \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^k}\right]_+ + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k\|^2 \notag\\
-&= P_1(x^{k+1}) + \theta_k s^{k+1} + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k\|^2 \\
-&\leq P_1(x) + \theta_k \max_{i = 1,\cdots,m}\left[\ling{i}{x}{y^k}\right]_+ + \frac{\theta_k L_g}{2}\| x - y^k \|^2 - \frac{\theta_k L_g}{2}\| x - x^{k+1}\|^2. \notag
+&= P_1(x^{k+1}) + \theta_k s^{k+1} + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k\|^2 \notag\\
+&\leq P_1(x) + \theta_k \max_{i = 1,\cdots,m}\left[\ling{i}{x}{y^k}\right]_+ + \frac{\theta_k L_g}{2}\| x - y^k \|^2 - \frac{\theta_k L_g}{2}\| x - x^{k+1}\|^2.
 \end{align}
 Now we are ready to prove the three items one by one.
 
@@ -817,7 +817,7 @@ Now we are ready to prove the three items one by one.
 &= \frac{1}{\theta_k}\!\left(\!P_1(x^{k}) - \hat{m} + \theta_k\max_{i = 1,\cdots,m}\left[g_i(x^k)\right]_+\!\right)\! +\! \frac{\beta_k^2 L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2\\
 &= E(x^{k},x^{k-1},\theta_k) - \frac{(1 - \beta_k^2)L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2,
 \end{align*}
-where (a) holds thanks to $\theta_k \leq\theta_{k+1}$ and $\hat{m} = \min\{P_1(x): x\in C\}$, (b) holds because of the Lipschitz continuity of $\nabla g_i$, (c) follows from $L_g := \max\{L_{g_i}:\; i=1,\dots,m\}$, (d) holds thanks to \eqref{stongconve} with $x=x^k$ (as $x^k\in C$), (e) follows from the convexity of $g_i$, and the last equality follows from the definition of $E(x^{k},x^{k-1},\theta_{k})$. The desired inequality now follows immediately from the above display and the definition of $E(x^{k+1},x^{k},\theta_{k+1})$.
+where (a) holds thanks to $\theta_k \leq\theta_{k+1}$ and $\hat{m} = \inf\{P_1(x): x\in C\}$, (b) holds because of the Lipschitz continuity of $\nabla g_i$, (c) follows from $L_g := \max\{L_{g_i}:\; i=1,\dots,m\}$, (d) holds thanks to \eqref{stongconve} with $x=x^k$ (as $x^k\in C$), (e) follows from the convexity of $g_i$, and the last equality follows from the definition of $E(x^{k},x^{k-1},\theta_{k})$. The desired inequality now follows immediately from the above display and the definition of $E(x^{k+1},x^{k},\theta_{k+1})$.
 
 (ii): Using similar arguments as Lemma~\ref{lemma1} (but using item (i) in place of Remark~\ref{rebarh}, and noting that Assumption~\ref{A1} holds according to Remark~\ref{rem43}), one can show that (ii) holds. We omit its proof for brevity.
 
@@ -825,7 +825,7 @@ where (a) holds thanks to $\theta_k \leq\theta_{k+1}$ and $\hat{m} = \min\{P_1(x
 \begin{equation}\label{set}
 \emptyset\not=\Lambda\subseteq \Argmin_{x\in {\cal G}}P_1(x) = \Argmin F_{\hat{\theta}} =: S.
 \end{equation}
-Now, write $E_{\theta}(x, y) := E(x, y, \theta)$ for notational simplicity. By the definition of $F_{\hat{\theta}}(x)$ in \eqref{definfalpha} and $E(x, y, \theta)$ in (i), we see that $E_{\hat{\theta}}(x, y) = F_{\hat{\theta}}(x) + \frac{L_g}{2}\|x - y\|^2$. From Remark~\ref{rem43}, Theorem~\ref{alpha} and item (i), we have that for any $k\geq N_0$, it holds that $\theta_k = \hat\theta$ and
+Now, write $E_{\theta}(x, y) := E(x, y, \theta)$ for notational simplicity. By the definition of $F_{\hat{\theta}}(x)$ in \eqref{definfalpha} and $E(x, y, \theta)$ in item (i), we see that $E_{\hat{\theta}}(x, y) = F_{\hat{\theta}}(x) + \frac{L_g}{2}\|x - y\|^2$. From Remark~\ref{rem43}, Theorem~\ref{alpha} and item (i), we have that for any $k\geq N_0$, it holds that $\theta_k = \hat\theta$ and
 \begin{equation}\label{upperK}
 E_{\hat{\theta}}(x^{k+1}, x^k)\leq E_{\hat{\theta}}(x^k, x^{k-1}) -\frac{L_g(1 - \bar{\beta}^2)}{2}\|x^k - x^{k-1}\|^2.
 \end{equation}
@@ -846,11 +846,11 @@ Using \eqref{valueomega}, \eqref{set2} and Lemma~\ref{KLinequ}, we deduce that t
 \end{equation}
 for any $(x, y)\in\dom \partial E_{\hat{\theta}}$ satisfying $\d((x, y), \bar{S})\leq \epsilon_0$ and $\bar\omega\leq E_{\hat{\theta}}(x, y) \leq \bar\omega + r_0$.
 
-Next, notice that $\{(x^k, x^{k-1})\}\subset C\times C$ and $ \dom \partial E_{\hat{\theta}} = C\times C$. From Remark~\ref{rem43}, Theorem~\ref{subconver} and \eqref{set2}, we deduce that there exists $k_1>0$ such that
+Next, notice that $\{(x^k, x^{k-1})\}\subset C\times C$ and $ \dom \partial E_{\hat{\theta}} = C\times C$. From Remark~\ref{rem43}, Theorem~\ref{subconver} and \eqref{set2}, we deduce that there exists $k_1\in \mathbb{N}$ such that
 \begin{equation}\label{erro1}
 \d((x^k, x^{k-1}), \bar{S})\leq\d((x^k, x^{k-1}), \bar{\Lambda})\leq\epsilon_0~~~~ \forall k\geq k_1.
 \end{equation}
-On the other hand, from Remark~\ref{rem43}, Theorem~\ref{alpha} and item (ii), we deduce the existence of $k_2>0$ such that
+On the other hand, from Remark~\ref{rem43}, Theorem~\ref{alpha} and item (ii), we deduce the existence of $k_2\in \mathbb{N}$ such that
 \begin{equation}\label{Ferro1}
 \bar\omega\leq E_{\hat{\theta}}(x^k, x^{k-1})\leq\bar\omega + r_0 ~~~~ \forall k\geq k_2.
 \end{equation}
@@ -869,7 +869,7 @@ Next, let $\bar{x}^k\in S$ satisfy $\|x^k - \bar{x}^k\| = \d(x^k, S)$. Then for 
 &\overset{\rm(e)}\leq F_{\hat{\theta}}(\bar{x}^k)  + \frac{L_g}{2\gamma}\|\bar{x}^k - x^k\|^2 + \frac{L_g}{2(1 - \gamma)}\|x^k - y^k\|^2 - \frac{L_g}{2}\|\bar{x}^k - x^{k+1}\|^2\nonumber\\
 &\overset{\rm(f)}\leq \bar\omega + \frac{L_g}{2\gamma}\d(x^k, S)^2 + \frac{L_g}{2(1 - \gamma)}\|x^k - y^k\|^2 - \frac{L_g}{2}\d(x^{k+1}, S)^2,
 \end{align}
-where (a) holds because of the Lipschitz continuity of $\nabla g_i$, (b) holds because $L_g = \max_{i = 1,\cdots,m}\{L_{g_i}\}$, (c) follows from \eqref{stongconve} with $x = \bar{x}^k$ (thanks to $\bar{x}^k\in S\subseteq C$) and $\ling{i}{\bar{x}^k}{y^k}\leq g_i(\bar{x}^k) \leq 0$ for each $i$ (thanks to the convexity of $g_i$ and $\bar{x}^k\in S \subseteq\mathcal{G}$), (d) holds because $g_i(\bar{x}^k)\leq 0$ for each $i$ (thanks to $\bar{x}^k\in S \subseteq\mathcal{G}$), and the triangle inequality, (e) follows from the fact that $(a + b)^2 = (\gamma\frac{a}{\gamma} + (1 - \gamma)\frac{b}{(1-\gamma)})^2\leq\frac{a^2}{\gamma} + \frac{b^2}{(1-\gamma)}$ as $\gamma\in(0,1)$, and (f) holds thanks to \eqref{valueomega} and the fact that $\bar{x}^k\in S$.
+where (a) holds because of the Lipschitz continuity of $\nabla g_i$, (b) holds because $L_g = \max_{i = 1,\cdots,m}\{L_{g_i}\}$, (c) follows from \eqref{stongconve} with $x = \bar{x}^k$ (thanks to $\bar{x}^k\in S\subseteq C$) and $\ling{i}{\bar{x}^k}{y^k}\leq g_i(\bar{x}^k) \leq 0$ for each $i$ (thanks to the convexity of $g_i$ and $\bar{x}^k\in S \subseteq\mathcal{G}$), (d) follows from the triangle inequality and the fact that $g_i(\bar{x}^k)\leq 0$ for each $i$ (thanks to $\bar{x}^k\in S \subseteq\mathcal{G}$), (e) follows from the fact that $(a + b)^2 = (\gamma\frac{a}{\gamma} + (1 - \gamma)\frac{b}{(1-\gamma)})^2\leq\frac{a^2}{\gamma} + \frac{b^2}{(1-\gamma)}$ as $\gamma\in(0,1)$, and (f) holds thanks to \eqref{valueomega} and the definition of $\bar{x}^k$.
 
 Then, we have for any $k\geq k_4:= \max\{k_3, N_0\}$ that
 \begin{align*}%\label{upperE}
@@ -907,7 +907,7 @@ Since $\vartheta > \frac{1}{2}$ and $\zeta > 1$, we have that for any $k\ge k_4$
 &\overset{\rm(b)}\leq\frac{L_g c_0}{2\gamma}\left(E_{\hat{\theta}}(x^k, x^{k-1}) - \bar\omega\right) + \frac{1}{(1 - \bar{\beta}^2)}\left(E_{\hat{\theta}}(x^k, x^{k-1}) - E_{\hat{\theta}}(x^{k+1}, x^{k})\right)\nonumber\\
 &\overset{\rm(c)} \leq c_1\left(E_{\hat{\theta}}(x^k, x^{k-1}) - \bar\omega\right),
 \end{align}
-where (a) holds thanks to \eqref{Eerro}, (b) holds because of \eqref{upperK}, and (c) follows from $E_{\hat{\theta}}(x^{k+1}, x^{k})\geq\bar\omega$ (see \eqref{valueomega}) and $c_1:= \frac{L_g c_0}{2\gamma} + \frac{1}{(1 - \bar{\beta}^2)}$.
+where (a) holds thanks to \eqref{Eerro}, (b) holds because of \eqref{upperK}, and (c) follows from $E_{\hat{\theta}}(x^{k+1}, x^{k})\geq\bar\omega$ (see \eqref{valueomega}) with $c_1:= \frac{L_g c_0}{2\gamma} + \frac{1}{(1 - \bar{\beta}^2)}$.
 
 Let $\varrho = \frac{c_1 + \frac{\zeta}{\vartheta+\zeta}}{c_1+1}\in(0,1)$. Then one can see that
 \begin{equation}\label{divi}
@@ -938,7 +938,7 @@ Taking $\mu > \max\{\frac{1}{(\vartheta + \zeta)(1 - \bar{\beta}^2)}, \frac{1}{1
 \begin{equation}\label{defmu}
 \mu > 1 \text{ and } 1 - \mu^{-1} > \varrho,
 \end{equation}
-and from \eqref{inequ}, we have that
+and from \eqref{inequ} (and \eqref{upperK}, which asserts the nonnegativity of the difference $E_{\hat{\theta}}(x^k,x^{k-1}) - E_{\hat{\theta}}(x^{k+1},x^{k})$), we have that
 \begin{equation*}
 E_{\hat{\theta}}(x^k,x^{k-1}) - \bar\omega \leq M\varrho^{k} + \mu(E_{\hat{\theta}}(x^k,x^{k-1}) - E_{\hat{\theta}}(x^{k+1},x^{k})),
 \end{equation*}
@@ -967,7 +967,7 @@ Inductively, since $1 - \mu^{-1} >0$ thanks to \eqref{defmu}, we see that for an
 \end{align}
 where (a) holds with $c_2 := \left(1 - \mu^{-1}\right)^{-k_4}\left(E_{\hat{\theta}}(x^{k_4},x^{k_4-1}) - \bar\omega + \frac{M}{\mu(1 - \mu^{-1} - \varrho)}\varrho^{k_4} \right)> 0$.
 
-Finally, combining \eqref{upperK} and \eqref{inductE}, we obtain that for any $k\geq k_4$,
+Finally, we obtain that for any $k\geq k_4$,
 \begin{align*}
 \|x^{k+1} - x^k\|^2 & \overset{\rm(a)}\leq \frac{2}{L_g(1 - \bar{\beta})}\left(E_{\hat{\theta}}(x^{k+1}, x^k) - E_{\hat{\theta}}(x^{k}, x^{k-1})\right)\\
 &\overset{\rm(b)}\leq\frac{2}{L_g(1 - \bar{\beta})} \left(E_{\hat{\theta}}(x^{k+1}, x^{k}) - \bar\omega\right)\overset{\rm(c)}\leq \frac{2c_2}{L_g(1 - \bar{\beta})}\left(1 - \mu^{-1}\right)^{k+1},
@@ -978,7 +978,7 @@ Consequently, for any $j$, $k\geq k_4$,
 \sum_{i = k}^{j}\|x^{i+1} - x^i\|&\leq \sum_{i = k}^{\infty} \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\left(\sqrt{1 - \mu^{-1}}\right)^{i+1}= c_2 \left(\sqrt{1 - \mu^{-1}}\right)^{k+1},
 \end{align}
 with $c_2 := \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\cdot\frac{1}{1 - \sqrt{1 - \mu^{-1}}} > 0$,
-which implies that $\{x^k\}$ is a Cauchy sequence. Combining this with Remark~\ref{rem43} and Theorem~\ref{subconver}, we see that $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}. The claimed linear convergence rate also follows immediately from \eqref{bound}.
+which implies that $\{x^k\}$ is a Cauchy sequence. Combining this with Remark~\ref{rem43} and Theorem~\ref{subconver}, we see that $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}. The claimed linear rate of convergence also follows immediately from \eqref{bound}.
 \end{proof}
 
 \section{KL exponent and exact penalty}\label{sec5}
@@ -993,7 +993,7 @@ where $P_1:\R^n \to \R$ is convex, $C$ is compact and convex, ${\cal F} := \{x\i
 \begin{equation}\label{Feta}
 \hat F_{\eta}(x): = P_1(x) + \delta_C(x) + \eta\max_i[g_i(x)]_+,
 \end{equation}
-where $\eta > 0$. Notice that the KL property of $\hat F_{\hat\theta}$ was the key for establishing the convergence rate of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork}.
+where $\eta > 0$. Notice that for \eqref{eq1}, the KL property of the corresponding $\hat F_{\hat\theta}$ was the key for establishing the convergence rate of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork}.
 
 We next recall the definition of exact penalty parameter.
 \begin{definition}[Exact penalty parameter]\label{Exact}
@@ -1031,44 +1031,28 @@ Since $C\cap {\cal F}$ is compact and $P_1$ is continuous, we see that $\Argmin 
 \end{remark}
 
 Now, we show that if the $\hat F$ in \eqref{KLproblem} is KL function with exponent $\alpha$, then for any $\eta>\bar{\eta}$,
-the $\hat F_{\eta}$ is a KL function with exponent $\alpha$, where $\bar{\eta}$ is an exact penalty parameter of \eqref{KLproblem}.
+the $\hat F_{\eta}$ is a KL function with exponent $\alpha\in (0,1)$, where $\bar{\eta}$ is an exact penalty parameter of \eqref{KLproblem}.
 
 \begin{theorem}[KL exponent of $\hat F_{\eta}$ from that of $\hat F$]\label{FetaKL}
-Let $\hat F$ be as in \eqref{KLproblem}, $\bar{x}\in\Argmin \hat F$ and $\bar{\eta}$ be an exact penalty parameter of \eqref{KLproblem}. If $\hat F$ satisfies the KL property with exponent $\alpha$ at $\bar{x}$, then for any $\eta>\bar{\eta}$, the $\hat F_{\eta}$ defined in \eqref{Feta} satisfies the KL property with exponent $\alpha$ at $\bar{x}$.
+Let $\hat F$ be as in \eqref{KLproblem}, $\bar{x}\in\Argmin \hat F$ and $\bar{\eta}$ be an exact penalty parameter of \eqref{KLproblem}. If $\hat F$ satisfies the KL property with exponent $\alpha\in (0,1)$ at $\bar{x}$, then for any $\eta>\bar{\eta}$, the $\hat F_{\eta}$ defined in \eqref{Feta} satisfies the KL property with exponent $\alpha$ at $\bar{x}$.
 \end{theorem}
 
 \begin{proof}
 Fix any $\eta > \bar\eta$. Since $\bar{\eta}$ is an exact penalty parameter of \eqref{KLproblem}, we see that $\Argmin \hat F = \Argmin \hat F_{\eta}$; also, note that $\dom\partial \hat F_{\eta} = C$.
 
-Since $\hat F$ satisfies the KL property with exponent $\alpha$ at $\bar{x}$ and $C$ is compact, by Lemma~\ref{KLinequ}, there exist $c>0$ and $a$, $\epsilon\in (0,1)$ such that
+Since $\hat F$ satisfies the KL property with exponent $\alpha$ at $\bar{x}$ and $C$ is compact, there exist $c>0$ and $a$, $\epsilon\in (0,1)$ such that
 \begin{equation}\label{FKL}
 \d(x, \Argmin \hat F) \leq c(\hat F(x) - \hat F(\bar{x}))^{\alpha},
 \end{equation}
 whenever $ x\in\dom \partial \hat F = C\cap \mathcal{F}$ satisfies $\|x - \bar{x}\|\leq \epsilon$ %$\d(x, \Argmin F)\leq\epsilon$
-and $\hat F(\bar{x}) \leq \hat F(x) \leq \hat F(\bar{x}) + a$.
+and $\hat F(\bar{x}) \leq \hat F(x) \leq \hat F(\bar{x}) + a$. Since $\hat F$ is continuous on its domain, by shrinking $\epsilon$ further if necessary, we assume that \eqref{FKL} holds whenever $ x\in\dom \partial \hat F = C\cap \mathcal{F}$ satisfies $\|x - \bar{x}\|\leq \epsilon$.
 
 Next, since $P_1:\R^n\to\R$ is convex, we know that $P_1$ is locally Lipschitz continuous at $\bar{x}$. Hence, there exist $\bar{\epsilon} > 0$ and $\hat L_{P_1}>0$ such that
 \begin{equation}\label{LipschP}
 |P_1(x) - P_1(y)|\leq \hat L_{P_1}\|x - y\| ~~~~\forall x,y\in B(\bar{x}, \bar{\epsilon}).
 \end{equation}
-Take $\epsilon_0 := \min\{\epsilon, \bar{\epsilon}, \frac{a}{3\hat L_{P_1}}\}$. Then for any $x\in C$ satisfying $\|x - \bar{x}\|\leq \epsilon_0$, we have
-\begin{align}\label{upperproje}
-|P_1(\Pi_{C\cap \mathcal{F}}(x)) - P_1(x)| &\leq |P_1(\Pi_{C\cap \mathcal{F}}(x)) - P_1(\bar{x})| + |P_1(\bar{x}) - P_1(x)| \nonumber\\
-&\overset{\rm(a)}\leq \hat L_{P_1}\|\Pi_{C\cap \mathcal{F}}(x) - \bar{x}\| + \hat L_{P_1}\|x - \bar{x}\| \leq 2\epsilon_0 \hat L_{P_1},
-\end{align}
-where $\Pi_{C\cap\mathcal{F}}(x)$ denotes the orthogonal projection of the point $x$ onto $C\cap\mathcal{F}$, (a) follows from \eqref{LipschP} and the fact that $\|\Pi_{C\cap\mathcal{F}}(x) - \bar{x}\|\leq\|x - \bar{x}\|\leq \epsilon_0$ (thanks to $\bar{x}\in C\cap\mathcal{F}$ and the nonexpansiveness of the projection mapping).
 
-Now, let $a_0 := a - 2\epsilon_0 \hat L_{P_1}>0$. Then for any $x\in C = \dom\partial \hat F_{\eta}$ satisfying $\hat F_{\eta}(\bar{x}) \leq \hat F_{\eta}(x) \leq \hat F_{\eta}(\bar{x}) + a_0$, we claim that
-\begin{equation}\label{projecx}
-\hat F(\bar{x}) \leq \hat F(\Pi_{C\cap \mathcal{F}}(x)) \leq \hat F(\bar{x}) + a.
-\end{equation}
-Indeed, from $\bar{x}\in\Argmin \hat F$, one can see that $\hat F(\bar{x}) \leq \hat F(\Pi_{C\cap \mathcal{F}}(x))$. At the same time, notice that
-\[
-P_1(x) \leq P_1(x) + \eta\max_i[g_i(x)]_+ = \hat F_{\eta}(x)\leq \hat F_{\eta}(\bar{x}) + a_0 = P_1(\bar{x}) + a - 2\epsilon_0 \hat L_{P_1}.
-\]
-Combining this with \eqref{upperproje}, one can see that $P_1(\Pi_{C\cap \mathcal{F}}(x))\leq P_1(\bar{x}) + a$. Combining this with the definition of $\hat F$, we conclude that \eqref{projecx} holds.
-
-Hence, for any $x\in C = \dom\partial \hat F_{\eta}$ satisfying $\|x - \bar{x}\|\leq \epsilon_0$ and $\hat F_{\eta}(\bar{x}) \leq \hat F_{\eta}(x) \leq \hat F_{\eta}(\bar{x}) + a_0$, we have that
+Now, take $\epsilon_0 := \min\{\epsilon, \bar{\epsilon}\}$. Then for any $x\in C = \dom\partial \hat F_{\eta}$ satisfying $\|x - \bar{x}\|\leq \epsilon_0$, we have upon letting $\Pi_{C\cap\mathcal{F}}(x)$ denote the orthogonal projection of $x$ onto $C\cap \mathcal{F}$ that
 \begin{align}\label{distFeta}
 &\d(x, \Argmin \hat F_{\eta})\leq \d(\Pi_{C\cap \mathcal{F}} (x), \Argmin \hat F_{\eta}) + \d(x, C\cap \mathcal{F}) \notag\\
 &\overset{\rm(a)} = \d(\Pi_{C\cap \mathcal{F}} (x), \Argmin F) + \d(x, C\cap \mathcal{F}) \notag\\
@@ -1079,7 +1063,7 @@ Hence, for any $x\in C = \dom\partial \hat F_{\eta}$ satisfying $\|x - \bar{x}\|
 &\overset{\rm(f)}\leq \bar{c}(P_1(x) \!-\! P_1(\bar{x}) + \kappa_1\d(x, \mathcal{F}))^{\alpha}
 \!\overset{\rm(g)}\leq\! \bar{c}\big(P_1(x) \!-\! P_1(\bar{x}) + \kappa_2\!\max_{i = 1,\cdots,m}\![g_i(x)]_+\big)^{\alpha},
 \end{align}
-where (a) holds because $\Argmin \hat F = \Argmin \hat F_{\eta}$, (b) holds because of \eqref{FKL}, \eqref{projecx} and the fact that $\|\Pi_{C\cap\mathcal{F}}(x) - \bar{x}\|\leq\|x - \bar{x}\|\leq\epsilon_0\le\epsilon$ (thanks to $\bar{x}\in C\cap\mathcal{F}$ and the projection mapping being nonexpansive), (c) follows from \eqref{LipschP} and the fact that $\epsilon_0 \le \bar\epsilon$, (d) follows from \eqref{eb2} and the facts that $\d(x,\mathcal{F})\leq \|x - \bar{x}\|\leq\epsilon_0\le \epsilon<1$ and $0\leq \alpha \leq1$, (e) holds with $\hat{c} = \max\{c, 1\}$, (f) holds with $\bar c = 2^{1-\alpha}\hat c$ and $\kappa_1 = \hat L_{P_1}\kappa + \kappa^{\frac{1}{\alpha}}$ thanks to the fact that $a^{\alpha} + b^{\alpha}\leq 2^{1 - \alpha}(a + b)^{\alpha}$ for any $a$, $b\ge0$ and $\alpha\in (0,1)$, and (g) holds with $\kappa_2 = \kappa_1\tau/\kappa$ thanks to \eqref{eb2}.
+where (a) holds because $\Argmin \hat F = \Argmin \hat F_{\eta}$, (b) holds because of \eqref{FKL} and the fact that $\|\Pi_{C\cap\mathcal{F}}(x) - \bar{x}\|\leq\|x - \bar{x}\|\leq\epsilon_0\le\epsilon$ (thanks to $\bar{x}\in C\cap\mathcal{F}$ and the projection mapping being nonexpansive), (c) follows from \eqref{LipschP} and the fact that $\epsilon_0 \le \bar\epsilon$, (d) follows from \eqref{eb2} and the facts that $\d(x,\mathcal{F})\leq \|x - \bar{x}\|\leq\epsilon_0\le \epsilon<1$ and $\alpha\in (0,1)$, (e) holds with $\hat{c} = \max\{c, 1\}$, (f) holds with $\bar c = 2^{1-\alpha}\hat c$ and $\kappa_1 = \hat L_{P_1}\kappa + \kappa^{\frac{1}{\alpha}}$ thanks to the fact that $a^{\alpha} + b^{\alpha}\leq 2^{1 - \alpha}(a + b)^{\alpha}$ for any $a$, $b\ge0$ and $\alpha\in (0,1)$, and (g) holds with $\kappa_2 = \kappa_1\tau/\kappa$ thanks to \eqref{eb2}.
 
 Now, if $\eta\geq\kappa_2$, then, from \eqref{distFeta}, we have that
 \[
@@ -1091,7 +1075,7 @@ On the other hand, if $\kappa_2 >\eta>\bar{\eta}$, then, from \eqref{distFeta}, 
 &\overset{\rm(a)} \leq \bar{c}\left(\frac{\kappa_2 - \bar{\eta}}{\eta - \bar{\eta}}\right)^{\alpha}\left(P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+ + (\eta - \bar{\eta}) \max_{i = 1,\cdots,m}[g_i(x)]_+\right)^{\alpha}\\
 &= \bar{c}\left(\frac{\kappa_2 - \bar{\eta}}{\eta - \bar{\eta}}\right)^{\alpha}\left(\hat F_{\eta}(x) - \hat F_{\eta}(\bar{x})\right)^{\alpha},
 \end{align*}
-where (a) holds because $a + b\leq\frac{1}{\epsilon}(a + \epsilon b)$ for any $a\geq 0$, $b \geq 0$ and $0<\epsilon\leq 1$.\footnote{We apply this relation to $\epsilon := (\eta-\bar\eta)/(\kappa_2 - \bar\eta)\in (0,1)$, $a:= P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+$, which is nonnegative because $\bar{\eta}$ is an exact penalty parameter, $\bar{x}\in\Argmin F$ and $x\in C$, and $b:= (\kappa_2 - \bar{\eta})\max_{i = 1,\cdots,m} [g_i(x)]_+ \geq 0$.} The desired conclusion now follows immediately.
+where (a) holds because $a + b\leq\frac{1}{\epsilon}(a + \epsilon b)$ for any $a\geq 0$, $b \geq 0$ and $0<\epsilon\leq 1$.\footnote{We apply this relation to $\epsilon := (\eta-\bar\eta)/(\kappa_2 - \bar\eta)\in (0,1)$, $b:= (\kappa_2 - \bar{\eta})\max_{i = 1,\cdots,m} [g_i(x)]_+ \geq 0$, and $a:= P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+$, which is nonnegative because $\bar{\eta}$ is an exact penalty parameter, $\bar{x}\in\Argmin F$ and $x\in C$.} The desired conclusion now follows immediately.
 \end{proof}
 
 In the next remark, we comment on the condition $\eta > \bar\eta$ required in Theorem~\ref{FetaKL}.
