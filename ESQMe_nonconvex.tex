@@ -50,7 +50,7 @@
 \usepackage{xcolor}%
 \usepackage{textcomp}%
 \usepackage{manyfoot}%
-\usepackage{refcheck}%
+%\usepackage{refcheck}%
 \usepackage{algorithm,algorithmic}%
 
 \usepackage{latexsym,enumerate,verbatim,amsfonts,microtype}
@@ -159,19 +159,19 @@
 %%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
 %%=============================================================%%
 
-\author*[1]{\fnm{Yongle} \sur{Zhang}}\email{xxx.com}
+\author*[1]{\fnm{Yongle} \sur{Zhang}}\email{yongle-zhang@163.com}
 
-\author[2]{\fnm{Ting Kei} \sur{Pong}}\email{tk.pong@polyu.edu.hk}
+\author[2]{\fnm{Ting Kei} \sur{Pong}}%\email{tk.pong@polyu.edu.hk}
 %\equalcont{These authors contributed equally to this work.}
 
-\author[3]{\fnm{Siqi} \sur{Xu}}\email{xxx.com}
+\author[3]{\fnm{Siqi} \sur{Xu}}%\email{xxx.com}
 %\equalcont{These authors contributed equally to this work.}
 
-\affil*[1]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{100190}, \state{State}, \country{Country}}}
+\affil*[1]{\orgdiv{Department of Mathematics}, \orgname{Visual Computing and Virtual Reality Key Laboratory of Sichuan Province, Sichuan Normal University}, \orgaddress{\city{Chendu}, \country{People's Republic of China}}}
 
 \affil[2]{\orgdiv{Department of Applied Mathematics}, \orgname{the Hong Kong Polytechnic University}, \orgaddress{\city{Hong Kong}, \country{People's Republic of China}}}
 
-\affil[3]{\orgdiv{Department}, \orgname{Organization}, \orgaddress{\street{Street}, \city{City}, \postcode{10587}, \state{State}, \country{Country}}}
+\affil[3]{\orgdiv{Department of Mathematics}, \orgname{Sichuan Normal University}, \orgaddress{\city{Chendu}, \country{People's Republic of China}}}
 
 %%==================================%%
 %% sample for unstructured abstract %%
@@ -192,26 +192,22 @@
 
 \section{Introduction}
 
-{\color{red} Plot:
-\begin{enumerate}
-  \item Review / discuss the use of extrapolation in gradient projection methods, i.e., deal with sets that are easy to project onto.
-  \item Mention that we consider incorporating extrapolation techniques for empirically accelerating an algorithm for a class of difference-of-convex optimization problems whose constraint sets are not easy to project onto. State the problem formulation, and mention its use. Then state the algorithm we study and cite some references.
-  \item Mention some competing algorithms, and mention that our ESQM$_e$ outperforms them.
-  \item Describe structure together with contributions.
-\end{enumerate}
-}
+Extrapolation techniques, due to their simplicity and easy adaptability, have been widely studied in recent years to empirically accelerate first-order methods; see, e.g., \cite{Polyak64,SOR00,nesterov83,Brezinski00,SmithFordSidi87} and references therein. Among them, Nesterov's extrapolation techniques \cite{nesterov83,Nesterov2004,Nesterov2005,Nesterov2013} have been successfully applied to accelerate the proximal gradient algorithm \cite{LionsMercier79} for minimizing $f + h$, with $f$ being a convex {\em loss function} with Lipschitz convex, and $h$ being a proper closed convex and possibly nonsmooth {\em regularizer} with \emph{easy-to-compute} proximal operator. These studies led to the developments of various algorithms and softwares including the well-known algorithm FISTA \cite{beck09} for linear inverse problems and the software TFOCS \cite{BeckerCandesGrant11} for solving a large class convex cone problems. Nesterov's extrapolation techniques have also been suitably adapted in subsequent works such as \cite{wen17,wen18} in some nonconvex settings, and most of these works still require the proximal operator of (part of) the regularizer to be easy to compute: in the case when $h$ is the indicator function of some closed set $D$, this requirement amounts to saying that the projection onto $D$ can be computed efficiently. In this paper, we investigate the adaptation of extrapolation techniques on empirically accelerating a classical algorithm for some constrained optimization problems whose constraint sets \emph{do not admit easy projections}.
 
-In this paper, we consider the following difference-of-convex (DC) optimization problem with smooth inequality and simple geometric constraints:
+Specifically, we consider the following difference-of-convex (DC) optimization problem with smooth inequality and simple geometric constraints:
 \begin{align}\label{eq1}
 \min_{x\in \mathbb {R}^n }\quad& P(x):= P_1(x) - P_2(x) \notag \\
 \text{s.t.}\quad & g_i(x)\leq 0,~~ i = 1,\ldots, m,\\
 & x\in C,  \notag
 \end{align}
-where $P_1:\mathbb{R}^n \to \R$ and $P_2:\mathbb{R}^n\to \R$ are convex, each $g_i:\mathbb{R}^n\to \R$ is smooth and $\nabla g_i$ is Lipschitz continuous with modulus $L_{g_i}>0$. $C\subseteq \mathbb {R}^n$ is a nonempty compact convex set, the feasible set $\mathcal{G} := C\cap \mathscr{F}$ is nonempty with $\mathscr{F}:=\{x\in \mathbb{R}^n : g_i(x)\leq 0, ~i = 1,\dots,m\}$.
+where $P_1:\mathbb{R}^n \to \R$ and $P_2:\mathbb{R}^n\to \R$ are convex, each $g_i:\mathbb{R}^n\to \R$ is smooth and $\nabla g_i$ is Lipschitz continuous with modulus $L_{g_i}>0$. $C\subseteq \mathbb {R}^n$ is a nonempty compact convex set, the feasible set $\mathcal{G} := C\cap \mathscr{F}$ is nonempty with $\mathscr{F}:=\{x\in \mathbb{R}^n : g_i(x)\leq 0, ~i = 1,\dots,m\}$. This class of problems arises naturally in many applications. For example, in compressed processing, the objective $P$ can be a regularizer such as the difference of $\ell_1$ and $\ell_2$ norms \cite{YinLouHeXin15} for inducing sparsity, the $g_i$, $i = 1,\ldots,m$ can be loss functions based on the noise models in the $i$th transmission channel, and the set $C$ can be used to model some priors such as nonnegativity or boundedness.
 
-\todo[inline]{Add in many references. The total number of references should exceed 35.}
-\todo[inline]{Introduction should, tentatively, include the following elements:
-1. FOM for constrained problems such as MBA and ESQM; 2. Acceleration techniques; 3. ...?}
+Since projections onto the feasible set of \eqref{eq1} are not easy to compute, existing algorithms for \eqref{eq1} usually leverage the Lipschitz continuity of $\nabla g_i$ to build approximations for the feasible sets, leading to relatively easier subproblems. One natural approach for building approximations is to replace $g_i$ by its quadratic majorants at the current iterate. Specific algorithms based on quadratically approximating $g_i$ in \eqref{eq1} include the moving balls approximation algorithm \cite{AusSheTeb10} and its variants (e.g., \cite{bolte16,yu21}), which were proposed and studied for instances of \eqref{eq1} {\em in the absence of the requirement $x\in C$}. Another natural approach for building approximations is to make use of \emph{affine approximations} to $g_i$ at the current iterate, leading to subproblems with even simpler structures. This approach has its roots in 
+the literature of sequential quadratic programming (SQP) method, and we refer the readers to \cite{GillWong12} and references therein for more discussions of SQP. Here, we are interested in the framework described in \cite{Ausleder13,Auslender13}, which focused on solving \eqref{eq1} when $P$ and each $g_i$ are twice continuously differentiable. We adapt the algorithmic framework described there to solve \eqref{eq1}, and incorporate extrapolation techniques to empirically accelerate the algorithm. We call the resulting algorithm extended sequential quadratic method with extrapolation (ESQM$_e$), following the use of the name ESQM in \cite{Auslender13}. The algorithmic details will be presented in Section~\ref{sec3} below; in particular, in each iteration of ESQM$_e$, the $g_i$ in \eqref{eq1} is replaced by its affine approximation at a point \emph{extrapolated from} the current iterate.
+
+In this paper, we study the convergence properties of ESQM$_e$ and perform numerical experiments to examine its computational efficiency. In particular, we show that the sequence generated by ESQM$_e$ clusters at a critical point if the extrapolation parameters are uniformly bounded above by a certain threshold, under a set of constraint qualifications similarly used in \cite{Auslender13}. We also construct a suitable potential function and establish the convergence of the whole sequence and its convergence rate by assuming Kurdyka-{\L}ojasiewicz (KL) property of the potential function and additional differentiability conditions on $P_2$ and each $g_i$ in \eqref{eq1}. Furthermore, when $P_2 \equiv 0$ and each $g_i$ is convex, we show that linear convergence can also be established if a certain exact penalty function of \eqref{eq1} is known to be a KL function with exponent $\frac12$. We also discuss how the KL exponent of such an exact penalty function can be derived from that of $P+\delta_{\cal G}$ (see Section~\ref{sec2} for notation). Finally, we perform numerical experiments on compressed sensing models with different types of measurement noises taking the form of \eqref{eq1}. Our experiments on random instances illustrate the empirical acceleration of ESQM$_e$ over ESQM, and also suggest that ESQM$_e$ outperforms the natural competing algorithm SCP$_{\rm ls}$ from \cite{yu21}.
+
+The remainder of the paper is organized as follows. We present notation and preliminary materials in Section~\ref{sec2}. Our algorithm, ESQM$_e$ is presented in Section~\ref{sec3}, and its subsequential and sequential convergences are established in Section~\ref{sec41}. We discuss the convergence behavior in the convex setting (i.e., $P_2 \equiv 0$ and each $g_i$ is convex) in Section~\ref{sec42}, and the relationship between the KL exponent of $P+\delta_{\cal G}$ and that of the exact penalty function used in the analysis of Section~\ref{sec42} is studied in Section~\ref{sec5}. Numerical experiments are presented in Section~\ref{sec6}.
 
 \section{Notation and preliminaries}\label{sec2}
 
@@ -371,7 +367,7 @@ where (a) follows from \cite[Exercise~8.31]{rock97a} with $I_k(\cdot)$ defined i
 
 \section{Convergence properties}\label{sec4}
 
-\subsection{Convergence analysis for ESQM$_{\rm e}$}
+\subsection{Convergence analysis for ESQM$_{\rm e}$}\label{sec41}
 We first show that the successive changes of the $\{x^k\}$ generated by ESQM$_{\rm e}$ vanish under suitable assumptions on $\beta_k$.
 \begin{theorem}[Vanishing successive changes]\label{suffdec}
 Consider \eqref{eq1} and let $\{(x^k,y^k,s^k,\theta_k)\}$ be generated by Algorithm \ref{alg:Framwork}. Then the following statements hold:
@@ -1109,7 +1105,7 @@ Suppose that in \eqref{eq1}, $P_1 = \|\cdot\|_1$, $C$ is a polyhedron, $m = 1$, 
 
 
 
-\section{Numerical experiments}
+\section{Numerical experiments}\label{sec6}
 
 In this section, we perform numerical experiments to illustrate the performance of Algorithm~\ref{alg:Framwork}. Particularly, we consider the following model for compressed sensing:
 \begin{equation}\label{CompSen}
@@ -1350,6 +1346,11 @@ A. Beck and M. Teboulle.
 \newblock Fast gradient-based algorithms for constrained total variation image denoising and deblurring problems.
 \newblock {\em IEEE Transactions on Image Processing} 18, 2419--2434, 2009.
 
+\bibitem{BeckerCandesGrant11}
+S. R. Becker, E. J. Cand\`{e}s and M. C. Grant.
+\newblock Templates for convex cone problems with applications to sparse signal recovery.
+\newblock {\em Mathematical Programming Computation} 3, 165--218, 2011.
+
 
 \bibitem{bolte07}
 J. Bolte, A. Daniilidis and A. Lewis.
@@ -1378,6 +1379,11 @@ J. Bolte, S. Sabach and M. Teboulle.
 %\newblock From error bounds to the complexity of first-order descent methods for convex functions.
 %\newblock {\em Mathematical Programming} 165, 471¨C507, 2017.
 
+\bibitem{Brezinski00}
+C. Brezinski.
+\newblock Convergence acceleration during the 20th century.
+\newblock {\em Journal of Computational and Applied Mathematics} 122, 1-–21, 2000.
+
 \bibitem{Ca18}
 E. J. Cand\`{e}s.
 \newblock The restricted isometry property and its implications for compressed sensing.
@@ -1398,6 +1404,17 @@ B. O'Donoghue and E. J. Cand\`{e}s.
 \newblock Adaptive restart for accelerated gradient schemes.
 \newblock {\em Foundations of Computational Mathematics} 15, 715--732, 2015.
 
+\bibitem{GillWong12}
+P. E. Gill and E. Wong.
+\newblock Sequential quadratic programming methods. 
+\newblock In: Lee, J., Leyffer, S. (eds.) {\em Mixed
+Integer Nonlinear Programming}, 147--224. Springer, New York, 2012.
+
+\bibitem{SOR00}
+A. Hadjidimos.
+\newblock Successive overrelaxation (SOR) and related methods.
+\newblock {\em Journal of Computational and Applied Mathematics} 123, 177–-199, 2000.
+
 \bibitem{HoLS13}
 J. D. W. Hosmer, S. Lemeshow and R. X. Sturdivant.
 \newblock {\em  Applied Logistic Regression}.
@@ -1407,6 +1424,11 @@ J. D. W. Hosmer, S. Lemeshow and R. X. Sturdivant.
 G. Li and T. K. Pong.
 \newblock Calculus of the exponent of Kurdyka--{\L}ojasiewicz inequality and its applications to linear convergence of first-order methods.
 \newblock {\em Foundations of Computational Mathematics} 18, 1199--1232, 2018.
+
+\bibitem{LionsMercier79}
+P. L. Lions and B. Mercier. 
+\newblock Splitting algorithms for the sum of two nonlinear operators. 
+\newblock {\em SIAM Journal on Numerical Analysis} 16, 964--979, 1979.
 
 %\bibitem{liu19}
 %T. X. Liu, T. K. Pong, and A. Takeda.
@@ -1418,15 +1440,36 @@ Y. Nesterov.
 \newblock A method for unconstrained convex minimization problem with the rate of convergence O ($\frac{1}{k^2}$).
 \newblock {\em Doklady AN USSR} 269, 543--547, 1983.
 
-\bibitem{Tseng08}
-P. Tseng.
-\newblock On accelerated proximal gradient methods for convex-concave optimization[J].
-\newblock {\em submitted to SIAM Journal on Optimization} 2, 2008.
+\bibitem{Nesterov2004}
+\newblock Y. Nesterov.
+\newblock {\em Introductory Lectures on Convex Optimization: A Basic Course.}
+\newblock Kluwer Academic Publishers, Boston, 2004.
 
-\bibitem{Tseng10}
-P. Tseng.
-\newblock Approximation accuracy, gradient methods, and error bound for structured convex optimization[J].
-\newblock {\em Mathematical Programming} 125, 263-295, 2010.
+\bibitem{Nesterov2005}
+\newblock Y. Nesterov.
+\newblock Smooth minimization of non-smooth functions.
+\newblock {\em Mathematical Programming} 103, 127--152, 2005.
+
+\bibitem{Nesterov2013}
+\newblock Y. Nesterov.
+\newblock Gradient methods for minimizing composite objective function.
+\newblock {\em Mathematical Programming} 140, 125--161, 2013.
+
+\bibitem{Polyak64}
+B. T. Polyak. 
+\newblock Some methods of speeding up the convergence of iteration methods. 
+\newblock {\em USSR Computational Mathematics and Mathematical Physics} 4(5), 1–-17, 1964.
+
+
+%\bibitem{Tseng08}
+%P. Tseng.
+%\newblock On accelerated proximal gradient methods for convex-concave optimization.
+%\newblock Preprint. Available at https://www.mit.edu/~dimitrib/PTseng/papers/apgm.pdf.
+%
+%\bibitem{Tseng10}
+%P. Tseng.
+%\newblock Approximation accuracy, gradient methods, and error bound for structured convex optimization.
+%\newblock {\em Mathematical Programming} 125, 263-295, 2010.
 
 \bibitem{Ro70}
 R. T. Rockafellar.
@@ -1443,6 +1486,11 @@ S. M. Robinson.
 \newblock An application of error bounds for convex programming in a linear space.
 \newblock {\em SIAM Journal on Control} 13, 271--273, 1975.
 
+\bibitem{SmithFordSidi87}
+D. A. Smith, W. F. Ford  and A. Sidi.
+\newblock Extrapolation methods for vector sequences.
+\newblock {\em SIAM Review} 29, 199--233, 1987.
+
 %\bibitem{Tu98}
 %H. Tuy.
 %\newblock {\em Convex Analysis and Global Optimization}.
@@ -1457,6 +1505,11 @@ B. Wen, X. Chen and T. K. Pong.
 B. Wen, X. Chen, and T. K. Pong.
 \newblock A proximal difference-of-convex algorithm with extrapolation.
 \newblock {\em Computational Optimization and Applications} 69, 297--324, 2018.
+
+\bibitem{YinLouHeXin15}
+P. Yin, Y. Lou, Q. He and J. Xin.
+\newblock Minimization of $\ell_{1-2}$ for compressed sensing. 
+\newblock {\em SIAM Journal on Scientific Computing} 37, A536--A563, 2015.
 
 
 \bibitem{yu21}
