@@ -4,6 +4,23 @@ function [xstar, lambda] = Newton_Monotone_LL(y, a, sigma, alpha, lambda, M, tol
 % and x = sign(tmp)*min(max(abs(tmp) - gamma, 0), M);
 % and tmp = y - lambda*gamma*a.
 
+% Input
+%
+% y             - n by 1 vector measurement
+% a              - n by 1 vector measurement
+% sigma      - real number > 0
+% alpha     - real number > 0
+% lambda   - real number which is the initial of lambda
+% M           - real number > 0
+% tol            - tolerance[1e-10] 
+% L             - a constant [ \|A\|^2 ]
+%
+%
+% Output
+%
+% xstar       - approximate stationary point
+% lambda   - corresponding Lagrange multipliers
+
 % Initialization
 eta = 1e-4; % parameter for regular
 c = 1e-4;

@@ -1,7 +1,7 @@
 function [xstar, lambda] = subprob_L1L2_ESQMe_Lor(y, a, sigma, alpha, lambda, M, L)
 
 % This aims to find the minimizer of the following problem
-% min   \|x\|_1 - mu*<xi, x> + alpha*t + alphaL/2\|x - y\|^2
+% min   \|x\|_1 + alpha*t + alphaL/2\|x - y\|^2
 % s.t. <a, x> - sigma <= t && \|x\|_inf <= M && t >= 0
 
 % Input

@@ -1,4 +1,4 @@
-function [x_new, iter] =  L1L2_ESQMe_Lor(A, b, sigma, mu, M, xstart, d, alpha_init, L, gamma, freq, tol)
+function [x_new, iter] =  L1L2_ESQMe_Lor(A, b, sigma, mu, M, xstart, d, alpha_init, L, gamma, freq, tol, maxiter)
 % This aims to use ESQMe to find the minimizer of the following problem (involve Lorentzion norm)
 % min ||x||_1 - mu*||x||
 % s.t.\|Ax - b\|_{LL_2,gamma} <= sigma  &&  \|x\|_inf <= M
@@ -6,39 +6,37 @@ function [x_new, iter] =  L1L2_ESQMe_Lor(A, b, sigma, mu, M, xstart, d, alpha_in
 %
 % Input
 %
-% A           - m by n matrix (m << n)
-% b           - m by 1 vector measurement
-% sigma       - real number > 0
-% mu          - real number in (0, 1)
-% xstart      - the starting point
-% d           - real number > 0
-% L           - the Lipschitz constant
-% M           - Upper bound of \|x\|
-% maxiter     - maximum number of iterations [inf]
-% freq        - The frequency of print the results
-% tol         - tolerance [1e-4]
+% A                 - m by n matrix (m << n)
+% b                   - m by 1 vector measurement
+% sigma             - real number > 0
+% mu                 - real number in (0, 1)
+% M                  - Upper bound of \|x\|
+% xstart              - the starting point
+% d                    - real number > 0
+% alpha_init        - real number > 0
+% L                    - the Lipschitz constant
+% gamma           - real number > 0
+% freq               - The frequency of print the results
+% tol                  - tolerance 
+% maxiter           - maximum number of iterations [inf]
 %
 %
 % Output
 %
-% x           - approximate stationary point
+% x_new           - approximate stationary point
 % iter        - number of iterations
 
 
 % Initialization
-% alpha_init = 0.05; % alpha
 
 theta = 1;  %…Ë÷√beta
 theta0 = 1;
 lambda = 0; % parameter for subproblem
 iter = 0;
 num_restart = 0;
-re_freq = 49;
+re_freq = 50;
 x_old = xstart; % starting point x^{k}
 x_new = x_old;% starting point x^{x+1}
-
-[~,n] = size(A);
-
 
 
 
@@ -71,13 +69,12 @@ while   1 == 1
     [x_new, lambda] = subprob_L1L2_ESQMe_Lor(y, grady0, newsigma1, alpha, lambda, M, L); % Solving the subproblem
     
 
-%     fval = norm(x_new, 1) - mu*norm(x_new);
 %     if mod(iter, freq) == 0
 %         fprintf(' %5d| %16.10f|%3.3e|%3.3e|%3.3e|%3.3e|%3.3e|%3.3e\n',iter, fval, elly0, alpha, lambda, norm(x_new - x_old), (theta/theta0 - 1/theta),  norm(x_new) )
 %     end
     
      % check for termination
-     if norm(x_new - x_old) < tol*max(norm(x_new), 1)
+     if norm(x_new - x_old) < tol*max(norm(x_new), 1) || iter >= maxiter 
         break
     end
 
