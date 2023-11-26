@@ -4,6 +4,25 @@ function [xstar, lambda] = Newton_Monotone_GL_e(y, a, sigma, alpha, lambda, M, t
 % and x = min(max(1 - (1/(alpha*L))./\|tmp\|,0), M./\|tmp\|).*tmp ;
 % and tmp_J = y - (lambda*/(alpha*L)).*a.
 
+% Input
+%
+% y              - n by 1 vector measurement
+% a              - n by 1 vector measurement
+% sigma       - real number > 0
+% alpha        - real number > 0
+% lambda     - real number which is the initial of lambda
+% M             - real number > 0
+% L              - the Lipschitz constant
+% tol              - tolerance [1e-10]
+
+%
+%
+% Output
+%
+% xstar       - approximate solution point
+% lambda   - corresponding Lagrange multipliers
+
+
 % Initialization
 eta = 1e-4; % parameter for regular
 c = 1e-4;

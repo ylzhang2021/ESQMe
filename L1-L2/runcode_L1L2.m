@@ -5,7 +5,7 @@ rand('seed',2000);
 randn('seed',2023);
 
 maxiter = inf;
-tol = 1e-8;
+tol = 1e-4;
 d = 1;
 alpha_init = 1;
 mu = 0.95;
@@ -101,24 +101,37 @@ for ii = 1: length(indexarray)
         Residual_esqme1 = (1/2*norm(A*x_esqme1 - b)^2 - delta)/delta; 
         RecErr_esqme1 = norm(x_esqme1 - xorig)/max(1, norm(xorig));
         nnz_esqme1 = nnz(abs(x_esqme1)  > 1e-10);
-        fprintf(' ESQM_1  Termination: time_ESQM = %g, iter = %d, nnz = %g, fval = %16.10f, diff = %g, feas vio = %g,\n',...
+        fprintf(' ESQM  Termination: time_ESQM = %g, iter = %d, nnz = %g, fval = %16.10f, diff = %g, feas vio = %g,\n',...
             t_esqme1, iter_esqme1, nnz_esqme1, fval_esqme1, RecErr_esqme1, Residual_esqme1)
        
-        % The initial point is random
-        fprintf('\n Start of ESQMe with zeros as the initial point \n');
+        fprintf('\n Start of ESQM_ls with zeros as the initial point \n');
         tesqme2 = tic;
-        [x_esqme2, iter_esqme2] = L1L2_ESQM_e(A, b, delta, mu, M, x0, d, alpha_init, LA, maxiter, freq, tol);
+        [x_esqme2, iter_esqme2] = L1L2_ESQM_ls(A, b, delta, mu, M, x0, d, alpha_init, LA, maxiter, freq, tol);
         t_esqme2 = toc(tesqme2);
         
         fval_esqme2= norm(x_esqme2, 1) - mu*norm(x_esqme2); 
         Residual_esqme2 = (1/2*norm(A*x_esqme2 - b)^2 - delta)/delta; 
         RecErr_esqme2 = norm(x_esqme2 - xorig)/max(1, norm(xorig));
-        nnz_esqme2 = nnz(abs(x_esqme2) > 1e-10);
-        fprintf(' ESQMe_1  Termination: time_ESQMe = %g, iter = %d, nnz = %g, fval = %16.10f, diff = %g, feas vio = %g,\n',...
+        nnz_esqme2 = nnz(abs(x_esqme2)  > 1e-10);
+        fprintf(' ESQM_ls  Termination: time_ESQMls = %g, iter = %d, nnz = %g, fval = %16.10f, diff = %g, feas vio = %g,\n',...
             t_esqme2, iter_esqme2, nnz_esqme2, fval_esqme2, RecErr_esqme2, Residual_esqme2)
+
+
+        % The initial point is random
+        fprintf('\n Start of ESQMe with zeros as the initial point \n');
+        tesqme3 = tic;
+        [x_esqme3, iter_esqme3] = L1L2_ESQM_e(A, b, delta, mu, M, x0, d, alpha_init, LA, maxiter, freq, tol);
+        t_esqme3 = toc(tesqme3);
+        
+        fval_esqme3= norm(x_esqme3, 1) - mu*norm(x_esqme3); 
+        Residual_esqme3 = (1/2*norm(A*x_esqme3 - b)^2 - delta)/delta; 
+        RecErr_esqme3 = norm(x_esqme3 - xorig)/max(1, norm(xorig));
+        nnz_esqme3 = nnz(abs(x_esqme3) > 1e-10);
+        fprintf(' ESQMe  Termination: time_ESQMe = %g, iter = %d, nnz = %g, fval = %16.10f, diff = %g, feas vio = %g,\n',...
+            t_esqme3, iter_esqme3, nnz_esqme3, fval_esqme3, RecErr_esqme3, Residual_esqme3)
     
      % save the results
-        table2 = [table2; time_qr, time_xf1, time_LA, time_scp, t_esqme1, t_esqme2, iter_scp,  iter_esqme1,  iter_esqme2, Rec_err_scp, RecErr_esqme1, RecErr_esqme2, Residual_scp, Residual_esqme1, Residual_esqme2];
+        table2 = [table2; time_qr, time_xf1, time_LA, time_scp, t_esqme1, t_esqme2, t_esqme3, iter_scp,  iter_esqme1, iter_esqme2,  iter_esqme3, Rec_err_scp, RecErr_esqme1, RecErr_esqme2, RecErr_esqme3, Residual_scp, Residual_esqme1, Residual_esqme2, Residual_esqme3];
     
     end
 
@@ -135,16 +148,16 @@ a = clock;
 fname = ['Results\L1-L2_table' '-'  date '-' int2str(a(4)) '-' int2str(a(5)) '.txt'];
 fid = fopen(fname, 'w');
 
-for ii = 1:6
+for ii = 1:7
     fprintf(fid, '& %6.3f & %6.3f & %6.3f & %6.3f & %6.3f \n', table1(ii,:));
 end
-for ii = 7:9
+for ii = 8:11
     fprintf(fid, '& %6.0f & %6.0f & %6.0f & %6.0f & %6.0f \n', table1(ii,:));
 end
-for ii = 10:12
+for ii = 12:15
    fprintf(fid, '& %6.3f & %6.3f & %6.3f & %6.3f & %6.3f\n', table1(ii,:));
 end
-for ii = 13:15
+for ii = 16:19
     fprintf(fid, '& %3.2e & %3.2e & %3.2e & %3.2e & %3.2e\n', table1(ii,:)); 
 end
 

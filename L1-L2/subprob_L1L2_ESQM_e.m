@@ -1,19 +1,18 @@
 function [xstar, lambda] = subprob_L1L2_ESQM_e(y, a, sigma, alpha, lambda, M, L)
 
 % This aims to find the minimizer of the following problem
-% min   \|x\|_1 - mu*<xi, x> + alpha*t + alpha*L/2\|x - y\|^2
+% min   \|x\|_1 + alpha*L/2\|x - y\|^2
 % s.t. <a, x> - sigma <= t && \|x\|_inf <= M && t >= 0
 
 % Input
 %
-% x0            - n by 1 vector measurement
+% y              - n by 1 vector measurement
 % a              - n by 1 vector measurement
-% sigma      - real number > 0
-% mu         - real number  [ 0.1 ]
-% alpha     - real number > 0
-% lambda   - real number which is the initial of lambda
-% J              - a positive integer whic denote the size of each block
-% M           - real number > 0
+% sigma       - real number > 0
+% alpha        - real number > 0
+% lambda     - real number which is the initial of lambda
+% M             - real number > 0
+% L              - the Lipschitz constant
 %
 %
 % Output

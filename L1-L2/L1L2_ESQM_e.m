@@ -3,26 +3,27 @@ function [x_new, iter] =  L1L2_ESQM_e(A, b, delta, mu, M, xstart, d, alpha_init,
 % min ||x||_1 - mu*||x||
 % s.t. 1/2*||Ax - b||^2 - delta <=0  &&  \|x\|_inf <= M
 %
+
 % Input
 %
-% A            - m by n matrix (m << n)
-% b             - m by 1 vector measurement
-% sigma      - real number > 0
-% mu          - real number in (0, 1)
-% J              - a positive integer whic denote the size of each block
-% xstart       - the starting point
-% delta       - real number > 0
-% L             - the Lipschitz constant
-% M           - Upper bound of \|x_J\| for any J
-% maxiter   - maximum number of iterations [inf]
-% freq         - The frequency of print the results
-% tol           - tolerance [1e-8]
+% A               - m by n matrix (m << n)
+% b                - m by 1 vector measurement
+% delta           - real number > 0
+% mu             - real number in (0, 1)
+% M              - Upper bound of \|x\|
+% xstart          - the starting point
+% d                - real number > 0
+% alpha_init   - real number > 0
+% L                - the Lipschitz constant
+% maxiter      - maximum number of iterations [inf]
+% freq            - The frequency of print the results
+% tol              - tolerance 
 %
 %
 % Output
 %
-% x            - approximate stationary point
-% iter        - number of iterations
+% x_new              - approximate stationary point
+% iter           - number of iterations
 
 
 % Initialization
@@ -33,7 +34,7 @@ theta0 = 1;
 lambda = 0; % parameter for subproblem
 iter = 0;
 num_restart = 0;
-re_freq = 200;
+re_freq = 50;
 % n = size(xstart, 1);
 x_old = xstart; % starting point x^{k}
 x_new = x_old;% starting point x^{x+1}
@@ -65,13 +66,6 @@ while  iter <= maxiter
     
     x_old = x_new;
     [x_new, lambda] = subprob_L1L2_ESQM_e(y, grady0, grady0'*y0 - gvaly0, alpha, lambda, M, L); % Solving the subproblem
-%     Ax_new = A*x_new; % A*x^{k+1}
-%     tmpx_new = Ax_new - b; 
-%     gvalx_new = (1/2)*norm(tmpx_new)^2 - delta;
-%     fval = norm(x_new, 1) - mu*norm(x_new);
-    
-    
-
     
 %     if mod(iter, freq) == 0
 %         fprintf(' %5d| %16.10f|%3.3e|%3.3e|%3.3e|%3.3e|%3.3e|%3.3e\n',iter, fval, gvalx_new, alpha, lambda, norm(x_new - x_old), ((theta0 - 1)/theta),  norm(x_new) )
@@ -82,7 +76,7 @@ while  iter <= maxiter
         break
     end
 
-      % Update theta
+    % Update theta
     theta0 = theta;
     theta = (1 + sqrt(1+4*theta0^2))/2;
 
@@ -94,6 +88,7 @@ while  iter <= maxiter
         end
     end
   
+    % Update alpha
     sss = gvaly0 + grady0'*(x_new - y0); 
     if sss > 1e-10
         alpha_init = alpha + d;
