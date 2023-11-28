@@ -34,7 +34,7 @@ theta0 = 1;
 lambda = 0; % parameter for subproblem
 iter = 0;
 num_restart = 0;
-re_freq = 50;
+re_freq = 49;
 x_old = xstart; % starting point x^{k}
 x_new = x_old;% starting point x^{x+1}
 

@@ -4,10 +4,8 @@ clc;
 rand('seed',2000);
 randn('seed',2023);
 
-% alpha = 1;     % regularization parameter for MBA_{l1/l2}
 maxiter = inf;
 tol = 1e-4;
-%d = 0.00001;
 alpha_init = 0.05; % regularization parameter for ESQMe
 mu = 0.95;
 freq = 1000; % the frequency of print the results
