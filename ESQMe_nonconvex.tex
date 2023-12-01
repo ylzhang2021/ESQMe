@@ -159,17 +159,17 @@
 %%                 \dgr{MSc, PhD}}\email{iauthor@gmail.com}
 %%=============================================================%%
 
-\author*[1]{\fnm{Yongle} \sur{Zhang}}\email{yongle-zhang@163.com}
+\author[1]{\fnm{Yongle} \sur{Zhang}}%\email{yongle-zhang@163.com}
 
-\author[2]{\fnm{Ting Kei} \sur{Pong}}%\email{tk.pong@polyu.edu.hk}
+\author*[2]{\fnm{Ting Kei} \sur{Pong}}\email{tk.pong@polyu.edu.hk}
 %\equalcont{These authors contributed equally to this work.}
 
 \author[3]{\fnm{Siqi} \sur{Xu}}%\email{xxx.com}
 %\equalcont{These authors contributed equally to this work.}
 
-\affil*[1]{\orgdiv{Department of Mathematics}, \orgname{Visual Computing and Virtual Reality Key Laboratory of Sichuan Province, Sichuan Normal University}, \orgaddress{\city{Chengdu}, \country{People's Republic of China}}}
+\affil[1]{\orgdiv{Department of Mathematics}, \orgname{Visual Computing and Virtual Reality Key Laboratory of Sichuan Province, Sichuan Normal University}, \orgaddress{\city{Chengdu}, \country{People's Republic of China}}}
 
-\affil[2]{\orgdiv{Department of Applied Mathematics}, \orgname{the Hong Kong Polytechnic University}, \orgaddress{\city{Hong Kong}, \country{People's Republic of China}}}
+\affil*[2]{\orgdiv{Department of Applied Mathematics}, \orgname{the Hong Kong Polytechnic University}, \orgaddress{\city{Hong Kong}, \country{People's Republic of China}}}
 
 \affil[3]{\orgdiv{Department of Mathematics}, \orgname{Sichuan Normal University}, \orgaddress{\city{Chengdu}, \country{People's Republic of China}}}
 
@@ -203,9 +203,9 @@ Specifically, we consider the following difference-of-convex (DC) optimization p
 where $P_1:\mathbb{R}^n \to \R$ and $P_2:\mathbb{R}^n\to \R$ are convex, each $g_i:\mathbb{R}^n\to \R$ is smooth and $\nabla g_i$ is Lipschitz continuous, $C\subseteq \mathbb {R}^n$ is a nonempty compact convex set, and the feasible set $C\cap \mathscr{F}$ is nonempty with $\mathscr{F}:=\{x\in \mathbb{R}^n : g_i(x)\leq 0, ~i = 1,\dots,m\}$. This class of problems arises naturally in many applications. For example, in compressed sensing, the $P$ can be a sparsity inducing regularizer such as the difference of $\ell_1$ and $\ell_2$ norms \cite{YinLouHeXin15}, the $g_i$, $i = 1,\ldots,m$ can be loss functions based on the noise models in the $i$th transmission channel, and the set $C$ can be used to model some priors such as nonnegativity or boundedness.
 
 Since projections onto the feasible set of \eqref{eq1} are not easy to compute, existing algorithms for \eqref{eq1} usually leverage the Lipschitz continuity of $\nabla g_i$ to build approximations for the feasible sets, leading to relatively easier subproblems. One natural approach for building approximations is to replace $g_i$ by its quadratic majorants at the current iterate. Specific algorithms based on quadratically approximating $g_i$ in \eqref{eq1} include the moving balls approximation algorithm \cite{AusSheTeb10} and its variants (e.g., \cite{bolte16,yu21}), which were proposed and studied for instances of \eqref{eq1} {\em in the absence of the requirement $x\in C$}. Another natural approach for building approximations is to make use of \emph{affine approximations} to $g_i$ at the current iterate, leading to subproblems with even simpler structures. This approach has its roots in
-the literature of sequential quadratic programming (SQP) method, and we refer the readers to \cite{GillWong12} and references therein for more discussions of SQP. Here, we are interested in the framework described in \cite{Ausleder13,Auslender13}, which focused on solving \eqref{eq1} when $P$ and each $g_i$ are twice continuously differentiable. We adapt the algorithmic framework described there to solve \eqref{eq1}, and incorporate extrapolation techniques to empirically accelerate the algorithm. We call the resulting algorithm extended sequential quadratic method with extrapolation (ESQM$_e$), following the use of the name ESQM in \cite{Auslender13}. The algorithmic details will be presented in Section~\ref{sec3} below; in particular, in each iteration of ESQM$_e$, the $g_i$ in \eqref{eq1} is replaced by its affine approximation at a point \emph{extrapolated from} the current iterate.
+the literature of sequential quadratic programming (SQP) method, and we refer the readers to \cite{GillWong12} and references therein for more discussions of SQP. Here, we are interested in the framework described in \cite{Ausleder13,Auslender13}, which focused on solving \eqref{eq1} when $P$ and each $g_i$ are twice continuously differentiable. We adapt the algorithmic framework described there to solve \eqref{eq1}, and incorporate extrapolation techniques to empirically accelerate the algorithm. We call the resulting algorithm extended sequential quadratic method with extrapolation (ESQM$_e$), following the use of the name ESQM in \cite{Ausleder13}. The algorithmic details will be presented in Section~\ref{sec3} below; in particular, in each iteration of ESQM$_e$, the $g_i$ in \eqref{eq1} is replaced by its affine approximation at a point \emph{extrapolated from} the current iterate.
 
-In this paper, we study the convergence properties of ESQM$_e$ and perform numerical experiments to examine its computational efficiency. In particular, we show that the sequence generated by ESQM$_e$ clusters at a critical point if the extrapolation parameters are uniformly bounded above by a certain threshold, under a set of constraint qualifications similarly used in \cite{Auslender13}. We also construct a suitable potential function and establish the convergence of the whole sequence and its convergence rate by assuming Kurdyka-{\L}ojasiewicz (KL) property of the potential function and additional differentiability conditions on $P_2$ and each $g_i$ in \eqref{eq1}. Furthermore, when $P_2 \equiv 0$ and each $g_i$ is convex, we show that linear convergence can also be established if a certain exact penalty function of \eqref{eq1} is known to be a KL function with exponent $\frac12$. We also discuss how the KL exponent of such an exact penalty function can be derived from that of the function $P+\delta_{C\cap \mathscr{F}}$ from \eqref{eq1} (see Section~\ref{sec2} for notation). Finally, we perform numerical experiments on compressed sensing models with different types of measurement noises taking the form of \eqref{eq1}. Our experiments on random instances illustrate the empirical acceleration of ESQM$_e$ over ESQM, and also suggest that ESQM$_e$ outperforms the natural competing algorithm SCP$_{\rm ls}$ from \cite{yu21}.
+In this paper, we study the convergence properties of ESQM$_e$ and perform numerical experiments to examine its computational efficiency. In particular, we show that the sequence generated by ESQM$_e$ clusters at a critical point if the extrapolation parameters are uniformly bounded above by a certain threshold, under a set of constraint qualifications similarly used in \cite{Ausleder13}. We also construct a suitable potential function and establish the convergence of the whole sequence and its convergence rate by assuming Kurdyka-{\L}ojasiewicz (KL) property of the potential function and additional differentiability conditions on $P_2$ and each $g_i$ in \eqref{eq1}. Furthermore, when $P_2 \equiv 0$ and each $g_i$ is convex, we show that linear convergence can also be established if a certain exact penalty function of \eqref{eq1} is known to be a KL function with exponent $\frac12$. We also discuss how the KL exponent of such an exact penalty function can be derived from that of the function $P+\delta_{C\cap \mathscr{F}}$ from \eqref{eq1} (see Section~\ref{sec2} for notation). Finally, we perform numerical experiments on compressed sensing models with different types of measurement noises taking the form of \eqref{eq1}. Our experiments on random instances illustrate the empirical acceleration of ESQM$_e$ over ESQM, and also suggest that ESQM$_e$ outperforms the natural competing algorithm SCP$_{\rm ls}$ from \cite{yu21}.
 
 The remainder of the paper is organized as follows. We present notation and preliminary materials in Section~\ref{sec2}. Our algorithm, ESQM$_e$ is presented in Section~\ref{sec3}, and its subsequential and sequential convergences are established in Section~\ref{sec41}. We discuss the convergence behavior in the convex setting (i.e., $P_2 \equiv 0$ and each $g_i$ is convex in \eqref{eq1}) in Section~\ref{sec42}, and the relationship between the KL exponent of the function $P+\delta_{C\cap \mathscr{F}}$ from \eqref{eq1} and that of the exact penalty function used in the analysis in Section~\ref{sec42} is studied in Section~\ref{sec5}. Numerical experiments are presented in Section~\ref{sec6}.
 
@@ -239,7 +239,7 @@ The normal cone of $D$ at $x\in D$ is defined by
 $\mathcal{N}_D(x) :=\partial \delta_D(x)$.
 Finally, the distance from a point $x$ to $D$ is denoted by $\d(x, D)$, and the convex hull of $D$ is denoted by $\conv D$.
 
-We next recall some important definitions that will be used in the sequel. We start by recalling the following constraint qualification for \eqref{eq1} (which was first introduced in \cite{Ausleder13}), and the (associated) first-order optimality conditions for \eqref{eq1}.
+We next recall some important definitions that will be used in the sequel. We start by recalling the following constraint qualification for \eqref{eq1} (which was also used in \cite{Ausleder13}), and the (associated) first-order optimality conditions for \eqref{eq1}.
 \begin{definition}[{{\bf RCQ}}]\label{RCQ}
 We say that the Robinson constraint qualification holds at $x\in\R^n$ for \eqref{eq1} if the following statement holds:
 $$ RCQ(x):~\exists y\in C \text{ such that } g_i(x) + \langle\nabla g_i(x), y-x\rangle < 0~~ \forall i = 1,2,\cdots m.$$
@@ -273,7 +273,7 @@ A proper closed function $f$ satisfying the KL property at every point in $\dom\
 
 Many functions are known to satisfy the KL property. For instance, proper closed semi-algebraic functions satisfy the KL property with some exponent $\alpha$; see \cite{bolte07_2}. The KL property plays an important role in the global convergence analysis of first order methods and the exponent is important in establishing convergence rates; see, for example, \cite{bolte14,attouch13,attouch10,li18}.
 
-Finally, before ending this section, we recall two technical lemmas. The first lemma concerns the uniformized KL property (see \cite[Section~3.5]{bolte14}) and was established in \cite[Lemma~3.10]{yu21}. The second lemma is a special case of Robinson \cite{Rob75} concerning error bounds for convex functions, which will be used in Section~\ref{sec5} for studying the KL property of a penalty function associated with \eqref{eq1}.
+Finally, before ending this section, we recall two technical lemmas. The first lemma concerns the uniformized KL property (see \cite[Section~3.5]{bolte14}) and is taken from \cite[Lemma~3.10]{yu21}. The second lemma is a special case of Robinson \cite{Rob75} concerning error bounds for convex functions, which will be used in Section~\ref{sec5} for studying the KL property of a penalty function associated with \eqref{eq1}.
 \begin{lemma}\label{KLinequ}
 Let $f:\R^n\rightarrow (-\infty,+\infty]$ be a level-bounded proper closed convex function with $\Lambda:= \Argmin f\not=\emptyset$. Let $\underline{f}:=\inf f$. Suppose that $f$ satisfies the KL property at each point in $\Lambda$ with exponent $\alpha\in[0,1)$. Then there exist $\epsilon >0$, $r_0>0$ and $c_0>0$ such that
 \[
@@ -300,15 +300,15 @@ Here and throughout, we denote a Lipschitz continuity modulus of $\nabla g_i^1$ 
 
 The algorithm we study in this paper is presented as Algorithm \ref{alg:Framwork} below; here and throughout, for notational simplicity, for each $u$, $w\in \R^n$, we define
 \begin{equation}\label{ling}
-\ling{0}{u}{w}\equiv 0 \ \ {\rm and}\ \ \ling{i}{u}{w} := g_i(w) + \langle\nabla g_i(w), u - w\rangle \ \ \ \forall i = 1,\ldots,m.
+\ling{i}{u}{w} := g_i(w) + \langle\nabla g_i(w), u - w\rangle \ \ \ \forall i = 1,\ldots,m, \ \ {\rm and}\ \ \ling{0}{u}{w}:= 0.
 \end{equation}
-We identify our algorithm as an extended sequential quadratic method with extrapolation (ESQM$_{\text{e}}$), where ``extrapolation" refers to the step \eqref{defyk}. This is because when $\beta_k \equiv 0$, our algorithm reduces to an instance of the ESQM proposed in \cite{Ausleder13}, whose convergence was established for solving \eqref{eq1} when the $P$ in \eqref{eq1} is in addition smooth with Lipschitz gradient.\footnote{More precisely, when the $P$ in \eqref{eq1} is smooth with Lipschitz gradient (say, with Lipschitz constant $L_P$) and $\beta_k \equiv 0$, our algorithm applied to \eqref{eq1} with $P_1(x) := \frac{L_P}2\|x\|^2$ and $P_2(x) := \frac{L_P}2\|x\|^2 - P(x)$ becomes an instance of the ESQM in \cite{Ausleder13}.} Notice that the subproblem in \eqref{eq2} has a unique solution as an optimization problem with an objective strongly convex in $x$ (and the optimal $s$ is uniquely determined) and a nonempty feasible set. While it requires an iterative solver in general, we refer the readers to \cite[Appendix~A]{zhang23} for an efficient routine for solving the subproblem in \eqref{eq2} when $m = 1$.
+We identify our algorithm as an extended sequential quadratic method with extrapolation (ESQM$_{\text{e}}$), where ``extrapolation" refers to step \eqref{defyk}. This is because when $\beta_k \equiv 0$, our algorithm reduces to an instance of the ESQM proposed in \cite{Ausleder13}, whose convergence was established for solving \eqref{eq1} when the $P$ in \eqref{eq1} is in addition smooth with Lipschitz gradient.\footnote{More precisely, when the $P$ in \eqref{eq1} is smooth with Lipschitz gradient (say, with Lipschitz constant $L_P$) and $\beta_k \equiv 0$, our algorithm applied to \eqref{eq1} with $P_1(x) := \frac{L_P}2\|x\|^2$ and $P_2(x) := \frac{L_P}2\|x\|^2 - P(x)$ becomes an instance of the ESQM in \cite{Ausleder13}.} Notice that the subproblem in \eqref{eq2} has a unique solution as an optimization problem with a nonempty closed convex feasible set and an objective strongly convex in $x$ (note that the optimal $s$ is clearly uniquely determined). While it requires an iterative solver in general, we refer the readers to \cite[Appendix~A]{zhang23} for an efficient routine for solving the subproblem in \eqref{eq2} with some specific $P_1$ when $m = 1$.
 \begin{algorithm}
 \caption{ESQM$_{\text{e}}$ for solving \eqref{eq1}}\label{alg:Framwork}
 \begin{algorithmic}
 \STATE
 \begin{description}
-  \item[\bf Step 0.] Choose $x^{-1}=x^0\in C$, $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}~\right)$ with $\bar\beta:= \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, $\theta_0>0$, $d>0$, where $L_g = \max\{L_{g_i}, ~ i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}, ~ i=1,\dots,m\}$ as in Remark~\ref{Remarkg}.
+  \item[\bf Step 0.] Choose $x^{-1}=x^0\in C$, $\theta_0>0$, $d>0$, and $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}~\right)$ with $\bar\beta:= \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, where $L_g = \max\{L_{g_i}, ~ i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}, ~ i=1,\dots,m\}$ as in Remark~\ref{Remarkg}.
   \item[\bf Step 1.] Set
     \begin{equation}\label{defyk}
       y^k = x^k + \beta_k(x^k - x^{k-1}).
@@ -367,7 +367,7 @@ We first show that the successive changes of the $\{x^k\}$ generated by ESQM$_{\
 Consider \eqref{eq1} and let $\{(x^k,y^k,s^k,\theta_k)\}$ be generated by Algorithm \ref{alg:Framwork}. Then the following statements hold:
 \begin{enumerate}[{\rm (i)}]
     \item The sequence $\{x^k\}$ belongs to $C$ and is bounded.
-    \item Let $\bar{m} = \inf\{P(x):x\in C\}$. Then $\bar m \in \R$ and for any $k\geq 1$,
+    \item Let $\bar{m} := \inf\{P(x):x\in C\}$. Then $\bar m \in \R$ and for any $k\geq 1$,
         $$
         Q(x^{k+1},x^{k},y^{k},\theta_{k+1}) \leq Q(x^k,x^{k-1},y^{k-1},\theta_k) - \left(1 - \frac{L_g + \ell_g}{L_g}\beta_k^2\right)\frac{L_g}{2}\| x^{k} - x^{k-1}\|^2,
         $$
@@ -456,7 +456,7 @@ For \eqref{eq1}, the $RCQ(x)$ holds at every $x\in C\cap \mathscr{F}$, and for e
 \begin{equation}\label{A11}
 u_i\geq 0 ~~ \forall i\in I(x), ~~ \sum_{i\in I(x)}u_i=1, ~~ \left\langle\sum_{i\in I(x)}u_i\nabla g_i(x), z - x\right\rangle\geq0 ~~\forall z\in C,
 \end{equation}
-where $I(x) := \Big\{ s\in\{1, 2, \dots, m\}: g_s(x) = \max_{i = 1, 2, \dots, m} \{ g_i(x), 0\} \Big\}$.\footnote{From the definition of $I_k(\cdot)$ in \eqref{defiIk}, one can see that the difference between $I_k(\cdot)$ and $I(\cdot)$ is that $I_k(\cdot)\subseteq\{0, 1,\cdots,m\}$, while $I(\cdot)\subseteq\{1,\cdots,m\}$. We would also like to point out that while our definition of $I(x)$ seems to look slightly different from the corresponding definition, namely $T(x)$, in \cite{Ausleder13} (see the discussions before \cite[Eq.~(6)]{Ausleder13}), one can check that Assumption~\ref{A1} above is equivalent to \cite[Assumption~(A1)]{Ausleder13}.}
+where $I(x) := \Big\{ s\in\{1, 2, \dots, m\}: g_s(x) = \max_{i = 1, 2, \dots, m} [g_i(x)]_+ \Big\}$.\footnote{From the definition of $I_k(\cdot)$ in \eqref{defiIk}, one can see that the difference between $I_k(\cdot)$ and $I(\cdot)$ is that $I_k(\cdot)\subseteq\{0, 1,\cdots,m\}$, while $I(\cdot)\subseteq\{1,\cdots,m\}$. We would also like to point out that while our definition of $I(x)$ seems to look slightly different from the corresponding definition, namely $T(x)$, in \cite{Ausleder13} (see the discussions before \cite[Eq.~(6)]{Ausleder13}), one can check that the two definitions are equivalent.}
 \end{assumption}
 \begin{remark}\label{remarkRCQ}
 \begin{enumerate}[{\rm (i)}]
@@ -495,7 +495,7 @@ In addition, from Lemma~\ref{subproremarks}(iii), we have that for each $k_j$, t
 \end{align}
 Now, since the sequences $\{x^k\}\subseteq C$ and $\{\lambda_i^{k_j}: i \in I_0\}$ are bounded, by passing to a further subsequence if necessary, we assume that $\lim_{j \to \infty} x^{k_j} = x^{*}$ for some $x^*$ and that for each $i\in I_0$, $\lim_{j \to \infty}\lambda_i^{k_j}= \bar{\lambda}_i$ for some $\bar \lambda_i$. Then $x^*\in C$, $\bar{\lambda}_i \ge 0$ (for each $i\in I_0$), $\sum_{i\in I_0} \bar{\lambda}_i = 1$ and $I_0 \subseteq \left\{i \in\{0,1,\cdots,m\}: g_i(x^*) = \max_{i=0,1,\cdots,m} g_i(x^*)\right\}$ (thanks to \eqref{eq10}, \eqref{ling} and Theorem~\ref{suffdec}(iii)). Since $0\notin I_0$, we see that
 \[
-I_0 \subseteq I(x^*) =\left\{i \in\{1,2,\cdots,m\}: g_i(x^*) = \max_{i=1,\cdots,m} \{g_i(x^*), 0\}\right\},
+I_0 \subseteq I(x^*) =\left\{i \in\{1,2,\cdots,m\}: g_i(x^*) = \max_{i=1,\cdots,m} [g_i(x^*)]_+\right\},
 \]
 where $I(x)$ was defined in Assumption~\ref{A1}.
 Passing to the limit in \eqref{eq11}, and noting that $\lim_{j \to \infty} \theta_{k_j}^{-1} = 0$, $\lim_{k \to \infty}\| x^{k+1} - y^{k} \|=\lim_{k \to \infty}\| x^{k+1} - x^{k} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)) and the fact that $\{\partial P_1(x^{k_j+1})\}$ and $\{\xi^{k_j}\}$ are uniformly bounded (thanks to the real-valuedness and convexity of $P_1$, $P_2$, the compactness of $C$ and \cite[Theorem~24.7]{Ro70}), we have upon invoking the closedness of $x\rightrightarrows {\cal N}_C(x)$ that
@@ -510,7 +510,7 @@ Therefore, if $|A| = \infty$, then it must hold that for each $i$, there exists 
 \[
 g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.
 \]
-Let $N_0 =  \max_{i = 1, \dots, m} n_i$. Then for all $i\in\{1, 2, \dots, m\}$ and for any $k\ge N_0$, we have
+Let $N_0 :=  \max_{i = 1, \dots, m} n_i$. Then for all $i\in\{1, 2, \dots, m\}$ and for any $k\ge N_0$, we have
 \[
 g_i(y^k) + \langle \nabla g_i(y^k),x^{k+1} - y^k \rangle\leq 0.
 \]
@@ -541,7 +541,7 @@ In addition, in view of \eqref{eq2}, we obtain that for each $j$,
 g_i(y^{k_j}) + \langle\nabla g_i(y^{k_j}), x^{{k_j}+1} - y^{k_j} \rangle \leq s^{{k_j}+1} ~~~~ \forall i =1,\dots,m.
 \end{equation}
 
-Now, note that $\lim_{k\to \infty} \| x^{k} - x^{k-1} \|=\lim_{k\to \infty} \| x^{k+1} - y^{k} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)), $s^{k_j+1} = 0$ and $\theta_{k_j} \equiv \theta_{N_0}$, for any $k_j\geq N_0$ (thanks to Theorem~\ref{alpha}). Passing to the limit in \eqref{giineq} and \eqref{inclusion}, we see that
+Now, note that $\lim_{k\to \infty} \| x^{k} - x^{k-1} \|=\lim_{k\to \infty} \| x^{k+1} - y^{k} \|=0$ (thanks to Theorem~\ref{suffdec}(iii)), $s^{k_j+1} = 0$ and $\theta_{k_j} \equiv \theta_{N_0}$ whenever $k_j\geq N_0$ (thanks to Theorem~\ref{alpha}). Passing to the limit in \eqref{giineq} and \eqref{inclusion}, we see that
 \begin{equation}\label{critical1}
 g_i(\bar{x})\le 0 ~~ \forall i=1,\dots,m,\ \ \sum_{i\in I_0}\bar \lambda_i = 1,\ \ \ \bar\lambda_i \ge 0 \ \ \forall i\in I_0,
 \end{equation}
@@ -561,7 +561,7 @@ Finally, let $\hat{\lambda}_i := \theta_{N_0}\bar{\lambda}_i\geq 0$ for all $i\i
 \end{equation}
 Indeed, for each $i\in I_0$, we have that $g_i(\bar{x}) = 0$, and for each $i\notin I_0$, we have that $\hat{\lambda}_i = 0$.
 
-Notice that $\nabla g_0 (\bar{x}) = 0$ (thanks to $g_0 \equiv 0$), using the definition of $\hat{\lambda}_i$ and \eqref{critical3}, we have
+Notice that $\nabla g_0 (\bar{x}) = 0$ (thanks to $g_0 \equiv 0$). Using the definition of $\hat{\lambda}_i$ and \eqref{critical3}, we have
 \begin{equation}\label{critical33}
 \begin{aligned}
 0&\in \partial P_1(\bar{x}) - \partial P_2(\bar{x}) + \sum_{i=1}^m \hat{\lambda}_i\nabla g_i(\bar{x}) + \mathcal{N}_C(\bar{x}).
@@ -577,7 +577,7 @@ We next derive the global convergence property of the $\{x^k\}$ generated by Alg
 \begin{equation}\label{defH}
 H(x,y,z) := \frac{P(x) - \bar{m}}{\hat{\theta}} + \delta_{C}(x) + \max_i[\ling{i}{x}{z}]_+ + \frac{L_g}{2}\| x-y \|^2 + \frac{L_g}{2}\| x - z \|^2,
 \end{equation}
-where $\bar{m}$ is defined in Theorem~\ref{suffdec}(ii), and $\hat{\theta}:= \theta_{N_0}$ with $N_0$ defined in Theorem~\ref{alpha}. Our analysis follows the nowadays standard convergence arguments based on Kurdyka-{\L}ojasiewicz property; see, for example, \cite{attouch10,attouch13,bolte14}. In essence, under Assumption~\ref{A1}, we will show that $H$ has sufficient descent along the sequence $\{(x^{k+1},x^{k},y^k)\}$ for all sufficiently large $k$, and $H$ is constant on the set of accumulation points of $\{(x^{k+1},x^{k},y^k)\}$. We will also show that $ \d(0,\partial H(x^{k+1},x^{k},y^k))$ is suitably bounded by successive changes of the iterates by imposing additional differentiability assumptions on $g$ and $P_2$. These together with the assumption that $H$ satisfies the KL property will be used to establish global convergence of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork}.
+where $\bar{m}$ is defined in Theorem~\ref{suffdec}(ii), and $\hat{\theta}:= \theta_{N_0}$ with $N_0$ defined in Theorem~\ref{alpha}. Our analysis follows the nowadays standard convergence arguments based on Kurdyka-{\L}ojasiewicz property; see, for example, \cite{attouch10,attouch13,bolte14}. In essence, under Assumption~\ref{A1}, we will show that $H$ has sufficient descent along the sequence $\{(x^{k+1},x^{k},y^k)\}$ for all sufficiently large $k$, and $H$ is constant on the set of accumulation points of $\{(x^{k+1},x^{k},y^k)\}$. We will also show that $ \d(0,\partial H(x^{k+1},x^{k},y^k))$ is suitably bounded by successive changes of the iterates by imposing additional differentiability assumptions on each $g_i$ and $P_2$. These together with the assumption that $H$ satisfies the KL property will be used to establish global convergence of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork}.
 
 We start with a remark concerning the sufficient descent property.
 \begin{remark}[Sufficient descent]\label{rebarh}
@@ -629,28 +629,30 @@ Let $\varLambda$ be the set of accumulation points of $\{x^k\}$. Then $\varLambd
 Next, let $N_0$ be defined as in Theorem \ref{alpha}. Since $P_2$ is continuously differentiable on $U_0$ and $x^k\in U_0$ for any $k\geq N_1 := \max\{N_0,N_2\}$, we obtain from \cite[Theorem~8.6]{rock97a} that for any $k \ge N_1$,
 \begin{align}\label{eq16}
 &\!\!\!\!\!\!\!\!\!\!~~~\partial H(x^{k+1},x^{k},y^{k})\supseteq \widehat{\partial} H(x^{k+1},x^{k},y^{k})\notag \\
-&\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(a)}\supseteq\!\!\!
-\left[\!
-\begin{array}{c}
-\Xi_k    \\ [2 pt]
- - L_g(x^{k+1} - x^{k}) \\ [2 pt]
- \conv\!_{i\in I_k(x^{k+1})}\{\nabla^2 g_i(y^{k})(x^{k+1} - y^{k})\} - L_g(x^{k+1}-y^{k})
-\end{array}\!
-\right]\\
-&\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(b)}{\supseteq}\!\!\!
+&\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(a)}\supseteq\begin{bmatrix}
+  \frac{1}{\hat{\theta}}\widehat\partial P(x^{k+1}) + \mathcal{N}_C(x^{k+1}) + L_g(x^{k+1}- x^k) + L_g(x^{k+1}- y^k)\\
+  - L_g(x^{k+1} - x^{k})\\
+   - L_g(x^{k+1}-y^{k})
+\end{bmatrix} + \widehat\partial \Xi (x^{k+1},x^k,y^k)\notag\\
+&\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(b)}=\begin{bmatrix}
+  \frac{1}{\hat{\theta}}\partial P(x^{k+1})+ \mathcal{N}_C(x^{k+1}) + L_g(x^{k+1}- x^k) + L_g(x^{k+1}- y^k)\\
+  - L_g(x^{k+1} - x^{k})\\
+   - L_g(x^{k+1}-y^{k})
+\end{bmatrix} + \widehat\partial \Xi (x^{k+1},x^k,y^k)\notag\\
+&\!\!\!\!\!\!\!\!\!\!~~\overset{\rm(c)}{\supseteq}\!\!\!
 \left[
 \begin{array}{c}
 \!\frac{1}{\hat{\theta}}\partial P(x^{k+1}) \!+ \!\!\!\!\sum\limits_{i\in I_k(x^{k+1})}\!\!\! \lambda_i^k \nabla g_i(y^k) \!+\! \mathcal{N}_C(x^{k+1}) \!+\! L_g(x^{k+1} \!-\! x^k) \!+\! L_g(x^{k+1} \!-\! y^k)    \\
  - L_g(x^{k+1} - x^{k}) \\ [5 pt]
 \sum_{i\in I_k(x^{k+1})} \lambda_i^k\nabla^2 g_i(y^{k})(x^{k+1} - y^{k}) - L_g(x^{k+1}-y^{k})
 \end{array}\!
-\right]\!\!,\!\!\!\!\notag
+\right]\!\!,\!\!\!\!
 \end{align}
-where $I_k(x^{k+1})$ and $\lambda_i^k$ are defined as in Lemma~\ref{subproremarks}(iii) and
-\[
-\Xi_k \!\!:=\! \frac{1}{\hat{\theta}}\partial P(x^{k+1}) + \conv\!_{i\in I_k(x^{k+1})}\{\nabla g_i(y^k)\} + \mathcal{N}_C(x^{k+1}) + L_g(x^{k+1} - x^k) + L_g(x^{k+1} - y^k),
-\]
-and (a) holds because of the subdifferential calculus rules in \cite[Exercise~8.8(c), Exercise~8.31, Corollary~10.9]{rock97a} and the regularity of the closed convex convex set $C$ and the convex function $P_1$ (thanks to \cite[Proposition~8.12]{rock97a}), and (b) holds as $\sum_{i\in I_k(x^{k+1})} \lambda_i^k = 1$ and $\lambda_i^k\ge 0$ for all $i\in I_k(x^{k+1})$.
+where $\Xi(x,y,z) := \max_i[\ling{i}{x}{z}]_+$, and $I_k(x^{k+1})$ and $\lambda_i^k$ are defined as in Lemma~\ref{subproremarks}(iii);
+%\[
+%\Xi_k \!\!:=\! \frac{1}{\hat{\theta}}\partial P(x^{k+1}) + \conv\!_{i\in I_k(x^{k+1})}\{\nabla g_i(y^k)\} + \mathcal{N}_C(x^{k+1}) + L_g(x^{k+1} - x^k) + L_g(x^{k+1} - y^k),
+%\]
+here, (a) holds because of the subdifferential calculus rules in \cite[Proposition~10.5, Corollary~10.9]{rock97a} and the regularity of the normal cone of $C$ in \cite[Proposition~6.17]{rock97a}, (b) holds upon invoking \cite[Exercise~8.8(c)]{rock97a}, the regularity of $P_1$ (thanks to \cite[Proposition~8.12]{rock97a}) and the fact that $P_2$ is continuously differentiable at $x^{k+1}$, and (c) follows from \cite[Proposition~10.5, Exercise~8.31]{rock97a} and the fact that $\sum_{i\in I_k(x^{k+1})} \lambda_i^k = 1$ and $\lambda_i^k\ge 0$ for all $i\in I_k(x^{k+1})$.
 
 On the other hand, according to Theorem \ref{alpha} and the definition of $\hat\theta$ in \eqref{defH}, we have that $\theta_k \equiv \theta_{N_0} = \hat \theta$ for any $k\ge N_0$. Using this together with the property of $\lambda^k_i$ from Lemma~\ref{subproremarks}(iii) and the differentiability assumption of $P_2$, we obtain that for all $k \ge N_0$,
 \begin{align*}
@@ -703,8 +705,8 @@ The desired conclusion now follows immediately from the above display, the defin
 \end{proof}
 
 Now, we present the convergence rate of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} under suitable assumptions. The proof is routine and we refer the readers to, for example, the proofs of Theorems 4.2 and 4.3 of \cite{wen18}.
-\begin{theorem}[Convergence rate of Algorithm \ref{alg:Framwork} in nonconvex setting]\label{th2.2}
-Consider \eqref{eq1}. Suppose that Assumptions~\ref{A1} and \ref{A2} hold, and $H$ in \eqref{defH} is a KL function. Let $\{(x^k, y^k)\}$ be generated by Algorithm~\ref{alg:Framwork} and $\Omega$ be the set of accumulation points of $\left\{(x^{k+1},x^{k},y^{k})\right\}$. Then $\{x^k\}$ converges to a critical point $\bar{x}$ of \eqref{eq1}. Moreover, if $H$ satisfies the KL property with exponent $\alpha\in [0,1)$ at every point in $\Omega$, then there exists $\underline{N}\in \mathbb{N}$ such that the following statements hold.
+\begin{theorem}[Global convergence and convergence rate of Algorithm \ref{alg:Framwork} in nonconvex setting]\label{th2.2}
+Consider \eqref{eq1}. Suppose that Assumptions~\ref{A1} and \ref{A2} hold, and the $H$ in \eqref{defH} is a KL function. Let $\{(x^k, y^k)\}$ be generated by Algorithm~\ref{alg:Framwork} and $\Omega$ be the set of accumulation points of $\left\{(x^{k+1},x^{k},y^{k})\right\}$. Then $\{x^k\}$ converges to a critical point $\bar{x}$ of \eqref{eq1}. Moreover, if $H$ satisfies the KL property with exponent $\alpha\in [0,1)$ at every point in $\Omega$, then there exists $\underline{N}\in \mathbb{N}$ such that the following statements hold.
 \begin{enumerate}[{\rm (i)}]
     \item If $\alpha=0$, then $\{x^k\}$ converges finitely.
     \item If $\alpha\in (0,\frac{1}{2}]$, then there exist $a_0\in(0, 1)$ and $a_1>0$ such that \[
@@ -722,7 +724,7 @@ Consider \eqref{eq1}. Suppose that Assumptions~\ref{A1} and \ref{A2} hold, and $
 We study the convergence properties of Algorithm \ref{alg:Framwork} under the following convex settings.
 
 \begin{assumption}\label{B1}
-Suppose that in \eqref{eq1}, $P_2 = 0$ and $g_1,\ldots, g_m$ are convex.
+Suppose that in \eqref{eq1}, $P_2 = 0$ and $g_1,\ldots, g_m$ are convex.\footnote{Under this assumption, we also set $\ell_{g_i}\equiv 0$ in Algorithm~\ref{alg:Framwork}.}
 \end{assumption}
 
 \begin{assumption}\label{B2}
@@ -736,18 +738,18 @@ Now, we present the convergence properties of Algorithm \ref{alg:Framwork} under
 \begin{equation}\label{definfalpha}
 F_{\eta}(x) := \frac{1}{\eta}(P_1(x) - \hat m) + \delta_C(x) + \max_{i = 1,\cdots,m}\left[g_i(x)\right]_+,
 \end{equation}
-where $\eta > 0$ and $\hat{m} = \inf\{P_1(x): x\in C\}\in \R$. Compared with $H$, the explicit KL exponent of $F_{\eta}$ is more readily obtainable, as we will discuss in Section~\ref{sec5}. Our $F_{\eta}$-based analysis, however, will require an additional assumption concerning the set of minimizers of $F_{\hat\theta}$, where $\hat\theta$ is defined in \eqref{defH}. The next lemma recalls a well-known fact and serves to motivate such an assumption.
+where $\eta > 0$ and $\hat{m} := \inf\{P_1(x): x\in C\}\in \R$. Compared with $H$, the explicit KL exponent of $F_{\eta}$ is more readily obtainable, as we will discuss in Section~\ref{sec5}. Our $F_{\eta}$-based analysis, however, will require an additional assumption concerning the set of minimizers of $F_{\hat\theta}$, where $\hat\theta$ is defined in \eqref{defH}. The next lemma recalls a well-known fact and serves to motivate such an assumption.
 \begin{lemma}\label{lem43}
   Consider \eqref{eq1}. Suppose that Assumption~\ref{B1} holds and let $F_\eta$ be defined in \eqref{definfalpha}. If
-  $\bar\eta > 0$ is such that $\Argmin F_{\bar\eta}\cap \Argmin_{x\in\cal G}P_1(x)\neq \emptyset$, then $\Argmin F_{\eta} = \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x)$ whenever $\eta > \bar\eta$.
+  $\bar\eta > 0$ is such that $\Argmin F_{\bar\eta}\cap \Argmin_{x\in{C\cap \mathscr{F}}}P_1(x)\neq \emptyset$, then $\Argmin F_{\eta} = \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x)$ whenever $\eta > \bar\eta$.
 %  \begin{equation}\label{set3}
 %\emptyset\not=\Lambda\subseteq \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x) = \Argmin F_{\hat\theta} \cap \mathscr{F} = \Argmin F_{{\hat\theta}+\iota},
 %\end{equation}
 %for any $\iota > 0$.
 \end{lemma}
 \begin{proof}
-Fix any $\eta > \bar\eta$ and let $\hat x \in \Argmin F_{\bar\eta}\cap \Argmin_{x\in\cal G}P_1(x)$.
-We first argue that $\Argmin_{x\in\cal G}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$. Indeed, if $\tilde x\in \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x)$, then $\tilde x \in {C\cap \mathscr{F}}\subseteq \mathscr{F}$ and hence $\max_{i=1,\ldots,m}[g_i(\tilde x)]_+ = 0$. Moreover, it holds that
+Fix any $\eta > \bar\eta$ and let $\hat x \in \Argmin F_{\bar\eta}\cap \Argmin_{x\in{C\cap \mathscr{F}}}P_1(x)$.
+We first argue that $\Argmin_{x\in{C\cap \mathscr{F}}}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$. Indeed, if $\tilde x\in \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x)$, then $\tilde x \in {C\cap \mathscr{F}}\subseteq \mathscr{F}$ and hence $\max_{i=1,\ldots,m}[g_i(\tilde x)]_+ = 0$. Moreover, it holds that
 \begin{align*}
 \eta F_{\eta}(\tilde x) = P_1(\tilde x)- \hat m\overset{\rm (a)}= P_1(\hat x)- \hat m = \bar\eta F_{\bar\eta}(\hat x)\overset{\rm (b)}\le \bar\eta F_{\bar\eta}(x)\overset{\rm (c)}\le \eta F_{\eta}(x)
 \end{align*}
@@ -755,7 +757,7 @@ for any $x\in C$, where (a) holds because both $\hat x$ and $\tilde x$ minimizes
 \[
 P_1(\tilde x)- \hat m = {\eta} F_{{\eta}}(\tilde x)\le {\eta} F_{{\eta}}(x) = P_1(x)- \hat m,
 \]
-where the equalities hold because $u\in \mathscr{F}$ implies $\max_{i=1,\ldots,m}[g_i(u)]_+=0$. The above arguments establish $\Argmin_{x\in\cal G}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$.
+where the equalities hold because $u\in \mathscr{F}$ implies $\max_{i=1,\ldots,m}[g_i(u)]_+=0$. The above arguments establish $\Argmin_{x\in{C\cap \mathscr{F}}}P_1(x) = \Argmin F_{\eta}\cap \mathscr{F}$.
 
 To complete the proof, it now suffices to show that $\Argmin F_{\eta}\subseteq \mathscr{F}$. To this end, let $\tilde x \in \Argmin F_{\eta}$. Then we have
 \begin{align*}
@@ -773,7 +775,7 @@ Consider \eqref{eq1} and suppose that Assumptions~\ref{B1} and \ref{B2} hold. Le
           \[
           E(x^{k+1},x^{k},\theta_{k+1}) \leq E(x^k,x^{k-1},\theta_k) - \frac{(1 - \beta_k^2)L_g}{2}\|x^{k} - x^{k-1}\|^2,
           \]
-          where $E(x,y,\theta):=\frac{1}{\theta}\big(P_1(x) - \hat{m} + \delta_C(x) + \theta\max_{i = 1,\cdots,m}[g_i(x)]_+ + \frac{\theta L_g}{2}\| x - y \|^2\big)$, $\hat m$ is defined as in \eqref{definfalpha} and $L_g$ is defined in Remark~\ref{Remarkg}.
+          where $E(x,y,\theta):=\frac{1}{\theta}\big(P_1(x) - \hat{m} + \delta_C(x) + \theta\max_{i = 1,\cdots,m}[g_i(x)]_+ + \frac{\theta L_g}{2}\| x - y \|^2\big)$ with $\hat m$ defined as in \eqref{definfalpha}.
     \item Let $\Omega$ be the set of accumulation points of $\left\{(x^{k+1},x^{k},\theta_k)\right\}$. Then $\Omega$ is a nonempty compact set, $\bar{\omega} := \lim_{k\to \infty} E(x^{k+1},x^{k}, \theta_k)$ exists, and $E \equiv \bar{\omega}$ on $\Omega$.
     \item If the function\footnote{i.e., the $F_\eta$ in \eqref{definfalpha} with $\eta = \hat \theta$, where $\hat\theta$ is given in \eqref{defH}.} $F_{\hat\theta}$ is a KL function with exponent $\frac{1}{2}$ and it holds that
     \begin{equation}\label{assumptionunhappy}
@@ -788,7 +790,7 @@ Consider \eqref{eq1} and suppose that Assumptions~\ref{B1} and \ref{B2} hold. Le
 \begin{remark}[Comments on \eqref{assumptionunhappy}]
 Consider \eqref{eq1} and suppose that Assumptions~\ref{B1} and \ref{B2} hold. Let $\{(x^k,\theta_k)\}$ be generated by Algorithm \ref{alg:Framwork}. Using Theorem~\ref{subconver} (see also Remark~\ref{rem43}) and the formula for the subdifferential of $\max_{i=1,\ldots,m}[g_i(\cdot)]_+$, we deduce from the definition of $F_\eta$ in \eqref{definfalpha} that
 \begin{equation}\label{conditionunhappy}
-\emptyset\neq \Lambda\subseteq \Argmin F_{\hat\theta} \cap \Argmin_{x\in\cal G}P_1(x).
+\emptyset\neq \Lambda\subseteq \Argmin F_{\hat\theta} \cap \Argmin_{x\in{C\cap \mathscr{F}}}P_1(x).
 \end{equation}
 where ${C\cap \mathscr{F}}$ is the feasible set of \eqref{eq1} and $\Lambda$ is the set of accumulation points of $\{x^k\}$. Consequently, Lemma~\ref{lem43} implies that $\Argmin F_{\eta} = \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x)$ whenever $\eta > \hat\theta$. In this regard, the assumption \eqref{assumptionunhappy} can be seen as a slightly stronger requirement where we require the equality of the two sets to hold when $\eta = \hat\theta$ as well. See Remark~\ref{rem52} below for further comments on \eqref{assumptionunhappy} based on the notion of exact penalty parameters in Definition~\ref{Exact}.
 \end{remark}
@@ -814,11 +816,11 @@ Now we are ready to prove the three items one by one.
 &= \frac{1}{\theta_k}\!\left(\!P_1(x^{k}) - \hat{m} + \theta_k\max_{i = 1,\cdots,m}\left[g_i(x^k)\right]_+\!\right)\! +\! \frac{\beta_k^2 L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2\\
 &= E(x^{k},x^{k-1},\theta_k) - \frac{(1 - \beta_k^2)L_g}{2}\|x^k - x^{k-1}\|^2 - \frac{L_g}{2}\| x^{k+1} - x^k \|^2,
 \end{align*}
-where (a) holds thanks to $\theta_k \leq\theta_{k+1}$ and $\hat{m} = \inf\{P_1(x): x\in C\}$, (b) holds because of the Lipschitz continuity of $\nabla g_i$, (c) follows from $L_g = \max\{L_{g_i}:\; i=1,\dots,m\}$, (d) holds thanks to \eqref{stongconve} with $x=x^k$ (as $x^k\in C$), (e) follows from the convexity of $g_i$, and the last equality follows from the definition of $E(x^{k},x^{k-1},\theta_{k})$. The desired inequality now follows immediately from the above display and the definition of $E(x^{k+1},x^{k},\theta_{k+1})$.
+where (a) holds thanks to $\theta_k \leq\theta_{k+1}$ and $\hat{m} = \inf\{P_1(x): x\in C\}$, (b) holds because of the Lipschitz continuity of $\nabla g_i$, (c) follows from $L_g = \max\{L_{g_i}:\; i=1,\dots,m\}$, (d) holds upon invoking \eqref{stongconve} with $x=x^k$ (as $x^k\in C$), (e) follows from the convexity of $g_i$, and the last equality follows from the definition of $E(x^{k},x^{k-1},\theta_{k})$. The desired inequality now follows immediately from the above display and the definition of $E(x^{k+1},x^{k},\theta_{k+1})$.
 
 (ii): Using similar arguments as Lemma~\ref{lemma1} (but using item (i) in place of Remark~\ref{rebarh}, and noting that Assumption~\ref{A1} holds according to Remark~\ref{rem43}), one can show that (ii) holds. We omit its proof for brevity.
 
-(iii): Let $\Lambda$ be the set of accumulation points of $\{x^k\}$ for notational simplicity. Using Theorem~\ref{subconver} and the assumption \eqref{assumptionunhappy}, we conclude that
+(iii): Let $\Lambda$ be the set of accumulation points of $\{x^k\}$ for notational simplicity. From Remark~\ref{rem43}, Theorem~\ref{subconver} and the assumption \eqref{assumptionunhappy}, we conclude that
 \begin{equation}\label{set}
 \emptyset\not=\Lambda\subseteq \Argmin_{x\in {C\cap \mathscr{F}}}P_1(x) = \Argmin F_{\hat{\theta}} =: S.
 \end{equation}
@@ -966,15 +968,15 @@ where (a) holds with $c_2 := \left(1 - \mu^{-1}\right)^{-k_4}\left(E_{\hat{\thet
 
 Finally, we obtain that for any $k\geq k_4$,
 \begin{align*}
-\|x^{k+1} - x^k\|^2 & \overset{\rm(a)}\leq \frac{2}{L_g(1 - \bar{\beta})}\left(E_{\hat{\theta}}(x^{k+1}, x^k) - E_{\hat{\theta}}(x^{k+2}, x^{k+1})\right)\\
-&\overset{\rm(b)}\leq\frac{2}{L_g(1 - \bar{\beta})} \left(E_{\hat{\theta}}(x^{k+1}, x^{k}) - \bar\omega\right)\overset{\rm(c)}\leq \frac{2c_2}{L_g(1 - \bar{\beta})}\left(1 - \mu^{-1}\right)^{k+1},
+\|x^{k+1} - x^k\|^2 & \overset{\rm(a)}\leq \frac{2}{L_g(1 - \bar{\beta}^2)}\left(E_{\hat{\theta}}(x^{k+1}, x^k) - E_{\hat{\theta}}(x^{k+2}, x^{k+1})\right)\\
+&\overset{\rm(b)}\leq\frac{2}{L_g(1 - \bar{\beta}^2)} \left(E_{\hat{\theta}}(x^{k+1}, x^{k}) - \bar\omega\right)\overset{\rm(c)}\leq \frac{2c_2}{L_g(1 - \bar{\beta}^2)}\left(1 - \mu^{-1}\right)^{k+1},
 \end{align*}
 where (a) holds because of \eqref{upperK}, (b) follows from $E_{\hat{\theta}}(x^{k+1}, x^k) \geq \bar\omega$ (see \eqref{valueomega}), and (c) holds because of \eqref{inductE}.
 Consequently, for any $j\ge k\geq k_4$,
 \begin{align}\label{bound}
-\sum_{i = k}^{j}\|x^{i+1} - x^i\|&\leq \sum_{i = k}^{\infty} \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\left(\sqrt{1 - \mu^{-1}}\right)^{i+1}= c_3 \left(\sqrt{1 - \mu^{-1}}\right)^{k+1},
+\sum_{i = k}^{j}\|x^{i+1} - x^i\|&\leq \sum_{i = k}^{\infty} \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta}^2)}}\left(\sqrt{1 - \mu^{-1}}\right)^{i+1}= c_3 \left(\sqrt{1 - \mu^{-1}}\right)^{k+1},
 \end{align}
-with $c_3 := \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta})}}\cdot\frac{1}{1 - \sqrt{1 - \mu^{-1}}} > 0$,
+with $c_3 := \sqrt{\frac{2c_2}{L_g(1 - \bar{\beta}^2)}}\cdot\frac{1}{1 - \sqrt{1 - \mu^{-1}}} > 0$,
 which implies that $\{x^k\}$ is a Cauchy sequence. Combining this with Remark~\ref{rem43} and Theorem~\ref{subconver}, we see that $\{x^k\}$ converges to a minimizer $x^*$ of \eqref{eq1}. The claimed linear rate of convergence also follows immediately from \eqref{bound}.
 \end{proof}
 
@@ -1024,6 +1026,7 @@ Since $C$ is compact, we deduce further that there exists $M_1> 0 $ such that
 The desired conclusion now follows upon combining \eqref{eb1} and \eqref{upperxF}.
 \end{proof}
 \begin{remark}[Nonemptiness of the set of exact penalty parameters]\label{rem51}
+Consider \eqref{KLproblem} and \eqref{Feta}.
 Since $C\cap {\cal F}$ is compact and $P_1$ is continuous, we see that $\Argmin \hat F\neq \emptyset$. Using this together with \eqref{eb2}, we can now deduce from \cite[Lemma~3.1]{ChenLuPong16} that any $\eta > \bar L_{P_1}\tau$ is an exact penalty parameter of \eqref{KLproblem}, where $\bar L_{P_1}$ is a Lipschitz continuity modulus for $P_1$ on the compact convex set $C$.
 \end{remark}
 
@@ -1037,9 +1040,9 @@ Let $\hat F$ be as in \eqref{KLproblem}, $\bar{x}\in\Argmin \hat F$ and $\bar{\e
 \begin{proof}
 Fix any $\eta > \bar\eta$. Since $\bar{\eta}$ is an exact penalty parameter of \eqref{KLproblem}, we see that $\Argmin \hat F = \Argmin \hat F_{\eta}$; also, note that $\dom\partial \hat F_{\eta} = C$.
 
-Since $\hat F$ satisfies the KL property with exponent $\alpha$ at $\bar{x}$ and $C$ is compact, there exist $c>0$ and $a$, $\epsilon\in (0,1)$ such that
+Since $\hat F$ satisfies the KL property with exponent $\alpha$ at $\bar{x}$, in view of \cite[Theorem~5]{bolte17}, there exist $c>0$ and $a$, $\epsilon\in (0,1)$ such that
 \begin{equation}\label{FKL}
-\d(x, \Argmin \hat F) \leq c(\hat F(x) - \hat F(\bar{x}))^{\alpha},
+\d(x, \Argmin \hat F) \leq c(\hat F(x) - \hat F(\bar{x}))^{1-\alpha},
 \end{equation}
 whenever $ x\in\dom \partial \hat F = C\cap \mathcal{F}$ satisfies $\|x - \bar{x}\|\leq \epsilon$ %$\d(x, \Argmin F)\leq\epsilon$
 and $\hat F(\bar{x}) \leq \hat F(x) \leq \hat F(\bar{x}) + a$. Since $\hat F$ is continuous on its domain, by shrinking $\epsilon$ further if necessary, we assume that \eqref{FKL} holds whenever $ x\in\dom \partial \hat F = C\cap \mathcal{F}$ satisfies $\|x - \bar{x}\|\leq \epsilon$.
@@ -1053,26 +1056,26 @@ Now, take $\epsilon_0 := \min\{\epsilon, \bar{\epsilon}\}$. Then for any $x\in C
 \begin{align}\label{distFeta}
 &\d(x, \Argmin \hat F_{\eta})\leq \d(\Pi_{C\cap \mathcal{F}} (x), \Argmin \hat F_{\eta}) + \d(x, C\cap \mathcal{F}) \notag\\
 &\overset{\rm(a)} = \d(\Pi_{C\cap \mathcal{F}} (x), \Argmin F) + \d(x, C\cap \mathcal{F}) \notag\\
-&\overset{\rm(b)}\leq c(\hat F(\Pi_{C\cap \mathcal{F}} (x)) - \hat F(\bar{x}))^{\alpha} \!+\! \kappa\d(x, \mathcal{F}) = c(P_1(\Pi_{C\cap \mathcal{F}} (x)) - P_1(\bar{x}))^{\alpha} \!+\! \kappa\d(x, \mathcal{F}) \notag\\
-&\overset{\rm(c)}\leq c(P_1(x) - P_1(\bar{x}) + \hat L_{P_1}\d(x, C\cap \mathcal{F}))^{\alpha} + \kappa\d(x, \mathcal{F}) \notag\\
-&\overset{\rm(d)}\leq c(P_1(x) - P_1(\bar{x}) + \hat L_{P_1}\kappa\d(x, \mathcal{F}))^{\alpha} + \kappa\d(x, \mathcal{F})^{\alpha} \notag\\
-& \overset{\rm (e)}\le\hat c \big[(P_1(x) - P_1(\bar{x}) + \hat L_{P_1}\kappa\d(x, \mathcal{F}))^{\alpha} + [\kappa^{1/\alpha}\d(x, \mathcal{F})]^{\alpha} \big]\notag\\
-&\overset{\rm(f)}\leq \bar{c}(P_1(x) \!-\! P_1(\bar{x}) + \kappa_1\d(x, \mathcal{F}))^{\alpha}
-\!\overset{\rm(g)}\leq\! \bar{c}\big(P_1(x) \!-\! P_1(\bar{x}) + \kappa_2\!\max_{i = 1,\cdots,m}\![g_i(x)]_+\big)^{\alpha},
+&\overset{\rm(b)}\leq \!c(\hat F(\Pi_{C\cap \mathcal{F}} (x)) \!-\! \hat F(\bar{x}))^{1-\alpha} \!\!+\! \kappa\d(x, \mathcal{F})\!=\! c(P_1(\Pi_{C\cap \mathcal{F}} (x)) \!-\! P_1(\bar{x}))^{1-\alpha} \!\!+\! \kappa\d(x, \mathcal{F}) \notag\\
+&\overset{\rm(c)}\leq c(P_1(x) - P_1(\bar{x}) + \hat L_{P_1}\d(x, C\cap \mathcal{F}))^{1-\alpha} + \kappa\d(x, \mathcal{F}) \notag\\
+&\overset{\rm(d)}\leq c(P_1(x) - P_1(\bar{x}) + \hat L_{P_1}\kappa\d(x, \mathcal{F}))^{1-\alpha} + \kappa\d(x, \mathcal{F})^{1-\alpha} \notag\\
+& \overset{\rm (e)}\le\hat c \big[(P_1(x) - P_1(\bar{x}) + \hat L_{P_1}\kappa\d(x, \mathcal{F}))^{1-\alpha} + [\kappa^{1/({1-\alpha})}\d(x, \mathcal{F})]^{1-\alpha} \big]\notag\\
+&\overset{\rm(f)}\leq \!\bar{c}(P_1(x) \!-\! P_1(\bar{x}) \!+\! \kappa_1\d(x, \mathcal{F}))^{1-\alpha}
+\!\!\overset{\rm(g)}\leq\! \bar{c}\big(P_1(x) \!-\! P_1(\bar{x}) \!+\! \kappa_2\!\!\max_{i = 1,\cdots,m}\![g_i(x)]_+\big)^{1-\alpha},\!\!
 \end{align}
-where (a) holds because $\Argmin \hat F = \Argmin \hat F_{\eta}$, (b) holds because of Lemma~\ref{distF}, \eqref{FKL} and the fact that $\|\Pi_{C\cap\mathcal{F}}(x) - \bar{x}\|\leq\|x - \bar{x}\|\leq\epsilon_0\le\epsilon$ (thanks to $\bar{x}\in C\cap\mathcal{F}$ and the projection mapping being nonexpansive), (c) follows from \eqref{LipschP} and the fact that $\epsilon_0 \le \bar\epsilon$, (d) follows from \eqref{eb2} and the facts that $\d(x,\mathcal{F})\leq \|x - \bar{x}\|\leq\epsilon_0\le \epsilon<1$ and $\alpha\in (0,1)$, (e) holds with $\hat{c} = \max\{c, 1\}$, (f) holds with $\bar c = 2^{1-\alpha}\hat c$ and $\kappa_1 = \hat L_{P_1}\kappa + \kappa^{\frac{1}{\alpha}}$ thanks to the fact that $a^{\alpha} + b^{\alpha}\leq 2^{1 - \alpha}(a + b)^{\alpha}$ for any $a$, $b\ge0$ and $\alpha\in (0,1)$, and (g) holds with $\kappa_2 = \kappa_1\tau/\kappa$ thanks to \eqref{eb2}.
+where (a) holds because $\Argmin \hat F = \Argmin \hat F_{\eta}$, (b) holds because of Lemma~\ref{distF}, \eqref{FKL} and the fact that $\|\Pi_{C\cap\mathcal{F}}(x) - \bar{x}\|\leq\|x - \bar{x}\|\leq\epsilon_0\le\epsilon$ (thanks to $\bar{x}\in C\cap\mathcal{F}$ and the projection mapping being nonexpansive), (c) follows from \eqref{LipschP} and the fact that $\epsilon_0 \le \bar\epsilon$, (d) follows from \eqref{eb2} and the facts that $\d(x,\mathcal{F})\leq \|x - \bar{x}\|\leq\epsilon_0\le \epsilon<1$ and $\alpha\in (0,1)$, (e) holds with $\hat{c} = \max\{c, 1\}$, (f) holds with $\bar c = 2^{\alpha}\hat c$ and $\kappa_1 = \hat L_{P_1}\kappa + \kappa^{\frac{1}{1-\alpha}}$ thanks to the fact that $a^{1-\alpha} + b^{1-\alpha}\leq 2^{\alpha}(a + b)^{1-\alpha}$ for any $a$, $b\ge0$ and $\alpha\in (0,1)$, and (g) holds with $\kappa_2 = \kappa_1\tau/\kappa$ thanks to \eqref{eb2}.
 
 Now, if $\eta\geq\kappa_2$, then, from \eqref{distFeta}, we have that
 \[
-\d(x, \Argmin \hat F_{\eta})\leq \bar{c}\left(P_1(x) - P_1(\bar{x}) + \eta\max_{i = 1,\cdots,m}[g_i(x)]_+\right)^{\alpha}.
+\d(x, \Argmin \hat F_{\eta})\leq \bar{c}\left(P_1(x) - P_1(\bar{x}) + \eta\max_{i = 1,\cdots,m}[g_i(x)]_+\right)^{1-\alpha}.
 \]
 On the other hand, if $\kappa_2 >\eta>\bar{\eta}$, then, from \eqref{distFeta}, we obtain that
 \begin{align*}
-&\d(x, \Argmin \hat F_{\eta})\leq \bar{c}\left(\!P_1(x) \!-\! P_1(\bar{x}) \!+\! \bar{\eta}\!\max_{i = 1,\cdots,m}[g_i(x)]_+ \!+\! (\kappa_2 - \bar{\eta})\!\max_{i = 1,\cdots,m}[g_i(x)]_+\!\right)^{\alpha}\\
-&\overset{\rm(a)} \leq \bar{c}\left(\frac{\kappa_2 - \bar{\eta}}{\eta - \bar{\eta}}\right)^{\alpha}\left(P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+ + (\eta - \bar{\eta}) \max_{i = 1,\cdots,m}[g_i(x)]_+\right)^{\alpha}\\
-&= \bar{c}\left(\frac{\kappa_2 - \bar{\eta}}{\eta - \bar{\eta}}\right)^{\alpha}\left(\hat F_{\eta}(x) - \hat F_{\eta}(\bar{x})\right)^{\alpha},
+&\d(x, \Argmin \hat F_{\eta})\!\leq \!\bar{c}\left(\!P_1(x) \!-\! P_1(\bar{x}) \!+\! \bar{\eta}\!\max_{i = 1,\cdots,m}[g_i(x)]_+ \!+\! (\kappa_2 - \bar{\eta})\!\!\max_{i = 1,\cdots,m}[g_i(x)]_+\!\!\right)^{1-\alpha}\\
+&\overset{\rm(a)} \leq \bar{c}\left(\frac{\kappa_2 - \bar{\eta}}{\eta - \bar{\eta}}\right)^{1-\alpha}\!\!\left(P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+ + (\eta - \bar{\eta}) \max_{i = 1,\cdots,m}[g_i(x)]_+\right)^{1-\alpha}\\
+&= \bar{c}\left(\frac{\kappa_2 - \bar{\eta}}{\eta - \bar{\eta}}\right)^{1-\alpha}\!\!\left(\hat F_{\eta}(x) - \hat F_{\eta}(\bar{x})\right)^{1-\alpha},
 \end{align*}
-where (a) holds because $a + b\leq\frac{1}{\epsilon}(a + \epsilon b)$ for any $a\geq 0$, $b \geq 0$ and $0<\epsilon\leq 1$.\footnote{We apply this relation to $\epsilon := (\eta-\bar\eta)/(\kappa_2 - \bar\eta)\in (0,1)$, $b:= (\kappa_2 - \bar{\eta})\max_{i = 1,\cdots,m} [g_i(x)]_+ \geq 0$, and $a:= P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+$, which is nonnegative because $\bar{\eta}$ is an exact penalty parameter, $\bar{x}\in\Argmin \hat F = \Argmin \hat F_{\bar\eta}$ and $x\in C$.} The desired conclusion now follows immediately.
+where (a) holds because $a + b\leq\frac{1}{\epsilon}(a + \epsilon b)$ for any $a\geq 0$, $b \geq 0$ and $0<\epsilon\leq 1$.\footnote{We apply this relation to $\epsilon := (\eta-\bar\eta)/(\kappa_2 - \bar\eta)\in (0,1)$, $b:= (\kappa_2 - \bar{\eta})\max_{i = 1,\cdots,m} [g_i(x)]_+ \geq 0$, and $a:= P_1(x) - P_1(\bar{x}) + \bar{\eta}\max_{i = 1,\cdots,m}[g_i(x)]_+$, which is nonnegative because $\bar{\eta}$ is an exact penalty parameter, $\bar{x}\in\Argmin \hat F = \Argmin \hat F_{\bar\eta}$ and $x\in C$.} The desired conclusion now follows immediately upon invoking \cite[Theorem~5]{bolte17}.
 \end{proof}
 
 In the next remark, we comment on the condition $\eta > \bar\eta$ required in Theorem~\ref{FetaKL}.
@@ -1105,7 +1108,7 @@ In this section, we perform numerical experiments to illustrate the performance 
 {\rm s.t.} \quad & h(Ax - b)\leq \sigma,
 \end{aligned}
 \end{equation}
-where $\mu\in[0, 1]$, $A\in\R^{q\times n}$ has full row rank, $b\in \R^q$, $h: \R^q\rightarrow\R_+$ is an analytic function whose gradient is Lipschitz continuous with modulus $L_{h}$ and satisfies $h(0) = 0$, and $\sigma\in (0, h(-b))$.
+where $\mu\in[0, 1)$, $A\in\R^{q\times n}$ has full row rank, $b\in \R^q$, $h: \R^q\rightarrow\R_+$ is an analytic function whose gradient is Lipschitz continuous with modulus $L_{h}$ and satisfies $h(0) = 0$, and $\sigma\in (0, h(-b))$.
 
 Although the feasible region of \eqref{CompSen} is unbounded and Algorithm~\ref{alg:Framwork} cannot be directly applied to solving \eqref{CompSen}, one can argue as in the discussion following \cite[Eq.~(6.2)]{zhang23} that \eqref{CompSen} is equivalent to the following model:
 \begin{equation}\label{CompSen1}
@@ -1115,7 +1118,7 @@ Although the feasible region of \eqref{CompSen} is unbounded and Algorithm~\ref{
            \quad & \|x\|_{\infty} \leq M,
 \end{aligned}
 \end{equation}
-where $M: = (1 - \mu)^{-1}\Big(\|A^\dagger b\|_1 - \mu\|A^\dagger b\|\Big)$. Notice that the equivalent problem \eqref{CompSen1} is a special case of \eqref{eq1} with $P_1(x) = \|x\|_1$, $P_2(x) = \mu\|x\|$, $m = 1$, $g_1(x) = h(Ax - b)-\sigma$ and $C = \{x: \|x\|_{\infty}\leq M\}$. Since $A$ has full row rank and $h(0) = 0< \sigma$, we see that $A^\dagger b \in C\cap \{x: g_1(x) < 0 \}\not=\emptyset$.
+where $M: = (1 - \mu)^{-1}\Big(\|A^\dagger b\|_1 - \mu\|A^\dagger b\|\Big)$.\footnote{We also recall from \cite[Section~6.1]{zhang23} that $\|A^\dagger b\|_\infty\le M$.} Notice that the equivalent problem \eqref{CompSen1} is a special case of \eqref{eq1} with $P_1(x) = \|x\|_1$, $P_2(x) = \mu\|x\|$, $m = 1$, $g_1(x) = h(Ax - b)-\sigma$ and $C = \{x: \|x\|_{\infty}\leq M\}$. Since $A$ has full row rank and $h(0) = 0< \sigma$, we see that $A^\dagger b \in C\cap \{x: g_1(x) < 0 \}\not=\emptyset$.
 
 Next, we will focus on \eqref{CompSen1} and consider two specific choices of $h$.
 
@@ -1129,9 +1132,13 @@ In this subsection, we take $h(\cdot) = \frac{1}{2}\|\cdot\|^2$, then \eqref{Com
 \end{aligned}
 \end{equation}
 %where $M: = (1 - \mu)^{-1}\Big(\|A^{\dag}b\|_1 - \mu\|A^{\dag}b\|\Big)$.
-Notice that $h$ is convex, the Slater condition holds for the feasible region of \eqref{CompSen1-1}, and the origin is not feasible as $\sigma\in(0, \frac{1}{2}\|b\|^2)$. Then Assumptions~\ref{A1} and \ref{A2} hold. Since the $H$ corresponding to \eqref{CompSen1-1} is clearly a semi-algebraic and hence KL function, one can then apply Theorem~\ref{th2.2} with $\ell_g = 0$ to deduce the convergence of the (whole) sequence $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} for solving \eqref{CompSen1-1}.\footnote{Though we are not considering $\mu = 0$ in our experiments below, we also point out that when $\mu = 0$ in \eqref{CompSen1-1}, thanks to $\sigma\in(0, \frac{1}{2}\|b\|^2)$ and the fact that $A^\dagger b \in C\cap \{x: g_1(x) < 0 \}$, we can deduce from Example~\ref{RemarkKL} that $x\rightarrow \|x\|_1 + \delta_C(x) + \eta\max_{i = 1,\cdots,m} [g_i(x)]_+$ is a KL function with exponent $\frac{1}{2}$ whenever $\eta$ exceeds some exact penalty parameter. Therefore, according to Remark~\ref{rem52}, for the sequence $\{(x^k,\theta_k)\}$ generated by Algorithm~\ref{alg:Framwork}, if $\hat\theta$ exceeds some exact penalty parameter, then $\{x^k\}$ converges locally linearly thanks to Theorem~\ref{Edecres}(iii).}
+Notice that $h$ is convex, the Slater condition holds for the feasible region of \eqref{CompSen1-1}, and the origin is not feasible as $\sigma\in(0, \frac{1}{2}\|b\|^2)$. Then Assumptions~\ref{A1} and \ref{A2} hold. Since the $H$ corresponding to \eqref{CompSen1-1} is clearly a semi-algebraic and hence KL function, one can then apply Theorem~\ref{th2.2} with $\ell_g = 0$ to deduce the convergence of the (whole) sequence $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_k\beta_k < 1$ for solving \eqref{CompSen1-1}.\footnote{Though we are not considering $\mu = 0$ in our experiments below, we also point out that when $\mu = 0$ in \eqref{CompSen1-1}, thanks to $\sigma\in(0, \frac{1}{2}\|b\|^2)$ and the fact that $A^\dagger b \in C\cap \{x: g_1(x) < 0 \}$, we can deduce from Example~\ref{RemarkKL} that $x\rightarrow \|x\|_1 + \delta_C(x) + \eta\max_{i = 1,\cdots,m} [g_i(x)]_+$ is a KL function with exponent $\frac{1}{2}$ whenever $\eta$ exceeds some exact penalty parameter. Therefore, according to Remark~\ref{rem52}, for the sequence $\{(x^k,\theta_k)\}$ generated by Algorithm~\ref{alg:Framwork}, if $\hat\theta$ exceeds some exact penalty parameter, then $\{x^k\}$ converges locally linearly thanks to Theorem~\ref{Edecres}(iii).}
 
-We compare SCP$_{\rm ls}$ in \cite{yu21}, ESQM (i.e., setting $\beta_k \equiv 0$ in Algorithm~\ref{alg:Framwork}), ESQM$_{\rm ls}$\footnote{This is a variant of the ESQM with line search described in \cite{Ausleder13}. Here, we implement the adaptation in \cite[Algorithm~3]{zhang23}.} and ESQM$_{\rm e}$ (i.e., Algorithm~\ref{alg:Framwork}). We use the same parameter settings for SCP$_{\rm ls}$ in \cite{yu21}, and the initial point of SCP$_{\rm ls}$ is chosen as $x^0 = A^\dagger b$. In ESQM and ESQM$_{\rm e}$, we take $L_g = \|A\|^2$, $\ell_g = 0$, $d = 1$ and $\theta_0 = 1$, and we use the same parameter settings for ESQM$_{\rm ls}$ as described on \cite[Page~31]{zhang23} except that we set $\delta = 1$ there; for these three algorithms, the initial points are chosen as $x^0 = 0$. We terminate all algorithms when $\|x^{k+1} - x^k\|< \epsilon\cdot\max\{1, \|x^{k+1}\|\}$ for some $\epsilon > 0$ specified below. In addition, for ESQM$_{\rm ls}$, we also terminate when the $t_k$ given in \cite[Algorithm~3]{zhang23} is small as described in \cite[Page~32]{zhang23} (specifically, when $t_k\le 10^{-8}$). The subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
+We compare SCP$_{\rm ls}$ in \cite{yu21}, ESQM (i.e., setting $\beta_k \equiv 0$ in Algorithm~\ref{alg:Framwork}), ESQM$_{\rm ls}$\footnote{This is a variant of the ESQM with line search described in \cite{Ausleder13}. Here, we implement the adaptation in \cite[Algorithm~3]{zhang23}.} and ESQM$_{\rm e}$ (i.e., Algorithm~\ref{alg:Framwork}). We use the same parameter settings for SCP$_{\rm ls}$ in \cite{yu21}, and the initial point of SCP$_{\rm ls}$ is chosen as $x^0 = A^\dagger b$. In ESQM and ESQM$_{\rm e}$, we take $L_g = \|A\|^2$, $\ell_g = 0$, $d = 1$ and $\theta_0 = 1$, and we use the same parameter settings for ESQM$_{\rm ls}$ as described on \cite[Page~31]{zhang23} except that we set $\delta = 1$ there; for these three algorithms, the initial points are chosen as $x^0 = 0$. We terminate all algorithms when 
+\begin{equation}\label{termination}
+  \|x^{k+1} - x^k\|< \epsilon\cdot\max\{1, \|x^{k+1}\|\}
+\end{equation}
+for some $\epsilon > 0$ specified below. In addition, for ESQM$_{\rm ls}$, we also terminate when the $t_k$ given in \cite[Algorithm~3]{zhang23} is small as described in \cite[Page~32]{zhang23} (specifically, when $t_k\le 10^{-8}$). The subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
 
 We use the same strategy of choosing $\beta_k$ as in the FISTA with fixed and adaptive restart described in \cite{DonoghueCandes15}. In more detail, we set the initial values $\vartheta_{-1}=\vartheta_{0}=1$ and define, for $k\geq 0$,
 \begin{align}\label{beta}
@@ -1141,7 +1148,7 @@ and we reset $\vartheta_{k-1}=\vartheta_{k}=1$ every $K = 200$ iterations or whe
 
 We perform tests on random instances of \eqref{CompSen1-1}. Specifically, we generate an $A\in\R^{q\times n}$ with independent and identically distributed (i.i.d.) standard Gaussian entries, and then normalize this matrix so that each column of it has unit norm. Then we choose a subset $T$ of size $k$ uniformly at random from $\{1, 2, \cdots, n\}$ and a $k$-sparse vector $x_{\rm orig}$ having i.i.d. standard Gaussian entries on $T$ is generated. We let $b = Ax_{\rm orig} + 0.01\cdot\hat{n}$ with $\hat{n}$ being a random vector having i.i.d. standard Gaussian entries, and $\sigma = 0.5\sigma_1^2$ with $\sigma_1 = 1.1\cdot\|0.01\cdot\hat{n}\|$.
 
-In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(q,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. We present the computational results of $\epsilon$ equal to $10^{-4}$ and $10^{-6}$ in Table~\ref{table1} and Table~\ref{table2}, respectively, averaged over the $20$ random instances. Here, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$),  the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$),\footnote{Note that $A^\dagger b$ is only used by SCP$_{\rm ls}$, and $\|A\|$ is only used by ESQM, ESQM$_{\rm ls}$ and ESQM$_{\rm e}$.} the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\| - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
+In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(q,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. We present the computational results when $\epsilon$ in \eqref{termination} equals $10^{-4}$ and $10^{-6}$ in Table~\ref{table1} and Table~\ref{table2}, respectively, averaged over the $20$ random instances. Here, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$),  the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$),\footnote{Note that $A^\dagger b$ is only used by SCP$_{\rm ls}$, and $\|A\|$ is only used by ESQM, ESQM$_{\rm ls}$ and ESQM$_{\rm e}$.} the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\| - \sigma_1 }{\sigma_1}$, where $x^*$ is the approximate solution returned by the respective algorithm.
 
 
 \begin{table}[h]
@@ -1213,7 +1220,7 @@ In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(q,n,k) = 
 }
 \end{table}
 
-From Table~\ref{table1} and Table~\ref{table2}, one can see that ESQM$_{{\rm e}}$ is the fastest, the recovery errors of SCP$_{\rm ls}$ and ESQM$_{\rm e}$ are comparable when $\epsilon = 10^{-4}$, and the recovery errors of all four methods are comparable when $\epsilon = 10^{-6}$.
+From Table~\ref{table1} and Table~\ref{table2}, one can see that ESQM$_{{\rm e}}$ is the fastest, and the recovery errors of all four methods are comparable.
 
 \subsection{When $h$ is the Lorentzian norm}
 
@@ -1229,13 +1236,22 @@ Then, problem~\eqref{CompSen1} becomes the following problem:
 \quad & \|x\|_{\infty} \le M.
 \end{aligned}
 \end{equation}
-We first argue that Assumption~\ref{A1} holds for \eqref{CompSen1-2} under our assumptions on $A$ and $\sigma$ in \eqref{CompSen1}. To this end, let $\hat h(y) := \|y\|_{L L_2, \gamma} - \sigma$ for notational simplicity. Then \eqref{CompSen1-2} is an instance of \eqref{eq1} with $g_1(x) = \hat h(Ax - b) - \sigma$ and $C := \{x:\; \|x\|_\infty \le M\}$. Now, recall that $A^\dagger b\in C$ by construction. Moreover, observe that for any $x\in C$, we have
+We first argue that Assumption~\ref{A1} holds for \eqref{CompSen1-2} under our assumptions on $A$ and $\sigma$ in \eqref{CompSen1}. To this end, let $\hat h(y) := \|y\|_{L L_2, \gamma} - \sigma$ for notational simplicity. Then \eqref{CompSen1-2} is an instance of \eqref{eq1} with $g_1(x) = \hat h(Ax - b) - \sigma$ and $C := \{x:\; \|x\|_\infty \le M\}$. Next, recall that $A^\dagger b\in C$ by construction. Moreover, observe that for any $x\in C$, we have
 \begin{align}\label{RCQexpression}
 &\langle \nabla g_1(x), A^\dagger b - x\rangle = \langle A^T\nabla \hat h(Ax-b), A^\dagger b - x\rangle =  \langle \nabla \hat h(Ax-b), b - Ax\rangle\notag\\
 & = 2\sum_{i=1}^q\frac{a_i^Tx - b_i}{\gamma^2 + (a_i^Tx - b_i)^2}\cdot (b_i - a_i^Tx)
 = -2\sum_{i=1}^q\frac{(a_i^Tx - b_i)^2}{\gamma^2 + (a_i^Tx - b_i)^2},
 \end{align}
-where $a_i^T$ is the $i$-th row of $A$. Now, suppose that $I(x)$ (defined in Assumption~\ref{A1}) is nonempty, i.e., $I(x) = \{1\}$. If there exists $u_1$ such that \eqref{A11} holds, then we see from \eqref{RCQexpression} that $a_i^Tx = b_i$ for all $i$. But then $g_1(x) = \hat h(0) - \sigma = -\sigma < 0$, contradicting the assumption that $I(x) = \{1\}$. This together with Remark~\ref{remarkRCQ}(i) shows that Assumption~\ref{A1} holds.
+where $a_i^T$ is the $i$-th row of $A$. Now we consider two cases:
+\begin{itemize}
+  \item $x\in C\backslash \mathscr{F}$. In this case, suppose that there exist $u_i$, $i\in I(x)$, such that \eqref{A11} holds. Then, in particular, we must have $I(x)$ (defined in Assumption~\ref{A1}) being nonempty, which in turn means $I(x) = \{1\}$. In addition, \eqref{A11} together with \eqref{RCQexpression} implies that $a_i^Tx = b_i$ for all $i$. But then $g_1(x) = \hat h(0) - \sigma = -\sigma < 0$, contradicting the fact that $I(x) = \{1\}$.
+  \item $x\in C\cap \mathscr{F}$. In this case, we claim that $g_1(x) + \langle \nabla g_1(x), A^\dagger b - x\rangle < 0$. Suppose to the contrary that $g_1(x) + \langle \nabla g_1(x), A^\dagger b - x\rangle = 0$. Then using $x\in \mathscr{F}$ and \eqref{RCQexpression}, we deduce that $g_1(x) = \langle \nabla g_1(x), A^\dagger b - x\rangle = 0$. The second equality together with \eqref{RCQexpression} implies that $a_i^Tx = b_i$ for all $i$. But then we deduce from this and $g_1(x) = 0$ that
+      \[
+       0 = g_1(x) = \hat h(0) - \sigma = -\sigma < 0,
+      \]
+      which is a contradiction. Thus, we have shown that $RCQ(x)$ holds and one can actually choose $y = A^\dagger b$ there.
+\end{itemize}
+Consequently, Assumption~\ref{A1} holds.
 
 Next, observe that the $\hat h$ has Lipschitz continuous gradient with modulus $\frac{2}{\gamma^2}$. The following proposition shows that $\hat h$ can be represented as the difference of two convex functions $\hat h_1$ and $\hat h_2$ with Lipschitz continuous gradients, and the Lipschitz continuity modulus of $\nabla \hat h_1$ is $\frac{2}{\gamma^2}$ while that of $\nabla \hat h_2$ is $\frac{1}{4\gamma^2}$.
 \begin{proposition}
@@ -1258,18 +1274,18 @@ Taking
 \[
 \hat h_1(y) = \sum_{i = 1}^m r_1(y_i/\gamma) - \sigma, \text{~  and  ~} \hat h_2(y) = \sum_{i = 1}^m r_2(y_i/\gamma),
 \]
-one can see that $\hat h_1$ and $\hat h_2$ are two convex functions with Lipschitz continuous gradients, and $\hat h(y) = \hat h_1(y) - \hat h_2(y)$. Furthermore, the continuity modulus of Lipschitz continuous gradients of $\hat h_1$ and $\hat h_2$ are $\frac{2}{\gamma^2}$ and $\frac{1}{4\gamma^2}$, respectively.
+one can see that $\hat h_1$ and $\hat h_2$ are two convex functions with Lipschitz continuous gradients, and $\hat h(y) = \hat h_1(y) - \hat h_2(y)$. Furthermore, the Lipschitz continuity modulus of $\nabla \hat h_1$ and $\nabla \hat h_2$ are $\frac{2}{\gamma^2}$ and $\frac{1}{4\gamma^2}$, respectively.
 \end{proof}
 In view of the above discussions, and the observation that the $H$ corresponding to \eqref{CompSen1-1} is a subanalytic function that is continuous on its closed domain (and hence a KL function in view of \cite[Theorem~3.1]{bolte07}), one can apply Theorem~\ref{th2.2} with $L_g = \frac{2\|A\|}{\gamma^2}$ and $\ell_g = \frac{\|A\|}{4\gamma^2}$ to deducing the convergence of the $\{x^k\}$ generated by Algorithm~\ref{alg:Framwork} with $\sup_{k}\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}} = \sqrt{\frac89}$ for solving \eqref{CompSen1-2}.
 
-As in the previous subsection, we compare SCP$_{\rm ls}$, ESQM, ESQM$_{\rm ls}$ and ESQM$_{\rm e}$. For SCP$_{\rm ls}$, we use the same parameter settings in \cite{yu21}, and initialize it at $x^0 = A^\dagger b$. In ESQM and ESQM$_{\rm e}$, we take $L_g = \frac{2\|A\|}{\gamma^2}$, $\ell_g = \frac{\|A\|}{4\gamma^2}$, $d = \frac{\gamma^2}{20}$ and $\theta_0 = 0.05$, and we use the same parameter settings for ESQM$_{\rm ls}$ as described on \cite[Page~31]{zhang23} except that we set $\delta = \frac{\gamma^2}{20}$ there; these three algorithms are initialized at $x^0 = 0$. We terminate all algorithms when $\|x^{k+1} - x^k\|< \epsilon\cdot\max\{1, \|x^{k+1}\|\}$ for some $\epsilon > 0$ specified below. For ESQM$_{\rm ls}$, we also terminate it when the $t_k$ given in \cite[Algorithm~3]{zhang23} is small as described in \cite[Page~32]{zhang23} (specifically, when $t_k\le 10^{-8}$). Furthermore, the subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
+As in the previous subsection, we compare SCP$_{\rm ls}$, ESQM, ESQM$_{\rm ls}$ and ESQM$_{\rm e}$. For SCP$_{\rm ls}$, we use the same parameter settings in \cite{yu21}, and initialize it at $x^0 = A^\dagger b$. In ESQM and ESQM$_{\rm e}$, we take $L_g = \frac{2\|A\|}{\gamma^2}$, $\ell_g = \frac{\|A\|}{4\gamma^2}$, $d = \frac{\gamma^2}{20}$ and $\theta_0 = 0.05$, and we use the same parameter settings for ESQM$_{\rm ls}$ as described on \cite[Page~31]{zhang23} except that we set $\delta = \frac{\gamma^2}{20}$ there; these three algorithms are initialized at $x^0 = 0$. We terminate all algorithms when \eqref{termination} holds for some $\epsilon > 0$ specified below. For ESQM$_{\rm ls}$, we also terminate it when the $t_k$ given in \cite[Algorithm~3]{zhang23} is small as described in \cite[Page~32]{zhang23} (specifically, when $t_k\le 10^{-8}$). Furthermore, the subproblems in these algorithms are solved according to the procedures described in the appendices of \cite{yu21} and \cite{zhang23}.
 
 We also choose $\{\beta_k\}$ as described in \eqref{beta} but we set the fixed restart frequency as $K = 49$. This parameter will ensure that $\{\beta_k\}$ satisfies $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}\right)$ and $ \sup_{k}\beta_k<\sqrt{\frac{L_g}{L_g + \ell_g}}$.
 
 We perform tests on random instances of \eqref{CompSen1-1}. As in the previous section, we generate an $A\in\R^{q\times n}$ with i.i.d. standard Gaussian entries, and then normalize its columns. We then choose a subset $T$ of size $k$ uniformly at random from $\{1, 2, \cdots, n\}$ and generate a $k$-sparse vector $x_{\rm orig}$ with i.i.d. standard Gaussian entries on $T$. We let $b = Ax_{\rm orig} + 0.01\cdot\bar{n}$ with $\bar{n}_i\sim{\rm Cauchy}(0, 1)$, specifically, we generate $\bar{n}_i$ as $\tan(\pi(\tilde{n}_i - \frac{1}{2}))$ with $\tilde{n}$ being a random vector with i.i.d. entries uniformly chosen in $[0, 1]$. We then set $\sigma = 1.1\cdot\|0.01\cdot\tilde{n}\|_{L L_2, \gamma}$ with $\gamma = 0.05$.
 
 
-In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(q,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. The computational results of $\epsilon$ equal to $10^{-4}$ and $10^{-6}$ averaged over the $20$ random instances are presented in Table~\ref{table3} and Table~\ref{table4}, respectively. As before, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$), the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$), the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\|_{LL_2,\gamma} - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
+In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(q,n,k) = (720i,2560i,80i)$ with $i\in \{2, 4, 6, 8, 10\}$. For each $i$, we generate 20 random instances as described above. The computational results for $\epsilon$ in \eqref{termination} being $10^{-4}$ and $10^{-6}$ are respectively presented in Table~\ref{table3} and Table~\ref{table4}, averaged over the $20$ random instances. As before, we present the time for computing the QR decomposition of $A^T$ (denoted by $t_{\rm QR}$), the time for computing $\|A\|$ (denoted by $t_{\|A\|}$), the time for computing $x^0 = A^\dagger b$ given the QR factorization of $A^T$ (denoted by $t_{A^\dagger b}$), the CPU times of the algorithms (CPU time), the number of iterations (denoted by Iter), the recovery errors $\text{RecErr} := \frac{\|x^* - \xorig\|}{\max\{1, \|\xorig\|\}}$ and the residuals ${\rm Residual} := \frac{\|Ax^* - b\|_{LL_2,\gamma} - \sigma }{\sigma}$, where $x^*$ is the approximate solution returned by the respective algorithm.
 
 
 \begin{table}[h]
@@ -1342,7 +1358,7 @@ In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(q,n,k) = 
 }
 \end{table}
 
-From Table~\ref{table3} and Table~\ref{table4}, we observe a similar pattern as shown in Table~\ref{table1} and Table~\ref{table2}, i.e., ESQM$_{{\rm e}}$ is the fastest algorithm, the recovery errors of SCP$_{\rm ls}$ and ESQM$_{\rm e}$ are comparable when $\epsilon = 10^{-4}$, and the recovery errors of all four methods are comparable when $\epsilon = 10^{-6}$.
+From Table~\ref{table3} and Table~\ref{table4}, we observe a similar pattern as shown in Table~\ref{table1} and Table~\ref{table2}, i.e., ESQM$_{{\rm e}}$ is the fastest algorithm, and the recovery errors of all four methods are comparable.
 
 
 
@@ -1426,10 +1442,10 @@ J. Bolte, S. Sabach and M. Teboulle.
 \newblock Proximal alternating linearized minimization for nonconvex and nonsmooth problems.
 \newblock {\em Mathematical Programming} 146, 459--494, 2014.
 
-%\bibitem{bolte17}
-%J. Bolte, T.P. Nguyen, J. Peypouquet, B. W. Suter.
-%\newblock From error bounds to the complexity of first-order descent methods for convex functions.
-%\newblock {\em Mathematical Programming} 165, 471¨C507, 2017.
+\bibitem{bolte17}
+J. Bolte, T.P. Nguyen, J. Peypouquet and B. W. Suter.
+\newblock From error bounds to the complexity of first-order descent methods for convex functions.
+\newblock {\em Mathematical Programming} 165, 471--507, 2017.
 
 \bibitem{Brezinski00}
 C. Brezinski.
