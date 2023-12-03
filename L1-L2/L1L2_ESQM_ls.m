@@ -1,10 +1,10 @@
-function [x, iter] =  L1L2_ESQM_ls(A, b, delta, mu, M, xstart, d, alpha_init, L, maxiter, freq, tol)
+function [x, iter] =  L1L2_ESQM_ls(A, b, delta, mu, M, xstart, d, alpha_init, maxiter, freq, tol)
 %This code uses ESQM method solving the model
 % min ||x||_1 - mu*||x||
 % s.t. 1/2*||Ax - b||^2 - delta <=0  &&  \|x\|_inf <= M
-%
+
 % Input
-%
+
 % A               - m by n matrix (m << n)
 % b                - m by 1 vector measurement
 % delta           - real number > 0
@@ -13,8 +13,7 @@ function [x, iter] =  L1L2_ESQM_ls(A, b, delta, mu, M, xstart, d, alpha_init, L,
 % xstart          - the starting point
 % d                - real number > 0
 % alpha_init   - real number > 0
-% L                - the Lipschitz constant
-% maxiter      - maximum number of iterations [inf]
+% maxiter      - maximum number of iterations 
 % freq            - The frequency of print the results
 % tol              - tolerance 
 %
@@ -28,9 +27,9 @@ function [x, iter] =  L1L2_ESQM_ls(A, b, delta, mu, M, xstart, d, alpha_init, L,
 % Initialization
 
 rho = 1e-4;
-lambda = 0; % parameter for subproblem
+lambda = 0; % Parameter for subproblem
 iter = 0;
-x = xstart; % starting point x^{k}
+x = xstart; 
 
 %  gradient of the starting point
 Ax = A*x;
@@ -41,23 +40,23 @@ fval = norm(x, 1) - mu*norm(x);
 
 
 % fprintf(' ****************** Start   ESQMe ********************\n')
-% fprintf('  iter        fval        err1      err2      gvalu      alpha       lambda      norm(x_new - x_old)      beta      norm(x_new)\n')
+% fprintf('  iter        fval           gvalu      alpha       lambda      norm(x_new - x_old)          norm(x_new)\n')
 
 
 while  iter <= maxiter
 
     alpha = alpha_init;
 
-    if norm(x) <= tol
+    if norm(x) <= 1e-10
         xi = 0*x;
     else
         xi = mu*x/norm(x);
     end
 
-    y = x + (1/(L*alpha)).*xi;
+    y = x + 1/alpha.*xi;
 
     %Solving the subproblem
-    [u, lambda] = subprob_L1L2_ESQM_e(y, gradx, gradx'*x - gvalx, alpha, lambda, M, L); % Solving the subproblem
+    [u, lambda] = subprob_ESQM(y, gradx, gradx'*x - gvalx, alpha, lambda, M, 1); 
 
     % Line search
 
@@ -73,13 +72,14 @@ while  iter <= maxiter
         fvalxtest= norm(xtest, 1) -  mu*norm(xtest);
         fvaltest_new = fvalxtest + alpha*max(0, gvalxtest);
 
-        if fvaltest_new - fval_new  > - alpha*rho*t*norm(u - x)^2 && t>1e-10
+        if fvaltest_new - fval_new  > - alpha*rho*t*norm(u - x)^2 && t>1e-8
             t = t/2;
             iter1 = iter1 +1;
         else
             break
         end
     end
+   
 
         
     %     if mod(iter, freq) == 0
@@ -88,17 +88,15 @@ while  iter <= maxiter
     %
 
     % check for termination
-    
-    if  norm(u - x) < tol*max(norm(u), 1)  || t<=1e-10 
-        x = u;
+
+    if  norm(xtest - x) < tol*max(norm(xtest), 1)  || t<=1e-8
+        if t < 1e-8
+            fprintf(' Terminate due to small gamma\n')
+        end
         break
     end
 
-
-
-
-    %       % Update alpha
-
+    % Update alpha
     sss = gvalx + gradx'*(u - x);
     if sss > 1e-10
         alpha_init = alpha + d;
@@ -106,18 +104,15 @@ while  iter <= maxiter
         alpha_init = alpha;
     end
 
-     % Update iterations, gradient and function value
-
+    % Update iterations, gradient and function value
     x = xtest;
     Ax = Axtest;
     tmpx = tmpxtest;
-    gradx = 2*(A'*tmpx);
+    gradx = A'*tmpx;
     gvalx = gvalxtest;
     fval = fvalxtest;
 
     iter = iter + 1;
-
-
 
 end
 
