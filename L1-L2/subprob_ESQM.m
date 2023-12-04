@@ -20,7 +20,7 @@ function [xstar, lambda] = subprob_ESQM(y, a, sigma, alpha, lambda, M, L)
 % xstar       - approximate stationary point
 % lambda   - corresponding Lagrange multipliers
 
-tol = 1e-10;
+tol = 1e-8;
 
 
 %Calculate x^* when lambda = 0
