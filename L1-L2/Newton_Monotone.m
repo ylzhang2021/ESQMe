@@ -46,16 +46,16 @@ else
         
         %  Calculate the generalized Jacobian
         I = abstmp > 1/alpha & abstmp <= 1/alpha +M;  %  gamma< \|y_J\| <= gamma + M
-        tmpmat = a(:,I);
-        tmp1 = tmp(:,I);
+        tmpmat = a(I);
+        tmp1 = tmp(I);
         abstmp1 = abstmp(I);
-        H1 = (1/alpha)^2*sum(sum((tmp1.*tmpmat)).^2./(abstmp1.^3)) + (1/alpha)*sum((1 - (1/alpha)./abstmp1).*sum(tmpmat.^2));
+        H1 = (1/alpha)^2*sum((tmp1.*tmpmat).^2./(abstmp1.^3)) + (1/alpha)*sum((1 - (1/alpha)./abstmp1).*tmpmat.^2);
         
         K = abstmp > (1/alpha) + M;  % \|y_J\| > gamma + M
-        tmpmat1 = a(:,K);
-        tmp11 = tmp(:,K);
+        tmpmat1 = a(K);
+        tmp11 = tmp(K);
         abstmp11 = abstmp(K);
-        H2 = - M*(1/alpha)*sum(sum((tmp11.*tmpmat1)).^2./(abstmp11.^3)) + M*(1/alpha)*sum((1./abstmp11).*sum(tmpmat1.^2));
+        H2 = - M*(1/alpha)*sum((tmp11.*tmpmat1).^2./(abstmp11.^3)) + M*(1/alpha)*sum(tmpmat1.^2./abstmp11);
         
         H = H1 + H2;
         
