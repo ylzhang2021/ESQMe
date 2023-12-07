@@ -50,7 +50,7 @@
 \usepackage{xcolor}%
 \usepackage{textcomp}%
 \usepackage{manyfoot}%
-\usepackage{refcheck}%
+%\usepackage{refcheck}%
 \usepackage{algorithm,algorithmic}%
 
 \usepackage{latexsym,enumerate,verbatim,amsfonts,microtype}
@@ -800,7 +800,7 @@ where ${C\cap \mathscr{F}}$ is the feasible set of \eqref{eq1} and $\Lambda$ is 
 %\begin{proof}
 %(i): Since $\{x^k\}\subseteq C$ and $C$ is a nonempty compact convex set, $\{x^k\}$ is bounded.
 \begin{proof}
-%Recall that $s^{k+1} = \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^k}\right]_+$ (see Lemma~\ref{subproremarks}(i)). 
+%Recall that $s^{k+1} = \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^k}\right]_+$ (see Lemma~\ref{subproremarks}(i)).
 Using the strong convexity of the objective in \eqref{subproblem2} and the fact that $x^{k+1}$ minimizes this objective, we obtain that for any $x\in C$,
 \begin{align}\label{stongconve}
 &P_1(x^{k+1}) + \theta_k \max_{i = 1,\cdots,m}\left[\ling{i}{x^{k+1}}{y^k}\right]_+ + \frac{\theta_k L_g}{2}\| x^{k+1} - y^k\|^2 \notag\\
