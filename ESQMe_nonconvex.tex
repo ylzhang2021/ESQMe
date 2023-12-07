@@ -1160,21 +1160,21 @@ In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(q,n,k) = 
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ }
 & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }
 \\\cline{1-7}\multirow{7}*{CPU time} & \multirow{1}*{$t_{\rm QR}$}
-&  0.657 &  3.617 & 11.290 & 30.732 & 67.974           \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{A^\dagger b}$}
-&  0.006 &  0.025 &  0.056 &  0.101 &  0.157           \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{\|A\|}$}
-&  0.574 &  1.363 &  4.192 & 10.176 & 19.742           \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP$_{\rm ls}$}
-&  2.601 &  8.950 & 19.348 & 31.669 & 47.208           \\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{\rm b}$}
-&  1.008 &  4.001 &  9.355 & 14.704 & 22.629           \\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e}}$}
-&  0.669 &  2.564 &  5.847 &  9.498 & 14.805           \\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{SCP$_{\rm ls}$}
-&    208 &    213 &    211 &    212 &    212           \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{\rm b}$}
-&    155 &    168 &    177 &    170 &    173           \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e}}$}
-&    108 &    112 &    114 &    112 &    113           \\\cline{1-7} \multirow{4}*{RecErr} & \multirow{1}*{SCP$_{\rm ls}$}
+&  0.732 &  4.810 & 13.220 & 33.999 & 65.165            \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{A^\dagger b}$}
+&  0.007 &  0.030 &  0.052 &  0.106 &  0.159            \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{\|A\|}$}
+&  0.758 &  1.730 &  4.653 & 11.011 & 20.341            \\\cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP$_{\rm ls}$}
+&  3.070 &  9.481 & 18.858 & 32.604 & 50.266            \\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{\rm b}$}
+& 11.283 & 40.481 & 90.625 & 152.157 & 243.125            \\\cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e}}$}
+&  0.766 &  2.532 &  5.488 &  9.710 & 15.326            \\\cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{SCP$_{\rm ls}$}
+&    208 &    213 &    211 &    212 &    212            \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{\rm b}$}
+&   1729 &   1781 &   1819 &   1768 &   1789            \\\cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e}}$}
+&    108 &    112 &    114 &    112 &    113            \\\cline{1-7} \multirow{4}*{RecErr} & \multirow{1}*{SCP$_{\rm ls}$}
 &  0.053 &  0.053 &  0.054 &  0.055 &  0.055       \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{\rm b}$}
-&  0.052 &  0.052 &  0.053 &  0.054 &  0.054       \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
+&  0.070 &  0.071 &  0.073 &  0.073 &  0.074       \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
 &  0.051 &  0.051 &  0.052 &  0.053 &  0.053       \\\cline{1-7} \multirow{4}*{Residual} & \multirow{1}*{SCP$_{\rm ls}$}
 & -3.60e-05 & -4.50e-05 & -2.33e-05 & -3.16e-05 & -3.33e-05      \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{\rm b}$}
-& 3.82e-05 & 3.93e-05 & 4.02e-05 & 3.86e-05 & 4.04e-05     \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
-& 1.20e-07 & 1.10e-07 & 9.94e-08 & 9.69e-08 & 1.03e-07    \\\cline{1-7}
+& 6.36e-07 & 6.04e-07 & 5.42e-07 & 5.60e-07 & 5.38e-07     \\\cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
+& 1.20e-07 & 1.11e-07 & 9.96e-08 & 9.71e-08 & 1.03e-07    \\\cline{1-7}
 \end{tabular}
 }
 \end{center}
@@ -1212,7 +1212,7 @@ In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-1} and $(q,n,k) = 
 }
 \end{table}
 
-From Table~\ref{table1} and Table~\ref{table2}, one can see that ESQM$_{{\rm e}}$ is the fastest algorithm, and the recovery errors of all four methods are comparable.
+From Table~\ref{table1} and Table~\ref{table2}, one can see that ESQM$_{{\rm e}}$ is the fastest algorithm, and the recovery errors of all three methods are comparable.
 
 \subsection{When $h$ is the Lorentzian norm}
 
@@ -1289,21 +1289,21 @@ In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(q,n,k) = 
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ }
 & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }
 \\ \cline{1-7}\multirow{7}*{CPU time} & \multirow{1}*{$t_{\rm QR}$}
-&  0.630 &  4.308 & 14.756 & 32.588 & 56.374         \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{A^\dagger b}$}
-&  0.006 &  0.028 &  0.060 &  0.101 &  0.146         \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{\|A\|}$}
-&  0.598 &  1.581 &  5.080 & 11.099 & 18.362         \\ \cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP$_{\rm ls}$}
-&  1.929 & 10.603 & 12.760 & 76.295 & 46.565         \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{\rm b}$}
-&  1.482 &  4.074 &  8.267 & 14.526 & 22.468         \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e}}$}
-&  0.842 &  2.820 &  5.975 & 10.340 & 16.417         \\ \cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{SCP$_{\rm ls}$}
-&    171 &    295 &    156 &    560 &    228         \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{\rm b}$}
-&    178 &    149 &    146 &    156 &    157         \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e}}$}
-&    116 &    113 &    112 &    116 &    118         \\ \cline{1-7} \multirow{4}*{RecErr} & \multirow{1}*{SCP$_{\rm ls}$}
+&  0.630 &  4.071 & 13.492 & 32.679 & 61.189          \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{A^\dagger b}$}
+&  0.006 &  0.025 &  0.055 &  0.100 &  0.160          \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{\|A\|}$}
+&  0.549 &  1.478 &  4.737 & 10.711 & 20.154          \\ \cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP$_{\rm ls}$}
+&  1.910 & 10.948 & 12.837 & 76.574 & 50.271          \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{\rm b}$}
+&  3.608 & 13.864 & 31.872 & 55.365 & 93.036          \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e}}$}
+&  0.686 &  2.437 &  5.558 &  9.925 & 17.198          \\ \cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{SCP$_{\rm ls}$}
+&    171 &    295 &    156 &    560 &    228          \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{\rm b}$}
+&    648 &    644 &    643 &    657 &    665          \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e}}$}
+&    115 &    113 &    111 &    115 &    118          \\ \cline{1-7} \multirow{4}*{RecErr} & \multirow{1}*{SCP$_{\rm ls}$}
 &  0.082 &  0.086 &  0.086 &  0.087 &  0.089       \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{\rm b}$}
-&  0.083 &  0.087 &  0.087 &  0.087 &  0.089       \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
-&  0.082 &  0.086 &  0.086 &  0.086 &  0.088       \\ \cline{1-7} \multirow{4}*{Residual} & \multirow{1}*{SCP$_{\rm ls}$}
+&  0.087 &  0.091 &  0.091 &  0.092 &  0.094       \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
+&  0.082 &  0.086 &  0.086 &  0.087 &  0.088       \\ \cline{1-7} \multirow{4}*{Residual} & \multirow{1}*{SCP$_{\rm ls}$}
 & -2.71e-07 & -2.79e-07 & -4.08e-07 & -2.84e-07 & -3.28e-07  \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{\rm b}$}
-& 2.61e-07 & 1.51e-07 & 1.33e-07 & 1.26e-07 & 1.20e-07     \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
-& 3.74e-08 & 5.09e-08 & 5.28e-08 & 5.77e-08 & 5.66e-08     \\ \cline{1-7}
+& 1.12e-07 & 9.82e-08 & 9.65e-08 & 9.42e-08 & 9.30e-08   \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
+& 3.37e-08 & 5.13e-08 & 5.32e-08 & 5.01e-08 & 5.26e-08   \\ \cline{1-7}
 \end{tabular}
 }
 \end{center}
@@ -1321,28 +1321,28 @@ In our numerical tests, we let $\mu =0.95$ in \eqref{CompSen1-2} and $(q,n,k) = 
 \phantom{\diagbox{Date}{$i$}} & \multicolumn{1}{|c|}{Method} & \multicolumn{1}{|c|}{$i = 2$} & \multicolumn{1}{c|}{ $i = 4$ }
 & \multicolumn{1}{c|}{ $i = 6$ } & \multicolumn{1}{|c|}{ $i = 8$ } & \multicolumn{1}{c|}{ $i = 10$ }
 \\ \cline{1-7}\multirow{7}*{CPU time} & \multirow{1}*{$t_{\rm QR}$}
-&  0.585 &  3.748 & 13.055 & 31.274 & 55.625          \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{A^\dagger b}$}
-&  0.006 &  0.023 &  0.055 &  0.095 &  0.150          \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{\|A\|}$}
-&  0.589 &  1.400 &  4.672 & 10.151 & 18.521          \\ \cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP$_{\rm ls}$}
-&  2.049 & 11.145 & 14.231 & 76.433 & 50.509          \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM}
-&  2.273 &  5.770 & 12.088 & 21.519 & 32.552          \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e}}$}
-&  1.179 &  3.867 &  8.614 & 14.943 & 23.786          \\ \cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{SCP$_{\rm ls}$}
-&    189 &    314 &    177 &    578 &    247          \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM}
-&    281 &    223 &    219 &    232 &    233          \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e}}$}
-&    163 &    162 &    163 &    166 &    175          \\ \cline{1-7} \multirow{4}*{RecErr} & \multirow{1}*{SCP$_{\rm ls}$}
+&  0.706 &  4.646 & 14.343 & 32.153 & 58.902           \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{A^\dagger b}$}
+&  0.007 &  0.029 &  0.058 &  0.100 &  0.155           \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{$t_{\|A\|}$}
+&  0.724 &  1.644 &  4.944 & 10.670 & 19.739           \\ \cline{2-7} \multirow{1}*{} & \multirow{1}*{SCP$_{\rm ls}$}
+&  2.412 & 12.479 & 14.589 & 79.060 & 52.279           \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM}
+&  6.370 & 24.099 & 51.721 & 89.569 & 143.448           \\ \cline{2-2} \multirow{1}*{}  & \multirow{1}*{ESQM$_{{\rm e}}$}
+&  1.037 &  3.851 &  8.205 & 13.918 & 23.230           \\ \cline{1-7} \multirow{4}*{Iter} & \multirow{1}*{SCP$_{\rm ls}$}
+&    189 &    314 &    177 &    578 &    247           \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM}
+&   1010 &   1030 &   1032 &   1053 &   1067           \\ \cline{2-2} \multirow{1}*{}     & \multirow{1}*{ESQM$_{{\rm e}}$}
+&    162 &    159 &    163 &    162 &    171           \\ \cline{1-7} \multirow{4}*{RecErr} & \multirow{1}*{SCP$_{\rm ls}$}
 &  0.082 &  0.086 &  0.086 &  0.086 &  0.088       \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM}
 &  0.082 &  0.086 &  0.086 &  0.086 &  0.088       \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
 &  0.082 &  0.086 &  0.086 &  0.086 &  0.088       \\ \cline{1-7} \multirow{4}*{Residual} & \multirow{1}*{SCP$_{\rm ls}$}
 & -2.51e-11 & -3.08e-11 & -4.18e-11 & -3.20e-11 & -2.97e-11  \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM}
-& 1.01e-11 & 7.07e-12 & 7.65e-12 & 8.52e-12 & 8.62e-12     \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
-& 6.41e-14 & 4.04e-12 & 3.35e-12 & 2.65e-12 & 2.98e-12     \\ \cline{1-7}
+& 1.11e-11 & 9.76e-12 & 9.62e-12 & 9.50e-12 & 9.31e-12    \\ \cline{2-2} \multirow{1}*{} & \multirow{1}*{ESQM$_{{\rm e}}$}
+& 3.43e-12 & 4.59e-12 & 2.51e-12 & 4.64e-12 & 2.84e-12    \\ \cline{1-7}
 \end{tabular}
 }
 \end{center}
 }
 \end{table}
 
-From Table~\ref{table3} and Table~\ref{table4}, we observe a similar pattern as shown in Table~\ref{table1} and Table~\ref{table2}, i.e., ESQM$_{{\rm e}}$ is the fastest algorithm, and the recovery errors of all four methods are comparable.
+From Table~\ref{table3} and Table~\ref{table4}, we observe a similar pattern as shown in Table~\ref{table1} and Table~\ref{table2}, i.e., ESQM$_{{\rm e}}$ is the fastest algorithm, and the recovery errors of all three methods are comparable.
 
 
 
