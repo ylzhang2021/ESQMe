@@ -95,20 +95,20 @@ for ii = 1: length(indexarray)
         fval_x_scp = norm(x_scp, 1) - mu*norm(x_scp);
         Rec_err_scp = norm(x_scp - xorig)/max(1, norm(xorig));
         Residual_scp = (sum(log(1 + (A*x_scp - b).^2/gamma^2)) - sigma)/sigma;
-        fprintf(' SCP_ls_LL2 terminated for l1 : time = %g, iter = %d,  nnz = %g,  fval = %16.10f, rec_err = %g, residual = %g,  \n',...
+        fprintf(' SCP_ls_LL2 terminated: time = %g, iter = %d,  nnz = %g,  fval = %16.10f, rec_err = %g, residual = %g,  \n',...
             time_scp, iter_scp, nnz(abs(x_scp) > 1e-10), fval_x_scp, Rec_err_scp, Residual_scp);
 
 
-        fprintf('\n Start of ESQM with zeros as the initial point \n');
+        fprintf('\n Start of ESQMb with zeros as the initial point \n');
         tesqme1 = tic;
-        [x_esqme1, iter_esqme1] = L1L2_Lor_ESQM(A, b, sigma, mu, M, x0, d, alpha_init, L, gamma, freq, tol, maxiter);
+        [x_esqme1, iter_esqme1] = L1L2_Lor_ESQMb(A, b, sigma, mu, M, x0, d, alpha_init, L, gamma, freq, tol, maxiter);
         t_esqme1 = toc(tesqme1);
 
         fval_esqme1= norm(x_esqme1, 1) - mu*norm(x_esqme1);
         Residual_esqme1 = (sum(log(1 + (A*x_esqme1 - b).^2/gamma^2)) - sigma)/sigma;
         RecErr_esqme1 = norm(x_esqme1 - xorig)/max(1, norm(xorig));
         nnz_esqme1 = nnz(abs(x_esqme1) > 1e-10);
-        fprintf(' ESQM Termination: time = %g, iter = %d, nnz = %g, fval = %16.10f, rec_err = %g, residual = %g,\n',...
+        fprintf(' ESQMb terminated: time = %g, iter = %d, nnz = %g, fval = %16.10f, rec_err = %g, residual = %g,\n',...
             t_esqme1,  iter_esqme1, nnz_esqme1, fval_esqme1, RecErr_esqme1, Residual_esqme1)
 
 
@@ -121,7 +121,7 @@ for ii = 1: length(indexarray)
         Residual_esqme2 = (sum(log(1 + (A*x_esqme2 - b).^2/gamma^2)) - sigma)/sigma;
         RecErr_esqme2 = norm(x_esqme2 - xorig)/max(1, norm(xorig));
         nnz_esqme2 = nnz(abs(x_esqme2) > 1e-10);
-        fprintf(' ESQM_e Termination: time = %g, iter = %d, nnz = %g, fval = %16.10f, rec_err = %g, residual = %g,\n',...
+        fprintf(' ESQMe terminated: time = %g, iter = %d, nnz = %g, fval = %16.10f, rec_err = %g, residual = %g,\n',...
             t_esqme2,  iter_esqme2, nnz_esqme2, fval_esqme2, RecErr_esqme2, Residual_esqme2)
 
 

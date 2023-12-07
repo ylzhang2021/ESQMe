@@ -1,4 +1,4 @@
-function [x_new, iter] =  L1L2_Lor_ESQM(A, b, sigma, mu, M, xstart, d, alpha_init, L, gamma, freq, tol, maxiter)
+function [x_new, iter] =  L1L2_Lor_ESQMb(A, b, sigma, mu, M, xstart, d, alpha_init, L, gamma, freq, tol, maxiter)
 % This aims to use ESQM to find the minimizer of the following problem (involve Lorentzion norm)
 % min ||x||_1 - mu*||x||
 % s.t.\|Ax - b\|_{LL_2,gamma} <= sigma  &&  \|x\|_inf <= M
