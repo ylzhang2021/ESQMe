@@ -1,7 +1,7 @@
 function [xstar, lambda] = Newton_Monotone(y, a, sigma, alpha, lambda, M, tol)
 % This aims to find the root of T(lambda) = 0 whenever s = 0;
 % where T(lambda) = sigma - a^T*x; 
-% and x = min(max(1 - 1/alpha./|tmp|,0), M./|tmp|).*tmp ;
+% and x = min(max(1 - 1/alpha./|tmp|,0), M./|tmp|).*tmp;
 % and tmp = y - (lambda/alpha).*a.
 
 % Input
