@@ -312,7 +312,7 @@ Since the problem \eqref{subproblem2} has a unique solution as an optimization p
 \begin{algorithmic}
 \STATE
 \begin{description}
-  \item[\bf Step 0.] Choose $x^{-1}=x^0\in C$, $\theta_0>0$, $d>0$, and $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}~\right)$ with $\bar\beta:= \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, where $L_g = \max\{L_{g_i}, ~ i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}, ~ i=1,\dots,m\}$ as in Remark~\ref{Remarkg}.
+  \item[\bf Step 0.] Choose $x^{-1}=x^0\in C$, $\theta_0>0$, $d>0$, and $\{\beta_k\}\subseteq\left[0,\sqrt{\frac{L_g}{L_g + \ell_g}}~\right)$ with $\bar\beta:= \sup_k\beta_k < \sqrt{\frac{L_g}{L_g + \ell_g}}$, where $L_g = \max\{L_{g_i}:  i=1,\dots,m\}$ and $\ell_g = \max\{\ell_{g_i}: i=1,\dots,m\}$ as in Remark~\ref{Remarkg}. Set $k = 0$.
   \item[\bf Step 1.] Set
     \begin{equation}\label{defyk}
       y^k = x^k + \beta_k(x^k - x^{k-1}).
