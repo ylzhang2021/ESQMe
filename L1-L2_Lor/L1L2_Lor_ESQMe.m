@@ -42,10 +42,9 @@ x_new = x_old;
 % fprintf(' ****************** Start   ESQMe ********************\n')
 %fprintf('  iter        fval      gvalu      alpha       lambda      norm(x_new - x_old)      beta      norm(x_new)\n')
 
-
 while   1 == 1
 
-    alpha = alpha_init;
+   alpha = alpha_init;
 
     if norm(x_new) <= 1e-10
         xi = 0*x_new;
@@ -101,6 +100,7 @@ while   1 == 1
     iter = iter + 1;
 
 end
+
 
 
 

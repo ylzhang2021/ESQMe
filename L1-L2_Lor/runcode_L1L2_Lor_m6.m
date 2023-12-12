@@ -2,7 +2,7 @@ clear;
 clc;
 
 rand('seed',2000);
-randn('seed',2023);
+randn('seed',2024);
 
 maxiter = inf;
 tol = 1e-6;
@@ -47,9 +47,9 @@ for ii = 1: length(indexarray)
         error = nf*tan(pi*(rand(m,1) - 1/2));
         b = A*xorig + error;
 
-        gamma = 0.05;
+        gamma = 0.08;
         tmpvalue =  sum(log(1 + error.^2/gamma^2));
-        sigma = 1.1* tmpvalue;
+        sigma = 1.05* tmpvalue;
         if sigma >= sum(log(1 + b.^2/gamma^2))
             error('0 is included in the feasible set. \n');
         end
@@ -82,9 +82,12 @@ for ii = 1: length(indexarray)
         fprintf('time_qr = %6.4f ; time_xf1 = %6.4f; time_LA = %6.4f \n', time_qr, time_xf1,time_LA);
 
         LA = nmA;
-        L = 2*sqrt(LA)/gamma^2;
-        alpha_init = 2*gamma;
-        d = gamma^2/20;
+%         L = 2*sqrt(LA)/gamma^2;
+%         alpha_init = 2*gamma;
+%         d = gamma^2/20;
+        L = 2*LA/gamma^2;
+        alpha_init = gamma*1.1;
+        d = gamma^2/(150*LA);
 
 
         fprintf('\n Start of SCP_ls_LL2 \n');
