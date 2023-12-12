@@ -1092,7 +1092,7 @@ In the next remark, we comment on the condition $\eta > \bar\eta$ required in Th
 \end{remark}
 
 \begin{example}\label{RemarkKL}
-Suppose that in \eqref{KLproblem}, $P_1 = \|\cdot\|_1$, $C$ is a polyhedron, $m = 1$, and $g_1 = q_1\circ A_1$ for some matrix $A_1\in \R^{s_1\times n}$ and $q_1:\mathbb{R}^{s_1} \rightarrow \mathbb{R}$ taking one of the following forms with $b\in \R^{s_1}$ and $\sigma > 0$ chosen so that the origin is not feasible and that $\inf_{x\in C}g_1(x) < 0$:
+Suppose that in \eqref{KLproblem}, $P_1 = \|\cdot\|_1$, $C$ is a polytope, $m = 1$, and $g_1 = q_1\circ A_1$ for some matrix $A_1\in \R^{s_1\times n}$ and $q_1:\mathbb{R}^{s_1} \rightarrow \mathbb{R}$ taking one of the following forms with $b\in \R^{s_1}$ and $\sigma > 0$ chosen so that the origin is not feasible and that $\inf_{x\in C}g_1(x) < 0$:
 \begin{enumerate}[{\rm (i)}]
    \item (Basis pursuit denoising \cite{Ca18}) $q_1(z) = \frac{1}{2}\|z - b\|^2 - \sigma$.
    \item (Logistic loss \cite{HoLS13}) $q_1(z) = \sum_{i=1}^{s_1}\log(1 + \exp(b_iz_i)) - \sigma$ for some $b\in \{-1,1\}^{s_1}$.
