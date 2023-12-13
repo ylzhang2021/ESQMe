@@ -1,4 +1,4 @@
-function [ x, iter, talg, X] = SCP_ls( A,b,delta,alpha,x_start,mu,tol,maxiter )
+function [ x, iter, talg] = SCP_ls( A,b,delta,alpha,x_start,mu,tol,maxiter )
 %This code uses a variant of the SCP method solving the model
 % min ||x||_1 - mu*||x||
 % s.t. 1/2*||Ax - b||^2 - delta <=0
@@ -20,7 +20,7 @@ function [ x, iter, talg, X] = SCP_ls( A,b,delta,alpha,x_start,mu,tol,maxiter )
 % x       - approximate stationary point
 % iter    - number of iterations
 % talg    - cputime
-% X       - n by iter matrix with the t_th column being x^t generated in the t_th iteration, t>=1.
+
 
 tau = 2;
 c = 1e-4;
@@ -37,7 +37,7 @@ Ax = A*x;
 nablag = A'*(Ax - b); %g(x)µÄÌÝ¶È
 [~,n] = size(A);
 iter = 0;
-X = x;
+
 
 
 while iter<=maxiter
@@ -91,7 +91,7 @@ while iter<=maxiter
     nablag = nablagnew;
     
     iter = iter + 1;
-    X = [X x];
+
 end
 
 
