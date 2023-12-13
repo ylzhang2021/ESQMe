@@ -28,7 +28,7 @@ x_newstar = sign(y).*min(max(abs(y) - 1/(alpha*L), 0), M);
 g0 = sigma - sum(a.*x_newstar);  
 
 %Calculate x^* when  lambda = alpha
-tmp1 = y - (1/L).*a;
+tmp1 = y - (1/L)*a;
 x_newstar1 = sign(tmp1).*min(max(abs(tmp1) - 1/(alpha*L), 0), M); 
 g1 = sigma - sum(a.*x_newstar1);
 

@@ -21,7 +21,7 @@ function [ x, iter, talg] = SCP_ls_LL2( A,b,delta,alpha,x_start,mu,gamma,tol,max
 % x       - approximate stationary point
 % iter    - number of iterations
 % talg    - cputime
-% X       - n by iter matrix with the t_th column being x^t generated in the t_th iteration, t>=1.
+
 
 tau = 2;
 c = 1e-4;

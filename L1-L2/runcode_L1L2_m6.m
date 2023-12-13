@@ -64,7 +64,7 @@ for ii = 1: length(indexarray)
         % Calculate the Lipschitz constant
         if m > 2000
             clear opts
-            opts.issym = 1;
+            % opts.issym = 1;
             tstart = tic;
             nmA = eigs(A*A', 1, 'LM');
             time_LA = toc(tstart);
