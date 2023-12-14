@@ -34,7 +34,7 @@ theta0 = 1;
 lambda = 0;
 iter = 0;
 num_restart = 0;
-re_freq = 49;
+re_freq = 48;
 x_old = xstart;
 x_new = x_old;
 
