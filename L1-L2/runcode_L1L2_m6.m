@@ -48,6 +48,10 @@ for ii = 1: length(indexarray)
         
         sigma = 1.1* norm(error);   
         delta = sigma^2/2;
+
+        if sigma >= norm(b)
+            error(' 0 is included in the feasible set. \n')
+        end
         
         tstart0  = tic;
         [Q,R] = qr(A',0);

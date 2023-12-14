@@ -53,7 +53,7 @@ while   1 == 1
     end
 
     % iterations, gradient
-    y0 = x_new + ((theta0 - 1)/theta) .* (x_new - x_old);
+    y0 = x_new + ((theta0 - 1)/theta) * (x_new - x_old);
     Ay0 = A * y0;
     tmpy0 = Ay0 - b;
     elly0 = sum(log(1 + tmpy0.^2/gamma^2)) - sigma;
@@ -61,7 +61,7 @@ while   1 == 1
     grady0 = 2*(A'*(tmpy0.*wy0));   % gradient of g
     newsigma1 =  grady0'*y0 - elly0;
 
-    y = y0 + (1/(L*alpha)).*xi;
+    y = y0 + (1/(L*alpha))*xi;
     x_old = x_new;
 
     % Solving the subproblem

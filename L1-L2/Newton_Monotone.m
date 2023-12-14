@@ -46,8 +46,7 @@ else
         
         %  Calculate the generalized Jacobian
         I = abstmp > 1/alpha & abstmp <= 1/alpha +M;  % Only need to consider the cases gamma< \|y_i\| <= gamma + M
-        tmpmat = a(I);
-        H = (1/alpha)*sum(tmpmat.^2);
+        H = (1/alpha)*sum(a(I).^2);
         
         % Calculate the direction
         H = H + muk;

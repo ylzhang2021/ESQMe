@@ -54,7 +54,7 @@ while  iter <= maxiter
 
     % iterations, gradient
     y0 = x_new + ((theta0 - 1)/theta) * (x_new - x_old);  
-    y = y0 + (1/(L*alpha)).*xi;
+    y = y0 + (1/(L*alpha))*xi;
     Ay0 = A * y0;
     tmpy0 = Ay0 - b;
     gvaly0 = (1/2)*norm(tmpy0)^2 - delta;

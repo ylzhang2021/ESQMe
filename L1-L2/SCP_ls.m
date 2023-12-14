@@ -72,6 +72,7 @@ while iter<=maxiter
       
     %termination criterion
     if norm(x - xnew) < tol*max(norm(xnew),1)
+        x = xnew;
         break
     end
     

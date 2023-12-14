@@ -40,9 +40,9 @@ while   1 == 1
     alpha = alpha_init;
 
     if norm(x_old) <= 1e-10
-        xi = 0*x_old;
+        xi = 0*x_new;
     else
-        xi = mu*x_old/norm(x_old);
+        xi = mu*x_new/norm(x_new);
     end
 
     % iterations, gradient

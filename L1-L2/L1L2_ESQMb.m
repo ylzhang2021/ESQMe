@@ -53,7 +53,7 @@ while  iter <= maxiter
     tmpx_new = Ax_new - b;
     gvalx_new = (1/2)*norm(tmpx_new)^2 - delta;
     gradx_new = A'*tmpx_new;
-    y = x_new + (1/(L*alpha)).*xi;   
+    y = x_new + (1/(L*alpha))*xi;   
     
     x_old = x_new;
 
