@@ -39,7 +39,7 @@ while   1 == 1
 
     alpha = alpha_init;
 
-    if norm(x_old) <= 1e-10
+    if norm(x_new) <= 1e-10
         xi = 0*x_new;
     else
         xi = mu*x_new/norm(x_new);
