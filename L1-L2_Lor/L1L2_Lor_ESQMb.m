@@ -54,7 +54,7 @@ while   1 == 1
     gradx_new = 2*(A'*(tmpx_new.*wx_new));   % gradient of g
     newsigma1 =  gradx_new'*x_new - gvalx_new;
 
-    y = x_new + (1/(L*alpha)).*xi;
+    y = x_new + (1/(L*alpha))*xi;
     x_old = x_new;
 
     % Solving the subproblem
